@@ -1,6 +1,7 @@
 import os
-import pandas as pd
 import re
+
+import pandas as pd
 
 
 class L2_Circuit:
@@ -103,7 +104,7 @@ class Utils:
     def get_info_part_3_huawei(part_3):
         dict_general = {}
         pttr_3 = 'MAC Address:.*\n(?:(?!MAC Address:).*\n)+'
-        labels = ['VSI', 'HW AC/remote IP', 'mac-count']
+        labels = ['VSI', 'HW AC-remote IP', 'mac-count']
         labels_sum = ['VSI', 'VSI Mac-Count']
         lst_mac_add = re.findall(pttr_3, part_3, flags=re.MULTILINE)
         for mac_dd in lst_mac_add:
@@ -233,7 +234,7 @@ class Utils:
     @staticmethod
     def get_info_part_3_juniper(part_3, dict_helper):
         dict_general = {}
-        labels = ['VPLS', 'JNPR AC/remote IP', 'Mac-count']
+        labels = ['VPLS', 'JNPR AC-remote IP', 'Mac-count']
         labels_sum = ['VPLS', 'VPLS mac-count']
         j_pttr_3 = 'Routing instance.*\n(?:(?!Routing instance).*\n)+'
         j_pttr_3_sub = '(?:\s{3}(?:\S{2}:){5}\S{2}).*\n'
@@ -350,7 +351,7 @@ class Utils:
         records_sum = []
         # create the first ARP table
         for key, value in dict_ifl.items():
-            records.append(('', key, len(value)))
+            records.append(('inet.0', key, len(value)))
         for key, dict_tmp in dict_vpn_instance.items():
             dict_sum[key] = 0
             for ifl_key, value in dict_tmp.items():
@@ -396,6 +397,36 @@ class Utils:
         return flag
 
     @staticmethod
+    def get_ifl_jnpr_from_port_mapping(df_mapping, ifl_hw):
+        # lowercase the string before processing
+        tmp_name = ifl_hw.lower()
+        if (tmp_name.startswith('eth-trunk')) or (tmp_name.startswith('ge')):
+            unit = ''
+            if '.' in tmp_name:
+                name, unit = tmp_name.split('.')
+            else:
+                name = tmp_name
+                unit = '0'
+
+            if name.startswith('ge'):
+                new_name = 'GigabitEthernet' + name.split('ge')[1]
+            else:
+                new_name = 'Eth-Trunk' + name.split('eth-trunk')[1]
+            df_temp = df_mapping[df_mapping.iloc[:, 0] == new_name]
+            if len(df_temp) > 0:
+                ifl_jnpr = str(df_temp.iloc[0, 1])
+                if ifl_jnpr != '':
+                    ifl_jnpr += '.' + unit
+            else:
+                ifl_jnpr = ''
+        else:
+            # tmp_name is ip
+            ifl_jnpr = tmp_name
+
+        return ifl_jnpr
+
+
+    @staticmethod
     def write_to_csv(df, writer, sheet_name):
         df.to_excel(writer, sheet_name, index=False)
         print("write file successfully")
@@ -404,10 +435,12 @@ class Utils:
 class Main:
     dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
-    dir_3 = ""
+    dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
+    hw_file = 'LDG03THA_input.txt'
+    jnpr_file = 'MX-LDG04NGA.txt'
+    mapping_file = 'LDG04NGA_IFD.csv'
+
     result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
-    hw_file = ''
-    jnpr_file = ''
     slash = '/'
     compare_result = result + '/' + 'Compare_Result' + '.xlsx'
 
@@ -442,12 +475,19 @@ class Main:
     @staticmethod
     def main():
         # ---------------------------------------------------------- #
-        Main.get_file_from_user_v1()
+        # Main.get_file_from_user_v1()
         # ---------------------------------------------------------- #
         labels_hw_vpls = ['VSI', 'VSI Mac-Count']
+        labels_hw_vpls_detail = ['VSI', 'HW AC-remote IP', 'mac-count']
         labels_hw_arp = ['VPN-Instance', 'HW ARP COUNT']
+        labels_hw_arp_detail = ['VPN-Instance', 'HW-IFL', 'HW ARP COUNT']
+
         labels_jnpr_vpls = ['VPLS', 'VPLS mac-count']
+        labels_jnpr_vpls_detail = ['VPLS', 'JNPR AC-remote IP', 'Mac-count']
         labels_jnpr_arp = ['JNPR VRF', 'JNPR-VRF ARP COUNT']
+        labels_jnpr_arp_detail = ['JNPR VRF', 'JNPR-IFL', 'JNPR-IFL ARP COUNT']
+
+
         writer = pd.ExcelWriter(Main.compare_result, engine='xlsxwriter')
         #lst_file_1 = os.listdir(Main.dir_1)
         #lst_file_2 = os.listdir(Main.dir_2)
@@ -461,10 +501,21 @@ class Main:
         lst_df_hw[1] = pd.read_excel(path_1, sheetname='VPLS')
         lst_df_hw[2] = pd.read_excel(path_1, sheetname='Mac-Address VPLS Huawei SUMMARY')
         lst_df_hw[3] = pd.read_excel(path_1, sheetname='ARP Huawei SUMMARY')
+        lst_df_hw[4] = pd.read_excel(path_1, sheetname='Mac-Address VPLS Huawei')
+        lst_df_hw[5] = pd.read_excel(path_1, sheetname='ARP Huawei')
+        # ------------------------------------------------------- #
         Main.compare_l2circuit_vpls(lst_df_hw[0], lst_df_jnpr[0], writer, 'L2Circuit')
         Main.compare_l2circuit_vpls(lst_df_hw[1], lst_df_jnpr[1], writer, 'VPLS')
-        Main.compare_mac_vpls_arp_sum(lst_df_hw[2], lst_df_jnpr[3], writer, labels_hw_vpls, labels_jnpr_vpls, 'Mac-Address VPLS')
+        Main.compare_mac_vpls_arp_sum(lst_df_hw[2], lst_df_jnpr[3], writer, labels_hw_vpls, labels_jnpr_vpls,
+                                      'Mac-Address VPLS')
         Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[5], writer, labels_hw_arp, labels_jnpr_arp, 'ARP')
+        # comparing detail
+        df_mapping = Main.read_csv_file_mapping(Main.dir_3 + '/' + Main.mapping_file)
+        Main.compare_mac_vpls_arp_detail(lst_df_hw[4], lst_df_jnpr[2], df_mapping, writer, labels_hw_vpls_detail,
+                                         labels_jnpr_vpls_detail, 'Mac-Address VPLS Detail')
+        Main.compare_mac_vpls_arp_detail(lst_df_hw[5], lst_df_jnpr[4], df_mapping, writer, labels_hw_arp_detail,
+                                         labels_jnpr_arp_detail, 'ARP Detail')
+
         writer.save()
 
     @staticmethod
@@ -531,7 +582,7 @@ class Main:
                     writer = pd.ExcelWriter(name_out, engine='xlsxwriter')
                     Utils.write_to_csv(df_part_1, writer, 'L2Circuit')
                     Utils.write_to_csv(df_part_2, writer, 'VPLS')
-                    Utils.write_to_csv(df_part_3_1, writer, 'Mac-Address VPLS ')
+                    Utils.write_to_csv(df_part_3_1, writer, 'Mac-Address VPLS')
                     Utils.write_to_csv(df_part_3_2, writer, 'Mac-Address VPLS SUMMARY')
                     Utils.write_to_csv(df_part_4_1, writer, 'ARP Juniper')
                     Utils.write_to_csv(df_part_4_2, writer, 'ARP Juniper SUMMARY')
@@ -547,7 +598,7 @@ class Main:
             # There are 3 ways to manipulate with dataframe in pandas
             # using df.ix for row index by 0,1,2.. not by Name (such as 'A' ,'B') and for columns by name
             # using df.loc for row and column using Name instead index(0,1,2..)
-            # using df.iloc for rown and column using index
+            # using df.iloc for row and column using index
             compare_result = ''
             df_1_row_hw = df_hw.iloc[[i]]  # return a Dataframe not Series, if df_hw.iloc[i] -> return Series
 
@@ -631,12 +682,20 @@ class Main:
                 vpls_jnpr = "L2-" + vsi_name_hw
             else:
                 # name_service = 'arp'
-                vpls_jnpr = "L3-" + vsi_name_hw
+                if vsi_name_hw == 'inet.0':
+                    vpls_jnpr = vsi_name_hw
+                else:
+                    vpls_jnpr = "L3-" + vsi_name_hw
 
-            ifl_jnpr = df_mapping[df_mapping['']]
+            ifl_jnpr = Utils.get_ifl_jnpr_from_port_mapping(df_mapping, ifl_hw)
+            # print('vpls_jnpr :' + vpls_jnpr)
+            # print('ifl_hw_name :' + ifl_hw)
+            # print('ifl_jnpr_name :' + ifl_jnpr)
+            df_row_jnpr = df_jnpr[(df_jnpr[labels_jnpr[0]] == vpls_jnpr) & (df_jnpr[labels_jnpr[1]] == ifl_jnpr)]
 
-            df_row_jnpr = df_jnpr[(df_jnpr[labels_jnpr[0]] == vpls_jnpr) & (df_jnpr[labels_jnpr[1] == ifl_jnpr])]
-            if len(df_jnpr) > 0:
+            # print(df_row_jnpr)
+
+            if len(df_row_jnpr) > 0:
                 mac_count_jnpr = df_row_jnpr[labels_jnpr[2]].to_string(index=False)  # Series Type
                 # print("name_vpls: " + str(new_col_value))
                 # print("col_2_jnpr_type: " + str(type(col_2_jnpr)) + " value: " + str(col_2_jnpr))
@@ -659,5 +718,11 @@ class Main:
         else:
             return ""
 
+    @staticmethod
+    def read_csv_file_mapping(filename):
+        if os.path.isfile(filename):
+            return pd.read_csv(filename)
+        else:
+            raise ValueError('File path does not exist')
 
 Main.main()
