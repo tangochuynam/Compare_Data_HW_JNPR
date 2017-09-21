@@ -495,7 +495,7 @@ class Main:
 
         lst_df_hw = Main.get_info_from_huawei(Main.hw_file)
         lst_df_jnpr = Main.get_info_from_juniper(Main.jnpr_file)
-        # Testing by reading excel
+        # ----Testing by reading excel---------------------------#
         path_1 = '/Users/tnhnam/Desktop/du an anh P/Compare_data/result/LDG04NGA_input.xlsx'
         lst_df_hw[0] = pd.read_excel(path_1, sheetname='L2Circuit')
         lst_df_hw[1] = pd.read_excel(path_1, sheetname='VPLS')
