@@ -87,7 +87,7 @@ class Utils:
         lst_vsi = re.findall(pttr_2, part_2, flags=re.MULTILINE)
         for vsi in lst_vsi:
             lines = vsi.split('\n')
-            VPLS.vpls_instance = lines[0].split(':')[1].strip()
+            VPLS.vpls_instance = lines[0].split()[2].strip()
             lst_peer = re.findall(pttr_2_sub, vsi, flags=re.MULTILINE)
             for peer in lst_peer:
                 vpls = VPLS()
@@ -436,9 +436,9 @@ class Main:
     dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
     dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
-    hw_file = 'LDG03THA_input.txt'
-    jnpr_file = 'MX-LDG04NGA.txt'
-    mapping_file = 'LDG04NGA_IFD.csv'
+    hw_file = 'HW.txt'
+    jnpr_file = 'JNPR.txt'
+    mapping_file = 'IFD.csv'
 
     result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
     slash = '/'
@@ -647,7 +647,7 @@ class Main:
                 # name_service = 'arp'
                 new_col_value = "L3-" + col_1_hw
             df_row_jnpr = df_jnpr[df_jnpr[labels_jnpr[0]] == new_col_value]
-            if len(df_jnpr) > 0:
+            if len(df_row_jnpr) > 0:
                 col_2_jnpr = df_row_jnpr[labels_jnpr[1]].to_string(index=False) # Series Type
                 # print("name_vpls: " + str(new_col_value))
                 # print("col_2_jnpr_type: " + str(type(col_2_jnpr)) + " value: " + str(col_2_jnpr))
