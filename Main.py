@@ -150,13 +150,21 @@ class Utils:
         dict_vpn_instance = {}
         labels_1 = ['VPN-Instance', 'HW-IFL', 'HW ARP COUNT']
         labels_2 = ['VPN-Instance', 'HW ARP COUNT']
-        pttr_4 = '(?:[0-9]+.[0-9]+.[0-9]+.[0-9]+).*\n(?:(?!------).*\n)+'
-        tmp_part = re.findall(pttr_4, part_4, flags=re.MULTILINE)
-        lines = tmp_part[0].splitlines()
-        for line in lines:
-            cols = line.split()
+        pttr_4 = '((?:\d+.){3}\d+.*\n(?:(?!(?:\d+.){3}\d+).*\n)*)'
+        lst_part = re.findall(pttr_4, part_4, flags=re.MULTILINE)
+        # print('part: ' + str(len(lst_part)))
+        for part in lst_part:
+            unit = ''
+            temp = part.splitlines()
+            cols = temp[0].split()
+            if len(temp) > 1:
+                unit = temp[1].split('/')[0].strip()
+
             if len(cols) == 5:
-                key = cols[4]
+                if (unit != '') & ('.' not in cols[4]):
+                    key = cols[4] + '.' + unit
+                else:
+                    key = cols[4]
                 value = cols[0] + ',' + cols[1]
                 if key not in dict_ifl:
                     dict_ifl[key] = []
@@ -164,7 +172,10 @@ class Utils:
                     dict_ifl[key].append(value)
             if len(cols) == 6:
                 vpn_key = cols[5]
-                ifl_key = cols[4]
+                if (unit != '') & ('.' not in cols[4]):
+                    ifl_key = cols[4] + '.' + unit
+                else:
+                    ifl_key = cols[4]
                 tmp_value = cols[0] + ',' + cols[1]
                 if vpn_key not in dict_vpn_instance:
                     dict_vpn_instance[vpn_key] = {}
@@ -182,10 +193,11 @@ class Utils:
         lst_neighbor = re.findall(j_pttr_1, part_1, flags=re.MULTILINE)
         for neighbor in lst_neighbor:
             lines = neighbor.splitlines()
+            print(lines)
             var_neighbor = lines[0].split(':')[1].strip()
-            for i in range(2, len(lines) - 1):
+            for i in range(2, len(lines)):
                 line = lines[i]
-                if line.strip() != '':
+                if (line.strip() != '') & (line.strip() != '{master}'):
                     cols = line.split()
                     index_parentheses = cols[0].index('(')
                     ac_int = cols[0][:index_parentheses]
@@ -496,24 +508,24 @@ class Main:
         lst_df_hw = Main.get_info_from_huawei(Main.hw_file)
         lst_df_jnpr = Main.get_info_from_juniper(Main.jnpr_file)
         # ----Testing by reading excel---------------------------#
-        path_1 = '/Users/tnhnam/Desktop/du an anh P/Compare_data/result/LDG04NGA_input.xlsx'
-        lst_df_hw[0] = pd.read_excel(path_1, sheetname='L2Circuit')
-        lst_df_hw[1] = pd.read_excel(path_1, sheetname='VPLS')
-        lst_df_hw[2] = pd.read_excel(path_1, sheetname='Mac-Address VPLS Huawei SUMMARY')
-        lst_df_hw[3] = pd.read_excel(path_1, sheetname='ARP Huawei SUMMARY')
-        lst_df_hw[4] = pd.read_excel(path_1, sheetname='Mac-Address VPLS Huawei')
-        lst_df_hw[5] = pd.read_excel(path_1, sheetname='ARP Huawei')
+        # path_1 = '/Users/tnhnam/Desktop/du an anh P/Compare_data/result/LDG04NGA_input.xlsx'
+        # lst_df_hw[0] = pd.read_excel(path_1, sheetname='L2Circuit')
+        # lst_df_hw[1] = pd.read_excel(path_1, sheetname='VPLS')
+        # lst_df_hw[2] = pd.read_excel(path_1, sheetname='Mac-Address VPLS Huawei SUMMARY')
+        # lst_df_hw[3] = pd.read_excel(path_1, sheetname='ARP Huawei SUMMARY')
+        # lst_df_hw[4] = pd.read_excel(path_1, sheetname='Mac-Address VPLS Huawei')
+        # lst_df_hw[5] = pd.read_excel(path_1, sheetname='ARP Huawei')
         # ------------------------------------------------------- #
         Main.compare_l2circuit_vpls(lst_df_hw[0], lst_df_jnpr[0], writer, 'L2Circuit')
         Main.compare_l2circuit_vpls(lst_df_hw[1], lst_df_jnpr[1], writer, 'VPLS')
-        Main.compare_mac_vpls_arp_sum(lst_df_hw[2], lst_df_jnpr[3], writer, labels_hw_vpls, labels_jnpr_vpls,
+        Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[3], writer, labels_hw_vpls, labels_jnpr_vpls,
                                       'Mac-Address VPLS')
-        Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[5], writer, labels_hw_arp, labels_jnpr_arp, 'ARP')
+        Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], writer, labels_hw_arp, labels_jnpr_arp, 'ARP')
         # comparing detail
         df_mapping = Main.read_csv_file_mapping(Main.dir_3 + '/' + Main.mapping_file)
-        Main.compare_mac_vpls_arp_detail(lst_df_hw[4], lst_df_jnpr[2], df_mapping, writer, labels_hw_vpls_detail,
+        Main.compare_mac_vpls_arp_detail(lst_df_hw[2], lst_df_jnpr[2], df_mapping, writer, labels_hw_vpls_detail,
                                          labels_jnpr_vpls_detail, 'Mac-Address VPLS Detail')
-        Main.compare_mac_vpls_arp_detail(lst_df_hw[5], lst_df_jnpr[4], df_mapping, writer, labels_hw_arp_detail,
+        Main.compare_mac_vpls_arp_detail(lst_df_hw[4], lst_df_jnpr[4], df_mapping, writer, labels_hw_arp_detail,
                                          labels_jnpr_arp_detail, 'ARP Detail')
 
         writer.save()
@@ -642,7 +654,10 @@ class Main:
             col_1_hw = df_row_hw[labels_hw[0]].to_string(index=False)
             col_2_hw = df_row_hw[labels_hw[1]].to_string(index=False)
             if name_service == 'Mac-Address VPLS':
-                new_col_value = "L2-" + col_1_hw
+                if col_1_hw.isdigit():
+                    new_col_value = "L2-VLAN-" + col_1_hw
+                else:
+                    new_col_value = "L2-" + col_1_hw
             else:
                 # name_service = 'arp'
                 new_col_value = "L3-" + col_1_hw
