@@ -193,7 +193,7 @@ class Utils:
         lst_neighbor = re.findall(j_pttr_1, part_1, flags=re.MULTILINE)
         for neighbor in lst_neighbor:
             lines = neighbor.splitlines()
-            print(lines)
+            # print(lines)
             var_neighbor = lines[0].split(':')[1].strip()
             for i in range(2, len(lines)):
                 line = lines[i]
@@ -301,6 +301,26 @@ class Utils:
                     if line_1.startswith('Local via'):
                         key_name = line_1.split('Local via ')[1].strip()
                         dict_vpn_instance[vpn_name][key_name] = []
+        return [dict_ifl, dict_vpn_instance]
+
+    @staticmethod
+    def get_info_part_4_juniper_new(part_4):
+        j_pttr_4_new = 'L3-\S+:\s*\n(?:(?!\s+Route-distinguisher:).*\n)+'
+        j_pttr_4_new_sub = '\s+Interfaces:.*\n(?:.*\n)*'
+        dict_ifl = {}
+        dict_vpn_instance = {}
+        l3_vpn = re.findall(j_pttr_4_new, part_4, flags=re.MULTILINE)
+        for vpn in l3_vpn:
+            vpn_name = vpn.splitlines()[0].split(':')[0].strip()
+            lines_below_intterface = re.findall(j_pttr_4_new_sub, vpn, flags=re.MULTILINE)
+            lst_line = lines_below_intterface[0].splitlines()
+            if vpn_name not in dict_vpn_instance:
+                dict_vpn_instance[vpn_name] = {}
+            for i in range(1, len(lst_line)):
+                key = lst_line[i].strip()
+                if (key != '') & (not key.startswith('Interfaces')):
+                    if key not in dict_vpn_instance[vpn_name]:
+                        dict_vpn_instance[vpn_name][key] = []
         return [dict_ifl, dict_vpn_instance]
 
     @staticmethod
@@ -449,7 +469,7 @@ class Main:
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
     dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
     hw_file = 'HW.txt'
-    jnpr_file = 'JNPR.txt'
+    jnpr_file = 'JNPR_v2.txt'
     mapping_file = 'IFD.csv'
 
     result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
@@ -584,7 +604,7 @@ class Main:
                     df_part_1 = Utils.get_info_part_1_juniper(part_1)
                     df_part_2, dict_mapping_helper = Utils.get_info_part_2_juniper(part_2)
                     df_part_3_1, df_part_3_2 = Utils.get_info_part_3_juniper(part_3, dict_mapping_helper)
-                    dict_ilf, dict_vpn_instance = Utils.get_info_part_4_juniper(part_4)
+                    dict_ilf, dict_vpn_instance = Utils.get_info_part_4_juniper_new(part_4)
                     df_part_4_1, df_part_4_2 = Utils.get_info_part_5_juniper(part_5, dict_ilf, dict_vpn_instance)
                     # print(df_part_4_1)
                     # print(df_part_4_2)
