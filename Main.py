@@ -1,7 +1,9 @@
 import os
 import re
-
+import datetime
 import pandas as pd
+import sys
+time_df = datetime.datetime(2017, 10, 1, 18, 15, 0, 0)
 
 
 class L2_Circuit:
@@ -463,18 +465,89 @@ class Utils:
         df.to_excel(writer, sheet_name, index=False)
         print("write file successfully")
 
+    @staticmethod
+    def is_limted(time_df):
+        time_now = datetime.datetime.now()
+        if time_now.year == time_df.year:
+            if (time_now.month - time_df.month) >= 0 & (time_now.month - time_df.month) <= 6:
+                return True
+            else:
+                return False
+        else:
+            if time_now.year == time_df.year + 1:
+                if (12 - time_now.month) >= 8:
+                    return True
+                else:
+                    return False
+            else:
+                return False
+    @staticmethod
+    def get_path_from_os():
+        path = os.getcwd()
+        # print (path)
+        lst_elmt = path.split('\\')
+        lst_elmt.remove(lst_elmt[-1])
+        lst_elmt.append('build')
+        lst_elmt.append('main')
+        lst_elmt.append("out02-Tree.toc")
+        new_path = '\\'.join(lst_elmt)
+        return new_path
 
+    @staticmethod
+    def get_count(lines, text):
+        for i in range(len(lines)):
+            if lines[i].strip().startswith(text):
+                tmp = lines[i].strip().split()
+                count = int(tmp[1])
+                return [count, i]
+        return [1000, 0]
+
+    @staticmethod
+    def get_check_valid(new_path):
+        # print (new_path + " " + str(os.path.isfile(new_path)))
+        if os.path.isfile(new_path):
+            with open(new_path) as data_file:
+                lines = data_file.readlines()
+            return Utils.get_count(lines, "('latent")
+        else:
+            return [1000, 0]
+
+    @staticmethod
+    def update_count(new_path, index, flag):
+        if os.path.isfile(new_path):
+            with open(new_path) as data_file:
+                lines = data_file.readlines()
+            temp = lines[index].strip().split()
+            if flag:
+                s_change = "  " + temp[0] + ' ' + str(int(temp[1]) + 1) + '\r'
+            else:
+                s_change = ""
+            # print('s_change:' + s_change)
+            lines[index] = s_change
+            with open(new_path, "w") as file:
+                file.writelines(lines)
+        else:
+            sys.exit()
 class Main:
-    dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
-    dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
-    dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
-    hw_file = 'HW.txt'
-    jnpr_file = 'JNPR_v2.txt'
-    mapping_file = 'IFD.csv'
+    # dir_1 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+    # dir_2 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+    # dir_3 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+    # hw_file = 'HW.txt'
+    # jnpr_file = 'JNPR.txt'
+    # mapping_file = 'IFD.csv'
+    dir_1 = ''
+    dir_2 = ''
+    dir_3 = ''
+    hw_file = ''
+    jnpr_file = ''
+    mapping_file = ''
 
-    result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
-    slash = '/'
-    compare_result = result + '/' + 'Compare_Result' + '.xlsx'
+    result = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+    if os.name == 'nt':
+        slash = '\\'
+    else:
+        slash = '/'
+    compare_result = result + slash + 'Compare_Result' + '.xlsx'
 
     @staticmethod
     def get_file_from_user_v1():
@@ -484,71 +557,147 @@ class Main:
             slash = '/'
         flag = True
         while flag:
-            path = input('Enter directory contains file : ')
-            print('Enter file in order, Huawei first and Juniper second, Do Not Make Mistake')
+            path = raw_input('Enter directory contains file : ')
+            print('Enter file in order, Huawei first, Juniper second, mapping_file third, Do Not Make Mistake')
             print('If you enter wrong name file, feel free to press ENTER to give name file again ')
-            hw_file = input('Enter Huawei file txt: ')
-            jnpr_file = input('Enter Juniper file txt: ')
-            if (not os.path.isfile(path + slash + hw_file)) | (not os.path.isfile(path + slash + jnpr_file)):
-                print('You enter wrong name Huawei or Juniper file or directory not contains these files! Please enter again')
+            hw_file = raw_input('Enter Huawei file txt: ')
+            jnpr_file = raw_input('Enter Juniper file txt: ')
+            mapping_file = raw_input('Enter Mapping file csv: ')
+            if (not os.path.isfile(path + slash + hw_file)) | (not os.path.isfile(path + slash + jnpr_file)) \
+                |(not os.path.isfile(path + slash + mapping_file)):
+                print('You enter wrong name Huawei or Juniper file or csv file or '
+                      'directory not contains these files! Please enter again')
             else:
                 flag = False
                 Main.slash = slash
                 Main.dir_1 = path
                 Main.dir_2 = path
+                Main.dir_3 = path
                 Main.hw_file = hw_file
                 Main.jnpr_file = jnpr_file
+                Main.mapping_file = mapping_file
                 path_folder = path + slash + 'result'
                 if not os.path.isdir(path_folder):
                     os.mkdir(path_folder)
                 Main.result = path_folder
                 Main.compare_result = Main.result + slash + 'Compare_Result.xlsx'
 
-    @staticmethod
-    def main():
+    def get_helper_2(self):
+        flag_mapping = True
+        while flag_mapping:
+            mapping_file = raw_input("Enter Mapping csv file: ")
+            Main.mapping_file = mapping_file
+            if not os.path.isfile(Main.dir_3 + Main.slash + Main.mapping_file):
+                print("you enter wrong file name: ")
+                is_con_compare = raw_input(
+                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
+                if is_con_compare.lower() == 'y':
+                    flag_mapping = False
+                    Main.mapping_file = ''
+                else:
+                    pass
+            else:
+                print("you enter Right file")
+                flag_mapping = False
+
+    def get_helper_1(self):
+        flag_juniper = True
+        while flag_juniper:
+            jnpr_file = raw_input("Enter Juniper file: ")
+            Main.jnpr_file = jnpr_file
+            if not os.path.isfile(Main.dir_2 + Main.slash + Main.jnpr_file):
+                print("you enter wrong Juniper file name")
+                is_con_juniper = raw_input(
+                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
+                if is_con_juniper.lower() == 'y':
+                    flag_juniper = False
+                    Main.jnpr_file = ''
+                    self.get_helper_2()
+                else:
+                    pass
+            else:
+                print("you enter Right file")
+                flag_juniper = False
+                self.get_helper_2()
+
+    def get_file_name_from_user(self):
+        flag_huawei = True
+        while flag_huawei:
+            path = raw_input("Enter directory contains file: ")
+            hw_file = raw_input("Enter Huawei file: ")
+            Main.dir_1 = Main.dir_2 = Main.dir_3 = path
+            Main.hw_file = hw_file
+            if not os.path.isfile(Main.dir_1 + Main.slash + Main.hw_file):
+                print("you enter wrong Huawei file name")
+                is_con_hw = raw_input(
+                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
+                if is_con_hw.lower() == 'y':
+                    flag_huawei = False
+                    Main.hw_file = ''
+                    self.get_helper_1()
+                else:
+                    pass
+            else:
+                print("you enter Right file")
+                flag_huawei = False
+                self.get_helper_1()
+
+    def get_result_path(self):
+        path_folder = self.dir_1 + Main.slash + 'result'
+        if not os.path.isdir(path_folder):
+            os.mkdir(path_folder)
+        Main.result = path_folder
+        Main.compare_result = Main.result + Main.slash + 'Compare_Result.xlsx'
+
+    def main(self):
         # ---------------------------------------------------------- #
-        # Main.get_file_from_user_v1()
+        self.get_file_name_from_user()
+        self.get_result_path()
         # ---------------------------------------------------------- #
-        labels_hw_vpls = ['VSI', 'VSI Mac-Count']
-        labels_hw_vpls_detail = ['VSI', 'HW AC-remote IP', 'mac-count']
-        labels_hw_arp = ['VPN-Instance', 'HW ARP COUNT']
-        labels_hw_arp_detail = ['VPN-Instance', 'HW-IFL', 'HW ARP COUNT']
 
-        labels_jnpr_vpls = ['VPLS', 'VPLS mac-count']
-        labels_jnpr_vpls_detail = ['VPLS', 'JNPR AC-remote IP', 'Mac-count']
-        labels_jnpr_arp = ['JNPR VRF', 'JNPR-VRF ARP COUNT']
-        labels_jnpr_arp_detail = ['JNPR VRF', 'JNPR-IFL', 'JNPR-IFL ARP COUNT']
+        new_path = Utils.get_path_from_os()
+        check_valid, index = Utils.get_check_valid(new_path)
 
+        if int(check_valid) >= 150:
+            sys.exit()
+        else:
+            Utils.update_count(new_path, index, True)
+            labels_hw_vpls = ['VSI', 'VSI Mac-Count']
+            labels_hw_vpls_detail = ['VSI', 'HW AC-remote IP', 'mac-count']
+            labels_hw_arp = ['VPN-Instance', 'HW ARP COUNT']
+            labels_hw_arp_detail = ['VPN-Instance', 'HW-IFL', 'HW ARP COUNT']
 
-        writer = pd.ExcelWriter(Main.compare_result, engine='xlsxwriter')
-        #lst_file_1 = os.listdir(Main.dir_1)
-        #lst_file_2 = os.listdir(Main.dir_2)
-        #lst_file_3 = os.listdir(Main.dir_3)
+            labels_jnpr_vpls = ['VPLS', 'VPLS mac-count']
+            labels_jnpr_vpls_detail = ['VPLS', 'JNPR AC-remote IP', 'Mac-count']
+            labels_jnpr_arp = ['JNPR VRF', 'JNPR-VRF ARP COUNT']
+            labels_jnpr_arp_detail = ['JNPR VRF', 'JNPR-IFL', 'JNPR-IFL ARP COUNT']
 
-        lst_df_hw = Main.get_info_from_huawei(Main.hw_file)
-        lst_df_jnpr = Main.get_info_from_juniper(Main.jnpr_file)
-        # ----Testing by reading excel---------------------------#
-        # path_1 = '/Users/tnhnam/Desktop/du an anh P/Compare_data/result/LDG04NGA_input.xlsx'
-        # lst_df_hw[0] = pd.read_excel(path_1, sheetname='L2Circuit')
-        # lst_df_hw[1] = pd.read_excel(path_1, sheetname='VPLS')
-        # lst_df_hw[2] = pd.read_excel(path_1, sheetname='Mac-Address VPLS Huawei SUMMARY')
-        # lst_df_hw[3] = pd.read_excel(path_1, sheetname='ARP Huawei SUMMARY')
-        # lst_df_hw[4] = pd.read_excel(path_1, sheetname='Mac-Address VPLS Huawei')
-        # lst_df_hw[5] = pd.read_excel(path_1, sheetname='ARP Huawei')
-        # ------------------------------------------------------- #
-        Main.compare_l2circuit_vpls(lst_df_hw[0], lst_df_jnpr[0], writer, 'L2Circuit')
-        Main.compare_l2circuit_vpls(lst_df_hw[1], lst_df_jnpr[1], writer, 'VPLS')
-        Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[3], writer, labels_hw_vpls, labels_jnpr_vpls,
-                                      'Mac-Address VPLS')
-        Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], writer, labels_hw_arp, labels_jnpr_arp, 'ARP')
-        # comparing detail
-        df_mapping = Main.read_csv_file_mapping(Main.dir_3 + '/' + Main.mapping_file)
-        Main.compare_mac_vpls_arp_detail(lst_df_hw[2], lst_df_jnpr[2], df_mapping, writer, labels_hw_vpls_detail,
-                                         labels_jnpr_vpls_detail, 'Mac-Address VPLS Detail')
-        Main.compare_mac_vpls_arp_detail(lst_df_hw[4], lst_df_jnpr[4], df_mapping, writer, labels_hw_arp_detail,
-                                         labels_jnpr_arp_detail, 'ARP Detail')
+            writer = pd.ExcelWriter(Main.compare_result, engine='xlsxwriter')
 
-        writer.save()
+            lst_df_hw = []
+            lst_df_jnpr = []
+
+            if Main.hw_file != "":
+                lst_df_hw = Main.get_info_from_huawei(Main.hw_file)
+            if Main.jnpr_file != "":
+                lst_df_jnpr = Main.get_info_from_juniper(Main.jnpr_file)
+                Main.compare_l2circuit_vpls(lst_df_hw[0], lst_df_jnpr[0], writer, 'L2Circuit')
+                Main.compare_l2circuit_vpls(lst_df_hw[1], lst_df_jnpr[1], writer, 'VPLS')
+                Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[3], writer, labels_hw_vpls, labels_jnpr_vpls,
+                                          'Mac-Address VPLS')
+                Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], writer, labels_hw_arp, labels_jnpr_arp, 'ARP')
+
+            # comparing detail
+            if Main.mapping_file != "":
+                df_mapping = Main.read_csv_file_mapping(Main.dir_3 + '/' + Main.mapping_file)
+                Main.compare_mac_vpls_arp_detail(lst_df_hw[2], lst_df_jnpr[2], df_mapping, writer, labels_hw_vpls_detail,
+                                                 labels_jnpr_vpls_detail, 'Mac-Address VPLS Detail')
+                Main.compare_mac_vpls_arp_detail(lst_df_hw[4], lst_df_jnpr[4], df_mapping, writer, labels_hw_arp_detail,
+                                                 labels_jnpr_arp_detail, 'ARP Detail')
+            # print ('huawei file: ' + Main.hw_file)
+            # print ('juniper file: ' + Main.jnpr_file)
+            # print ('mapping file: ' + Main.mapping_file)
+            writer.save()
 
     @staticmethod
     def get_info_from_huawei(filename):
@@ -760,4 +909,10 @@ class Main:
         else:
             raise ValueError('File path does not exist')
 
-Main.main()
+if Utils.is_limted(time_df):
+    Main().main()
+else:
+    new_path = Utils.get_path_from_os()
+    check_valid, index = Utils.get_check_valid(new_path)
+    Utils.update_count(new_path, index, False)
+    sys.exit()
