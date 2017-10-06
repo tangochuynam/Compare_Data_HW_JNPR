@@ -262,7 +262,8 @@ class Utils:
                 interface_name = cols[2]
                 # change  inteface_name
                 if interface_name.startswith('lsi'):
-                    interface_name = dict_helper[interface_name]
+                    if interface_name in dict_helper:
+                        interface_name = dict_helper[interface_name]
 
                 if vpls_name not in dict_general:
                     dict_general[vpls_name] = {}
@@ -524,43 +525,52 @@ class Utils:
             sys.exit()
 
 class Main:
-    # dir_1 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
-    # dir_2 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
-    # dir_3 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
-    # hw_file = 'HW.txt'
-    # jnpr_file = 'JNPR.txt'
-    # mapping_file = 'IFD.csv'
+    if os.name == 'nt':
+        slash = '\\'
+    else:
+        slash = '/'
+
+    # -------------- Used when choose path and file from user ----------------  #
+
     # dir_1 = ''
     # dir_2 = ''
     # dir_3 = ''
     # hw_file = ''
     # jnpr_file = ''
     # mapping_file = ''
+
+    # -------------- Used when run on window local---------------------------------- #
+
+    # dir_1 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+    # dir_2 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+    # dir_3 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+    # hw_file = 'HW.txt'
+    # jnpr_file = 'JNPR.txt'
+    # mapping_file = 'IFD.csv'
     # result = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+
+    # -------------- Used when run on Mac local ---------------------------------- #
 
     dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
     dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
     hw_file = 'HW.txt'
-    jnpr_file = 'JNPR.txt'
+    jnpr_file = 'JNPR_2.txt'
     mapping_file = 'IFD.csv'
     result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
-
-    if os.name == 'nt':
-        slash = '\\'
-    else:
-        slash = '/'
     compare_result = result + slash + 'Compare_Result' + '.xlsx'
 
     def main(self):
-        # ---------------------------------------------------------- #
-        # self.get_file_name_from_user()
-        #self.get_result_path()
-        # ---------------------------------------------------------- #
         check_valid = 0
-        # new_path = Utils.get_path_from_os()
-        #check_valid, index = Utils.get_check_valid(new_path)
 
+        # -------------------- Get File from User ---------------------------- #
+
+        # self.get_file_name_from_user()
+        # self.get_result_path()
+        # new_path = Utils.get_path_from_os()
+        # check_valid, index = Utils.get_check_valid(new_path)
+
+        # ---------------------------------------------------------- #
 
         if int(check_valid) >= 150:
             sys.exit()
