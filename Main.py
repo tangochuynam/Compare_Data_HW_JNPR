@@ -309,7 +309,6 @@ class Utils:
     def get_info_part_4_juniper_new(part_4):
         j_pttr_4_new = 'L3-\S+:\s*\n(?:(?!\s+Route-distinguisher:).*\n)+'
         j_pttr_4_new_sub = '\s+Interfaces:.*\n(?:.*\n)*'
-        dict_ifl = {}
         dict_vpn_instance = {}
         l3_vpn = re.findall(j_pttr_4_new, part_4, flags=re.MULTILINE)
         for vpn in l3_vpn:
@@ -323,60 +322,55 @@ class Utils:
                 if (key != '') & (not key.startswith('Interfaces')):
                     if key not in dict_vpn_instance[vpn_name]:
                         dict_vpn_instance[vpn_name][key] = []
-        return [dict_ifl, dict_vpn_instance]
+        return dict_vpn_instance
 
     @staticmethod
-    def get_info_part_5_juniper(part_5, dict_ifl, dict_vpn_instance):
-        pattern = '+----------------+---------------+-------------------------+------------------------------'
+    def get_info_part_5_juniper(part_5, dict_vpn_instance):
         j_pttr_5 = '(?:(?:\S{2}:){5}\S{2}).*\n'
-        lst_index = Utils.find_index_to_split(pattern)
         lst_line = re.findall(j_pttr_5, part_5, flags=re.MULTILINE)
         labels_1 = ['JNPR VRF', 'JNPR-IFL', 'JNPR-IFL ARP COUNT']
         labels_2 = ['JNPR VRF', 'JNPR-VRF ARP COUNT']
+
+        lst_irb = []
         for line in lst_line:
-            cols = Utils.split_line(lst_index, line)
+            cols = line.split()
+            col_interface = ''
+            if len(cols) == 5:
+                col_interface = cols[3]
+            elif len(cols) == 6:
+                col_interface = cols[3] + ' ' + cols[4]
             mac = cols[0]
             ip = cols[1]
             value = ip + ',' + mac
-            temp = cols[3].split()
-            if len(temp) == 2:
-                flag_1 = True
-                interface_name = temp[0].strip()
-                if interface_name in dict_ifl:
-                    if value not in dict_ifl[interface_name]:
-                        dict_ifl[interface_name].append(value)
-                        flag = False
+            temp = col_interface.split()
 
-                if flag_1:
-                    for key in dict_vpn_instance:
-                        if interface_name in dict_vpn_instance[key]:
-                            if value not in dict_vpn_instance[key][interface_name]:
-                                dict_vpn_instance[key][interface_name].append(value)
-                                break
+            if len(temp) == 1:
+                interface_name = temp[0]
+                for key in dict_vpn_instance:
+                    if interface_name in dict_vpn_instance[key]:
+                        if value not in dict_vpn_instance[key][interface_name]:
+                            dict_vpn_instance[key][interface_name].append(value)
+                            break
             else:
-                # len(temp) == 3
-                flag_2 = True
-                interface_name_not_pri = temp[0].strip()
+                # len(temp) == 2
+                interface_irb = temp[0].strip()
                 interface_name_pri = temp[1][1:-1].strip()
-
-                if interface_name_not_pri in dict_ifl:
-                    dict_ifl.pop(interface_name_not_pri)
-                    if interface_name_pri not in dict_ifl:
-                        dict_ifl[interface_name_pri] = []
-                    if value not in dict_ifl[interface_name_pri]:
-                        dict_ifl[interface_name_pri].append(value)
-                        flag_2 = False
-
-                if flag_2:
-                    for key in dict_vpn_instance:
-                        if interface_name_not_pri in dict_vpn_instance[key]:
-                            dict_vpn_instance[key].pop(interface_name_not_pri)
-                            if interface_name_pri not in dict_vpn_instance[key]:
-                                dict_vpn_instance[key][interface_name_pri] = []
-                            if value not in dict_vpn_instance[key][interface_name_pri]:
-                                dict_vpn_instance[key][interface_name_pri].append(value)
-                                break
-        return Utils.create_info_arp(dict_ifl, dict_vpn_instance, labels_1, labels_2)
+                lst_irb.append(interface_irb)
+                for vpn_name in dict_vpn_instance:
+                    if interface_irb in dict_vpn_instance[vpn_name]:
+                        # dict_vpn_instance[vpn_name].pop(interface_name_not_pri)
+                        if interface_name_pri not in dict_vpn_instance[vpn_name]:
+                            dict_vpn_instance[vpn_name][interface_name_pri] = []
+                        if value not in dict_vpn_instance[vpn_name][interface_name_pri]:
+                            dict_vpn_instance[vpn_name][interface_name_pri].append(value)
+                            break
+        lst_irb_del = list(set(lst_irb))
+        for vpn_name in dict_vpn_instance:
+            for irb in lst_irb_del:
+                if irb in dict_vpn_instance[vpn_name]:
+                    dict_vpn_instance[vpn_name].pop(irb)
+        # print (dict_vpn_instance)
+        return Utils.create_info_arp({}, dict_vpn_instance, labels_1, labels_2)
 
     @staticmethod
     def create_info_arp(dict_ifl, dict_vpn_instance, labels_1, labels_2):
@@ -528,6 +522,7 @@ class Utils:
                 file.writelines(lines)
         else:
             sys.exit()
+
 class Main:
     # dir_1 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
     # dir_2 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
@@ -535,133 +530,42 @@ class Main:
     # hw_file = 'HW.txt'
     # jnpr_file = 'JNPR.txt'
     # mapping_file = 'IFD.csv'
-    dir_1 = ''
-    dir_2 = ''
-    dir_3 = ''
-    hw_file = ''
-    jnpr_file = ''
-    mapping_file = ''
+    # dir_1 = ''
+    # dir_2 = ''
+    # dir_3 = ''
+    # hw_file = ''
+    # jnpr_file = ''
+    # mapping_file = ''
+    # result = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
 
-    result = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
+    dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
+    dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
+    dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
+    hw_file = 'HW.txt'
+    jnpr_file = 'JNPR.txt'
+    mapping_file = 'IFD.csv'
+    result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
+
     if os.name == 'nt':
         slash = '\\'
     else:
         slash = '/'
     compare_result = result + slash + 'Compare_Result' + '.xlsx'
 
-    @staticmethod
-    def get_file_from_user_v1():
-        if os.name == 'nt':
-            slash = '\\'
-        else:
-            slash = '/'
-        flag = True
-        while flag:
-            path = raw_input('Enter directory contains file : ')
-            print('Enter file in order, Huawei first, Juniper second, mapping_file third, Do Not Make Mistake')
-            print('If you enter wrong name file, feel free to press ENTER to give name file again ')
-            hw_file = raw_input('Enter Huawei file txt: ')
-            jnpr_file = raw_input('Enter Juniper file txt: ')
-            mapping_file = raw_input('Enter Mapping file csv: ')
-            if (not os.path.isfile(path + slash + hw_file)) | (not os.path.isfile(path + slash + jnpr_file)) \
-                |(not os.path.isfile(path + slash + mapping_file)):
-                print('You enter wrong name Huawei or Juniper file or csv file or '
-                      'directory not contains these files! Please enter again')
-            else:
-                flag = False
-                Main.slash = slash
-                Main.dir_1 = path
-                Main.dir_2 = path
-                Main.dir_3 = path
-                Main.hw_file = hw_file
-                Main.jnpr_file = jnpr_file
-                Main.mapping_file = mapping_file
-                path_folder = path + slash + 'result'
-                if not os.path.isdir(path_folder):
-                    os.mkdir(path_folder)
-                Main.result = path_folder
-                Main.compare_result = Main.result + slash + 'Compare_Result.xlsx'
-
-    def get_helper_2(self):
-        flag_mapping = True
-        while flag_mapping:
-            mapping_file = raw_input("Enter Mapping csv file: ")
-            Main.mapping_file = mapping_file
-            if not os.path.isfile(Main.dir_3 + Main.slash + Main.mapping_file):
-                print("you enter wrong file name: ")
-                is_con_compare = raw_input(
-                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
-                if is_con_compare.lower() == 'y':
-                    flag_mapping = False
-                    Main.mapping_file = ''
-                else:
-                    pass
-            else:
-                print("you enter Right file")
-                flag_mapping = False
-
-    def get_helper_1(self):
-        flag_juniper = True
-        while flag_juniper:
-            jnpr_file = raw_input("Enter Juniper file: ")
-            Main.jnpr_file = jnpr_file
-            if not os.path.isfile(Main.dir_2 + Main.slash + Main.jnpr_file):
-                print("you enter wrong Juniper file name")
-                is_con_juniper = raw_input(
-                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
-                if is_con_juniper.lower() == 'y':
-                    flag_juniper = False
-                    Main.jnpr_file = ''
-                    self.get_helper_2()
-                else:
-                    pass
-            else:
-                print("you enter Right file")
-                flag_juniper = False
-                self.get_helper_2()
-
-    def get_file_name_from_user(self):
-        flag_huawei = True
-        while flag_huawei:
-            path = raw_input("Enter directory contains file: ")
-            hw_file = raw_input("Enter Huawei file: ")
-            Main.dir_1 = Main.dir_2 = Main.dir_3 = path
-            Main.hw_file = hw_file
-            if not os.path.isfile(Main.dir_1 + Main.slash + Main.hw_file):
-                print("you enter wrong Huawei file name")
-                is_con_hw = raw_input(
-                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
-                if is_con_hw.lower() == 'y':
-                    flag_huawei = False
-                    Main.hw_file = ''
-                    self.get_helper_1()
-                else:
-                    pass
-            else:
-                print("you enter Right file")
-                flag_huawei = False
-                self.get_helper_1()
-
-    def get_result_path(self):
-        path_folder = self.dir_1 + Main.slash + 'result'
-        if not os.path.isdir(path_folder):
-            os.mkdir(path_folder)
-        Main.result = path_folder
-        Main.compare_result = Main.result + Main.slash + 'Compare_Result.xlsx'
-
     def main(self):
         # ---------------------------------------------------------- #
-        self.get_file_name_from_user()
-        self.get_result_path()
+        # self.get_file_name_from_user()
+        #self.get_result_path()
         # ---------------------------------------------------------- #
+        check_valid = 0
+        # new_path = Utils.get_path_from_os()
+        #check_valid, index = Utils.get_check_valid(new_path)
 
-        new_path = Utils.get_path_from_os()
-        check_valid, index = Utils.get_check_valid(new_path)
 
         if int(check_valid) >= 150:
             sys.exit()
         else:
-            Utils.update_count(new_path, index, True)
+            #Utils.update_count(new_path, index, True)
             labels_hw_vpls = ['VSI', 'VSI Mac-Count']
             labels_hw_vpls_detail = ['VSI', 'HW AC-remote IP', 'mac-count']
             labels_hw_arp = ['VPN-Instance', 'HW ARP COUNT']
@@ -753,8 +657,8 @@ class Main:
                     df_part_1 = Utils.get_info_part_1_juniper(part_1)
                     df_part_2, dict_mapping_helper = Utils.get_info_part_2_juniper(part_2)
                     df_part_3_1, df_part_3_2 = Utils.get_info_part_3_juniper(part_3, dict_mapping_helper)
-                    dict_ilf, dict_vpn_instance = Utils.get_info_part_4_juniper_new(part_4)
-                    df_part_4_1, df_part_4_2 = Utils.get_info_part_5_juniper(part_5, dict_ilf, dict_vpn_instance)
+                    dict_vpn_instance = Utils.get_info_part_4_juniper_new(part_4)
+                    df_part_4_1, df_part_4_2 = Utils.get_info_part_5_juniper(part_5, dict_vpn_instance)
                     # print(df_part_4_1)
                     # print(df_part_4_2)
                     # print(df_part_4_2)
@@ -909,8 +813,107 @@ class Main:
         else:
             raise ValueError('File path does not exist')
 
+    # @staticmethod
+    # def get_file_from_user_v1():
+    #     if os.name == 'nt':
+    #         slash = '\\'
+    #     else:
+    #         slash = '/'
+    #     flag = True
+    #     while flag:
+    #         path = raw_input('Enter directory contains file : ')
+    #         print('Enter file in order, Huawei first, Juniper second, mapping_file third, Do Not Make Mistake')
+    #         print('If you enter wrong name file, feel free to press ENTER to give name file again ')
+    #         hw_file = raw_input('Enter Huawei file txt: ')
+    #         jnpr_file = raw_input('Enter Juniper file txt: ')
+    #         mapping_file = raw_input('Enter Mapping file csv: ')
+    #         if (not os.path.isfile(path + slash + hw_file)) | (not os.path.isfile(path + slash + jnpr_file)) \
+    #             |(not os.path.isfile(path + slash + mapping_file)):
+    #             print('You enter wrong name Huawei or Juniper file or csv file or '
+    #                   'directory not contains these files! Please enter again')
+    #         else:
+    #             flag = False
+    #             Main.slash = slash
+    #             Main.dir_1 = path
+    #             Main.dir_2 = path
+    #             Main.dir_3 = path
+    #             Main.hw_file = hw_file
+    #             Main.jnpr_file = jnpr_file
+    #             Main.mapping_file = mapping_file
+    #             path_folder = path + slash + 'result'
+    #             if not os.path.isdir(path_folder):
+    #                 os.mkdir(path_folder)
+    #             Main.result = path_folder
+    #             Main.compare_result = Main.result + slash + 'Compare_Result.xlsx'
+
+    def get_helper_2(self):
+        flag_mapping = True
+        while flag_mapping:
+            mapping_file = raw_input("Enter Mapping csv file: ")
+            Main.mapping_file = mapping_file
+            if not os.path.isfile(Main.dir_3 + Main.slash + Main.mapping_file):
+                print("you enter wrong file name: ")
+                is_con_compare = raw_input(
+                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
+                if is_con_compare.lower() == 'y':
+                    flag_mapping = False
+                    Main.mapping_file = ''
+                else:
+                    pass
+            else:
+                print("you enter Right file")
+                flag_mapping = False
+
+    def get_helper_1(self):
+        flag_juniper = True
+        while flag_juniper:
+            jnpr_file = raw_input("Enter Juniper file: ")
+            Main.jnpr_file = jnpr_file
+            if not os.path.isfile(Main.dir_2 + Main.slash + Main.jnpr_file):
+                print("you enter wrong Juniper file name")
+                is_con_juniper = raw_input(
+                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
+                if is_con_juniper.lower() == 'y':
+                    flag_juniper = False
+                    Main.jnpr_file = ''
+                    self.get_helper_2()
+                else:
+                    pass
+            else:
+                print("you enter Right file")
+                flag_juniper = False
+                self.get_helper_2()
+
+    def get_file_name_from_user(self):
+        flag_huawei = True
+        while flag_huawei:
+            path = raw_input("Enter directory contains file: ")
+            hw_file = raw_input("Enter Huawei file: ")
+            Main.dir_1 = Main.dir_2 = Main.dir_3 = path
+            Main.hw_file = hw_file
+            if not os.path.isfile(Main.dir_1 + Main.slash + Main.hw_file):
+                print("you enter wrong Huawei file name")
+                is_con_hw = raw_input(
+                    "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
+                if is_con_hw.lower() == 'y':
+                    flag_huawei = False
+                    Main.hw_file = ''
+                    self.get_helper_1()
+                else:
+                    pass
+            else:
+                print("you enter Right file")
+                flag_huawei = False
+                self.get_helper_1()
+
+    def get_result_path(self):
+        path_folder = self.dir_1 + Main.slash + 'result'
+        if not os.path.isdir(path_folder):
+            os.mkdir(path_folder)
+        Main.result = path_folder
+        Main.compare_result = Main.result + Main.slash + 'Compare_Result.xlsx'
+
 if Utils.is_limted(time_df):
-    # test commit and push
     Main().main()
 else:
     new_path = Utils.get_path_from_os()
