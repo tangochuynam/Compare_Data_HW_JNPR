@@ -531,7 +531,6 @@ class Main:
         slash = '/'
 
     # -------------- Used when choose path and file from user ----------------  #
-
     # dir_1 = ''
     # dir_2 = ''
     # dir_3 = ''
@@ -540,7 +539,6 @@ class Main:
     # mapping_file = ''
 
     # -------------- Used when run on window local---------------------------------- #
-
     # dir_1 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
     # dir_2 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
     # dir_3 = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
@@ -550,7 +548,6 @@ class Main:
     # result = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
 
     # -------------- Used when run on Mac local ---------------------------------- #
-
     dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
     dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
