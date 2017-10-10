@@ -102,7 +102,7 @@ class Utils:
     def get_info_part_2_huawei(part_2):
         lst_vsi_store = []
         pttr_2 = 'VSI Name.*\n(?:(?!VSI Name).*\n)+'
-        pttr_2_sub = '(?:(?:\d+.){3}\d+).*\n(?:(?!(?:\d+.){3}\d+).*\n)*'
+        pttr_2_sub = '^\d+.*\n'
         lst_vsi = re.findall(pttr_2, part_2, flags=re.MULTILINE)
         for vsi in lst_vsi:
             lines = vsi.split('\n')
@@ -111,7 +111,7 @@ class Utils:
             for peer in lst_peer:
                 vpls = VPLS()
                 cols = peer.split()
-                vpls.neighbor, vpls.vc_id , vpls.vc_state = cols[0], cols[1], cols[4]
+                vpls.neighbor, vpls.vc_id, vpls.vc_state = cols[0], cols[1], cols[4]
                 lst_vsi_store.append((vpls.vc_state, vpls.vpls_instance, vpls.neighbor, vpls.vc_id))
         labels = ['VC State', 'VPLS Instance', 'Neighbor', 'VC ID']
         df_vsi = pd.DataFrame.from_records(lst_vsi_store, columns=labels)
