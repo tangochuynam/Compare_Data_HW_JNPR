@@ -54,6 +54,22 @@ class Utils:
         return part
 
     @staticmethod
+    def convert_mac_to_jnpr_form(mac):
+        la = mac.split('-')
+        lb = list(map(lambda x: (x[0:2] + ':' + x[2:]).lower(), la))
+        return ':'.join(lb)
+
+    @staticmethod
+    def get_diff_lst_mac_hw_jnpr(lst_mac_hw, lst_mac_jnpr):
+        set_hw = set(lst_mac_hw)
+        set_jnpr = set(lst_mac_jnpr)
+        diff = set_hw.difference(set_jnpr)
+        if diff == set():
+            return ''
+        else:
+            return ', '.join(list(diff))
+
+    @staticmethod
     def get_info_part_1_huawei(part_1):
         lst_l2vc = []
         pttr_1 = ' *Client Interface .*\n(?: (?:[^*](?!Client Interface)).*\n)+'
@@ -106,8 +122,8 @@ class Utils:
     def get_info_part_3_huawei(part_3):
         dict_general = {}
         pttr_3 = 'MAC Address:.*\n(?:(?!MAC Address:).*\n)+'
-        labels = ['VSI', 'HW AC-remote IP', 'mac-count']
-        labels_sum = ['VSI', 'VSI Mac-Count']
+        labels = ['VSI', 'HW AC-remote IP', 'mac-count', 'List-Mac']
+        labels_sum = ['VSI', 'VSI Mac-Count', 'List-Mac']
         lst_mac_add = re.findall(pttr_3, part_3, flags=re.MULTILINE)
         for mac_dd in lst_mac_add:
             lines = mac_dd.split('\n')
@@ -124,7 +140,8 @@ class Utils:
                 if line.startswith('Peer IP'):
                     line_peer = line
             index_vsi = line_mac.find('VLAN/VSI/SI')
-            mac = line_mac[:index_vsi].split(':')[1].strip()
+            mac_tmp = line_mac[:index_vsi].split(':')[1].strip()
+            mac = Utils.convert_mac_to_jnpr_form(mac_tmp)
             key = line_mac[index_vsi:].split(':')[1].strip()
             index_type = line_port.find('Type')
             port_key = line_port[:index_type].split(':')[1].strip()
@@ -248,8 +265,8 @@ class Utils:
     @staticmethod
     def get_info_part_3_juniper(part_3, dict_helper):
         dict_general = {}
-        labels = ['VPLS', 'JNPR AC-remote IP', 'Mac-count']
-        labels_sum = ['VPLS', 'VPLS mac-count']
+        labels = ['VPLS', 'JNPR AC-remote IP', 'Mac-count', 'List-Mac']
+        labels_sum = ['VPLS', 'VPLS mac-count', 'List-Mac']
         j_pttr_3 = 'Routing instance.*\n(?:(?!Routing instance).*\n)+'
         j_pttr_3_sub = '(?:\s{3}(?:\S{2}:){5}\S{2}).*\n'
         lst_routing_instance = re.findall(j_pttr_3, part_3, flags=re.MULTILINE)
@@ -374,6 +391,18 @@ class Utils:
         return Utils.create_info_arp({}, dict_vpn_instance, labels_1, labels_2)
 
     @staticmethod
+    def get_info_part_6_juniper(part_6):
+        j_pttr_6_1 = '^inet.0:.*\n(?:(?!^\s*$).*\n)+'
+        j_pttr_6_2 = '^L3-.*\n(?:(?!^\s*$).*\n)*'
+        labels = ['VRF', 'Direct', 'Static', ]
+        inet_0 = re.findall(j_pttr_6_1, part_6, flags=re.MULTILINE)
+        l3_route_info = re.findall(j_pttr_6_2, part_6, flags=re.MULTILINE)
+
+    @staticmethod
+    def get_info_part_7_juinper(part_7):
+        pass
+
+    @staticmethod
     def create_info_arp(dict_ifl, dict_vpn_instance, labels_1, labels_2):
         dict_sum = {}
         records = []
@@ -402,14 +431,14 @@ class Utils:
         records_summary = []
         # create dict summary from dict_general and records to export to excel
         for key in dict_general:
-            dict_summary[key] = 0
+            dict_summary[key] = []
             for port_key, lst_mac in dict_general[key].items():
-                dict_summary[key] += len(lst_mac)
+                dict_summary[key] += lst_mac
                 # create records to export to excel
-                records.append((key, port_key, len(lst_mac)))
+                records.append((key, port_key, len(lst_mac), ' '.join(lst_mac)))
 
-        for vsi, mac_count in dict_summary.items():
-            records_summary.append((vsi, mac_count))
+        for vsi, lst_mac in dict_summary.items():
+            records_summary.append((vsi, len(lst_mac), ' '.join(lst_mac)))
 
         df_1 = pd.DataFrame.from_records(records, columns=labels)
         df_2 = pd.DataFrame.from_records(records_summary, columns=labels_sum)
@@ -552,7 +581,7 @@ class Main:
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
     dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
     hw_file = 'HW.txt'
-    jnpr_file = 'JNPR_2.txt'
+    jnpr_file = 'JNPR.txt'
     mapping_file = 'IFD.csv'
     result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
     compare_result = result + slash + 'Compare_Result' + '.xlsx'
@@ -573,13 +602,13 @@ class Main:
             sys.exit()
         else:
             #Utils.update_count(new_path, index, True)
-            labels_hw_vpls = ['VSI', 'VSI Mac-Count']
-            labels_hw_vpls_detail = ['VSI', 'HW AC-remote IP', 'mac-count']
+            labels_hw_vpls = ['VSI', 'VSI Mac-Count', 'List-Mac']
+            labels_hw_vpls_detail = ['VSI', 'HW AC-remote IP', 'mac-count', 'List-Mac']
             labels_hw_arp = ['VPN-Instance', 'HW ARP COUNT']
             labels_hw_arp_detail = ['VPN-Instance', 'HW-IFL', 'HW ARP COUNT']
 
-            labels_jnpr_vpls = ['VPLS', 'VPLS mac-count']
-            labels_jnpr_vpls_detail = ['VPLS', 'JNPR AC-remote IP', 'Mac-count']
+            labels_jnpr_vpls = ['VPLS', 'VPLS mac-count', 'List-Mac']
+            labels_jnpr_vpls_detail = ['VPLS', 'JNPR AC-remote IP', 'Mac-count', 'List-Mac']
             labels_jnpr_arp = ['JNPR VRF', 'JNPR-VRF ARP COUNT']
             labels_jnpr_arp_detail = ['JNPR VRF', 'JNPR-IFL', 'JNPR-IFL ARP COUNT']
 
@@ -638,8 +667,9 @@ class Main:
                     writer = pd.ExcelWriter(name_out, engine='xlsxwriter')
                     Utils.write_to_csv(df_part_1, writer, 'L2Circuit')
                     Utils.write_to_csv(df_part_2, writer, 'VPLS')
-                    Utils.write_to_csv(df_part_3_1, writer, 'Mac-Address VPLS Huawei')
-                    Utils.write_to_csv(df_part_3_2, writer, 'Mac-Address VPLS Huawei SUMMARY')
+                    Utils.write_to_csv(df_part_3_1[['VSI', 'HW AC-remote IP', 'mac-count']], writer,
+                                       'Mac-Address VPLS Huawei')
+                    Utils.write_to_csv(df_part_3_2[['VSI', 'VSI Mac-Count']], writer, 'Mac-Address VPLS Huawei SUMMARY')
                     Utils.write_to_csv(df_part_4_1, writer, 'ARP Huawei')
                     Utils.write_to_csv(df_part_4_2, writer, 'ARP Huawei SUMMARY')
                     writer.save()
@@ -674,8 +704,9 @@ class Main:
                     writer = pd.ExcelWriter(name_out, engine='xlsxwriter')
                     Utils.write_to_csv(df_part_1, writer, 'L2Circuit')
                     Utils.write_to_csv(df_part_2, writer, 'VPLS')
-                    Utils.write_to_csv(df_part_3_1, writer, 'Mac-Address VPLS')
-                    Utils.write_to_csv(df_part_3_2, writer, 'Mac-Address VPLS SUMMARY')
+                    Utils.write_to_csv(df_part_3_1[['VPLS', 'JNPR AC-remote IP', 'Mac-count']], writer,
+                                       'Mac-Address VPLS')
+                    Utils.write_to_csv(df_part_3_2[['VPLS', 'VPLS mac-count']], writer, 'Mac-Address VPLS SUMMARY')
                     Utils.write_to_csv(df_part_4_1, writer, 'ARP Juniper')
                     Utils.write_to_csv(df_part_4_2, writer, 'ARP Juniper SUMMARY')
                     writer.save()
@@ -762,9 +793,11 @@ class Main:
         lst_record = []
         labels = []
         if name_service == 'Mac-Address VPLS Detail':
-            labels = ['VSI', 'HW IFL', 'HW mac-count', 'VPLS', 'JNPR IFL', 'JNPR mac-count', 'Compare Result']
+            labels = ['VSI', 'HW IFL', 'HW mac-count', 'VPLS', 'JNPR IFL', 'JNPR mac-count', 'Compare Result',
+                      'MAC HW Lost']
         elif name_service == 'ARP Detail':
-            labels = ['VPN Instance', 'HW IFL', 'HW ARP Count', 'JNPR VRF',  'JNPR IFL', 'JNPR-VRF ARP Count', 'Compare Result']
+            labels = ['VPN Instance', 'HW IFL', 'HW ARP Count', 'JNPR VRF', 'JNPR IFL', 'JNPR-VRF ARP Count',
+                      'Compare Result', 'MAC HW Lost']
         else:
             print('this is a new service (not mac_vpls nor arp)')
         for i in range(0, len(df_hw)):
@@ -773,9 +806,15 @@ class Main:
             vsi_name_hw = df_row_hw[labels_hw[0]].to_string(index=False)
             ifl_hw = df_row_hw[labels_hw[1]].to_string(index=False)
             mac_count_hw = df_row_hw[labels_hw[2]].to_string(index=False)
+
             if name_service == 'Mac-Address VPLS Detail':
                 vpls_jnpr = "L2-" + vsi_name_hw
+                lst_mac_hw = df_row_hw[labels_hw[3]].tolist()[0].split()
+                # print(lst_mac_hw)
+                # print("len_list: " + str(len(lst_mac_hw)))
+                # print("type_list_mac_hw: " + str(type(lst_mac_hw)))
             else:
+                lst_mac_hw = []
                 # name_service = 'arp'
                 if vsi_name_hw == 'inet.0':
                     vpls_jnpr = vsi_name_hw
@@ -792,16 +831,23 @@ class Main:
 
             if len(df_row_jnpr) > 0:
                 mac_count_jnpr = df_row_jnpr[labels_jnpr[2]].to_string(index=False)  # Series Type
-                # print("name_vpls: " + str(new_col_value))
-                # print("col_2_jnpr_type: " + str(type(col_2_jnpr)) + " value: " + str(col_2_jnpr))
+                lst_mac_jnpr = []
+                mac_hw_lost = ''
                 if int(mac_count_hw) == int(mac_count_jnpr):
-                    compare_result = 'OK'
+                    compare_result = 'OK - #mac equal'
                 else:
-                    compare_result = 'Check here'
-                lst_record.append((vsi_name_hw, ifl_hw, mac_count_hw, vpls_jnpr, ifl_jnpr, mac_count_jnpr, compare_result))
+                    compare_result = 'CHECK HERE - #mac NOT equal'
+                if name_service == 'Mac-Address VPLS Detail':
+                    lst_mac_jnpr = df_row_jnpr[labels_jnpr[3]].tolist()[0].split()
+                    mac_hw_lost = Utils.get_diff_lst_mac_hw_jnpr(lst_mac_hw, lst_mac_jnpr)
+                    # print("name_vpls: " + str(new_col_value))
+                    # print("col_2_jnpr_type: " + str(type(col_2_jnpr)) + " value: " + str(col_2_jnpr))
+                lst_record.append((vsi_name_hw, ifl_hw, mac_count_hw, vpls_jnpr, ifl_jnpr, mac_count_jnpr,
+                                   compare_result, mac_hw_lost))
+
             else:
                 compare_result = 'Not Found'
-                lst_record.append((vsi_name_hw, ifl_hw, mac_count_hw, '', '', '', compare_result))
+                lst_record.append((vsi_name_hw, ifl_hw, mac_count_hw, '', '', '', compare_result, ''))
         df_compare = pd.DataFrame.from_records(lst_record, columns=labels)
         Utils.write_to_csv(df_compare, writer, name_service)
 
@@ -919,6 +965,7 @@ class Main:
             os.mkdir(path_folder)
         Main.result = path_folder
         Main.compare_result = Main.result + Main.slash + 'Compare_Result.xlsx'
+
 
 if Utils.is_limted(time_df):
     Main().main()
