@@ -589,7 +589,7 @@ class Main:
 
     def main(self):
         check_valid = 0
-
+        new_path = ''
         # -------------------- Get File from User ---------------------------- #
 
         # self.get_file_name_from_user()
@@ -602,7 +602,8 @@ class Main:
         if int(check_valid) >= 150:
             sys.exit()
         else:
-            #Utils.update_count(new_path, index, True)
+            if new_path != '':
+                Utils.update_count(new_path, index, True)
             labels_hw_vpls = ['VSI', 'VSI Mac-Count', 'List-Mac']
             labels_hw_vpls_detail = ['VSI', 'HW AC-remote IP', 'mac-count', 'List-Mac']
             labels_hw_arp = ['VPN-Instance', 'HW ARP COUNT']
