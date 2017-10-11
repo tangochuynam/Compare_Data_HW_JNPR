@@ -23,6 +23,15 @@ class VPLS:
         self.vc_id = vc_id
 
 
+class Route:
+    def __init__(self):
+        self.direct = 0
+        self.static = 0
+        self.rip = 0
+        self.ospf = 0
+        self.isis = 0
+        self.bgp = 0
+
 class Utils:
     @staticmethod
     def find_index_to_split(pattern):
@@ -395,14 +404,55 @@ class Utils:
     def get_info_part_6_juniper(part_6):
         j_pttr_6_1 = '^inet.0:.*\n(?:(?!^\s*$).*\n)+'
         j_pttr_6_2 = '^L3-.*\n(?:(?!^\s*$).*\n)*'
-        labels = ['VRF', 'Direct', 'Static', ]
+        lst_route = []
+        labels = ['VRF', 'Direct', 'Static', 'RIP', 'OSPF', 'ISIS', 'BGP']
         inet_0 = re.findall(j_pttr_6_1, part_6, flags=re.MULTILINE)
-        l3_route_info = re.findall(j_pttr_6_2, part_6, flags=re.MULTILINE)
+        lst_l3 = re.findall(j_pttr_6_2, part_6, flags=re.MULTILINE)
+        lst_line_inet_0 = inet_0[0].splitlines()
+
+        # handle the inet.0
+        name_vrf_inet = lst_line_inet_0[0].split(':')[0].strip()
+        route = Route()
+        for i in range(1, len(lst_line_inet_0)):
+            Utils.get_num_active_route(lst_line_inet_0[i], route)
+        lst_route.append((name_vrf_inet, route.direct, route.static, route.rip, route.ospf, route.isis, route.bgp))
+
+        # handle the L3-
+        for l3 in lst_l3:
+            lst_line_l3 = l3.splitlines()
+            name_vrf_l3 = lst_line_l3[0].split(':')[0].strip()
+            route = Route()
+            for i in range(1, len(lst_line_l3)):
+                Utils.get_num_active_route(lst_line_l3[i], route)
+            lst_route.append((name_vrf_l3, route.direct, route.static, route.rip, route.ospf, route.isis, route.bgp))
+
+        df_route_sum = pd.DataFrame.from_records(lst_route, columns=labels)
+        return df_route_sum
 
     @staticmethod
     def get_info_part_7_juinper(part_7):
         pass
 
+    @staticmethod
+    def get_num_active_route(line, route):
+        tmp_line = line.strip()
+        tmp_1 = tmp_line.split(':')
+        route_name = tmp_1[0].lower()
+        num_active = tmp_1[1].split(',')[1].strip().split()[0]
+        if route_name == 'direct':
+            route.direct = num_active
+        elif route_name == 'static':
+            route.static = num_active
+        elif route_name == 'rip':
+            route.rip = num_active
+        elif route_name == 'ospf':
+            route.ospf = num_active
+        elif route_name == 'is-is':
+            route.isis = num_active
+        elif route_name == 'bgp':
+            route.bgp = num_active
+        else:
+            pass
     @staticmethod
     def create_info_arp(dict_ifl, dict_vpn_instance, labels_1, labels_2):
         dict_sum = {}
@@ -973,7 +1023,8 @@ class Main:
 
 
 if Utils.is_limted(time_df):
-    Main().main()
+    if __name__ == '__main__':
+        Main().main()
 else:
     new_path = Utils.get_path_from_os()
     check_valid, index = Utils.get_check_valid(new_path)
