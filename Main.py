@@ -767,7 +767,7 @@ class Main:
             col_1_hw = df_row_hw[labels_hw[0]].to_string(index=False)
             col_2_hw = df_row_hw[labels_hw[1]].to_string(index=False)
             if name_service == 'Mac-Address VPLS':
-                if col_1_hw.isdigit():
+                if col_1_hw.strip().isdigit():
                     new_col_value = "L2-VLAN-" + col_1_hw
                 else:
                     new_col_value = "L2-" + col_1_hw
@@ -810,7 +810,10 @@ class Main:
             mac_count_hw = df_row_hw[labels_hw[2]].to_string(index=False)
 
             if name_service == 'Mac-Address VPLS Detail':
-                vpls_jnpr = "L2-" + vsi_name_hw
+                if vsi_name_hw.strip().isdigit():
+                    vpls_jnpr = "L2-VLAN-" + vsi_name_hw
+                else:
+                    vpls_jnpr = "L2-" + vsi_name_hw
                 lst_mac_hw = df_row_hw[labels_hw[3]].tolist()[0].split()
                 # print(lst_mac_hw)
                 # print("len_list: " + str(len(lst_mac_hw)))
