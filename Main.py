@@ -6,13 +6,13 @@ import sys
 time_df = datetime.datetime(2017, 10, 1, 18, 15, 0, 0)
 
 
-
 class L2_Circuit:
     def __init__(self, vc_state='', ac_interface='', neighbor='', vc_id=''):
         self.vc_state = vc_state
         self.ac_interface = ac_interface
         self.neighbor = neighbor
         self.vc_id = vc_id
+
 
 class VPLS:
     vpls_instance = ''
@@ -31,6 +31,31 @@ class Route:
         self.ospf = 0
         self.isis = 0
         self.bgp = 0
+
+    def get_info(self, df_vrf, protocol):
+
+        if protocol == 'BGP':
+            self.bgp = int(df_vrf['BGP'].to_string(index=False))
+        elif protocol == 'OSPF':
+            self.ospf = int(df_vrf['OSPF'].to_string(index=False))
+        elif protocol == 'IS-IS':
+            self.isis = int(df_vrf['IS-IS'].to_string(index=False))
+        elif protocol == 'DIRECT':
+            self.direct = int(df_vrf['DIRECT'].to_string(index=False))
+        elif protocol == 'STATIC':
+            self.static = int(df_vrf['STATIC'].to_string(index=False))
+        elif protocol == 'RIP':
+            self.rip = int(df_vrf['RIP'].to_string(index=False))
+        else:
+            raise ValueError('No protocol found')
+
+
+class Route_Detail:
+    def __init__(self, vrf_name='', route='', protocol=''):
+        self.vrf_name = vrf_name
+        self.route = route
+        self.protocol = protocol
+
 
 class Utils:
     @staticmethod
@@ -214,6 +239,94 @@ class Utils:
                     dict_vpn_instance[vpn_key][ifl_key].append(tmp_value)
         #print(dict_vpn_instance)
         return Utils.create_info_arp(dict_ifl, dict_vpn_instance, labels_1, labels_2)
+
+    @staticmethod
+    def get_info_the_rest_huawei(lst_part):
+        h_pttr_other = '(?:^\s|^\d{1,3})\s*\d+.*\n(?:(?!\s*\d{1,3}).*\n)*'
+        h_pttr_vrf_name = 'Routing Tables.*\n'
+        labels_sum = ['VRF', 'DIRECT', 'STATIC', 'RIP', 'OSPF', 'IS-IS', 'BGP']
+        labesl_detail = ['VRF', 'Route', 'Protocol', 'Next-Hop and Interface']
+        lst_route_sum = []
+        lst_route_detail = []
+        lst_vrf_name = []
+        for part in lst_part:
+            line_vrf_name = re.findall(h_pttr_vrf_name, part, flags=re.MULTILINE)
+            lines_route = re.findall(h_pttr_other, part, flags=re.MULTILINE)
+            vrf_name = line_vrf_name[0].splitlines()[0].split(':')[1].strip().upper()
+            if vrf_name == 'PUBLIC':
+                vrf_name = 'inet.0'.upper()
+            # store list vrf_name for compare later
+            lst_vrf_name.append(vrf_name)
+            route_info = Route()
+            # print ('vrf_name: ' + vrf_name)
+            for i in range(0, len(lines_route)):
+                lines = lines_route[i]
+                route = '';
+                protocol = '';
+                next_hop_interface = ''
+                if i == 0:
+                    info = lines.splitlines()[1].strip().split()
+                    route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info)
+                else:
+                    lst_tmp = lines.splitlines()
+                    if len(lst_tmp) == 1:
+                        info = lst_tmp[0].split()
+                        route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info)
+                    else:
+                        destination = ''
+                        for j in range(0, len(lst_tmp)):
+                            if j == 0:
+                                info = lst_tmp[j].split()
+                                route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info)
+                                destination = info[0]
+                            else:
+                                tmp = lst_tmp[j].split()
+                                if len(tmp) > 0:
+                                    # print("value of TMP")
+                                    # print(tmp)
+                                    tmp.insert(0, destination)
+                                    lst_info_tmp = Utils.get_route_info_HW(tmp, route_info)
+                                    next_hop_interface += ', ' + lst_info_tmp[2]
+                lst_route_detail.append((vrf_name, route, protocol, next_hop_interface))
+            lst_route_sum.append((vrf_name, route_info.direct, route_info.static, route_info.rip, route_info.ospf,
+                                  route_info.isis, route_info.bgp))
+        # create dataframe for compare and export to excel
+        df_route_sum = pd.DataFrame.from_records(lst_route_sum, columns=labels_sum)
+        df_route_detail = pd.DataFrame.from_records(lst_route_detail, columns=labesl_detail)
+        return [df_route_sum, df_route_detail, lst_vrf_name]
+
+    @staticmethod
+    def get_route_info_HW(info, route_info):
+        route = info[0]
+        next_hop = info[5]
+        interface = info[6]
+        next_hop_interface = '(' + next_hop + ', ' + interface + ')'
+        protocol = Utils.convert_protocol_and_count_HW(info[1], route_info)
+        return [route, protocol, next_hop_interface]
+
+    @staticmethod
+    def convert_protocol_and_count_HW(p, route_info):
+        protocol = ''
+        p = p.upper()
+        if p == 'ISIS-L1':
+            protocol = 'IS-IS'
+            route_info.isis += 1
+        elif p == 'IBGP':
+            protocol = 'BGP'
+            route_info.bgp += 1
+        elif p == 'DIRECT':
+            protocol = 'DIRECT'
+            route_info.direct += 1
+        elif p == 'RIP':
+            protocol = 'RIP'
+            route_info.rip += 1
+        elif p == 'STATIC':
+            protocol = 'STATIC'
+            route_info.static += 1
+        elif p == 'OSPF':
+            protocol = 'OSPF'
+            route_info.ospf += 1
+        return protocol
 
     @staticmethod
     def get_info_part_1_juniper(part_1):
@@ -405,13 +518,13 @@ class Utils:
         j_pttr_6_1 = '^inet.0:.*\n(?:(?!^\s*$).*\n)+'
         j_pttr_6_2 = '^L3-.*\n(?:(?!^\s*$).*\n)*'
         lst_route = []
-        labels = ['VRF', 'Direct', 'Static', 'RIP', 'OSPF', 'ISIS', 'BGP']
+        labels = ['VRF', 'DIRECT', 'STATIC', 'RIP', 'OSPF', 'IS-IS', 'BGP']
         inet_0 = re.findall(j_pttr_6_1, part_6, flags=re.MULTILINE)
         lst_l3 = re.findall(j_pttr_6_2, part_6, flags=re.MULTILINE)
         lst_line_inet_0 = inet_0[0].splitlines()
 
         # handle the inet.0
-        name_vrf_inet = lst_line_inet_0[0].split(':')[0].strip()
+        name_vrf_inet = lst_line_inet_0[0].split(':')[0].strip().upper()
         route = Route()
         for i in range(1, len(lst_line_inet_0)):
             Utils.get_num_active_route(lst_line_inet_0[i], route)
@@ -420,7 +533,7 @@ class Utils:
         # handle the L3-
         for l3 in lst_l3:
             lst_line_l3 = l3.splitlines()
-            name_vrf_l3 = lst_line_l3[0].split(':')[0].strip()
+            name_vrf_l3 = lst_line_l3[0].split(':')[0].strip().upper().split('.INET.0')[0]
             route = Route()
             for i in range(1, len(lst_line_l3)):
                 Utils.get_num_active_route(lst_line_l3[i], route)
@@ -430,8 +543,55 @@ class Utils:
         return df_route_sum
 
     @staticmethod
-    def get_info_part_7_juinper(part_7):
-        pass
+    def get_info_part_7_juniper(part_7):
+        j_pttr_7_1 = '^inet.0:.*\n(?:(?!^inet.1).*\n)+'
+        j_pttr_7_2 = '^L3-.*\n(?:(?!(?:^L3-|^iso.0)).*\n)*'
+        j_pttr_7_3 = '^\d+.*\n'
+        j_pttr_7_4 = '^inet.0.*\n'
+        j_pttr_7_5 = '^L3-.*\n'
+        lst_route = []
+        lst_protocol = ['DIRECT', 'RIP', 'BGP', 'OSPF', 'STATIC', 'IS-IS']
+        labels = ['VRF', 'Route', 'Protocol']
+        inet_0 = re.findall(j_pttr_7_1, part_7, flags=re.MULTILINE)
+        lst_l3 = re.findall(j_pttr_7_2, part_7, flags=re.MULTILINE)
+
+        # handle the inet_0
+        vrf_name_inet = Utils.get_name_vrf_for_part_7_juniper(inet_0[0], j_pttr_7_4)
+        lst_line_inet = re.findall(j_pttr_7_3, inet_0[0], flags=re.MULTILINE)
+        for line_inet in lst_line_inet:
+            route, protocol = Utils.get_route_protcol_part7_juniper(line_inet)
+            if protocol in lst_protocol:
+                lst_route.append((vrf_name_inet, route, protocol))
+        # handle the l3
+        for l3 in lst_l3:
+            vrf_name_l3 = Utils.get_name_vrf_for_part_7_juniper(l3, j_pttr_7_5)
+            lst_line_l3 = re.findall(j_pttr_7_3, l3, flags=re.MULTILINE)
+            for line_l3 in lst_line_l3:
+                route, protocol = Utils.get_route_protcol_part7_juniper(line_l3)
+                if protocol in lst_protocol:
+                    lst_route.append((vrf_name_l3, route, protocol))
+        df_route_detail = pd.DataFrame.from_records(lst_route, columns=labels)
+        return df_route_detail
+
+    @staticmethod
+    def get_name_vrf_for_part_7_juniper(part, pttr):
+        first_line = re.findall(pttr, part, flags=re.MULTILINE)
+        return first_line[0].split(':')[0].strip().upper().split('.INET.0')[0]
+
+    @staticmethod
+    def get_route_protcol_part7_juniper(line):
+        tmp = line.split()
+        route = tmp[0].strip()
+        protocol = ''
+        if '/' in tmp[1]:
+            index_first_square_bracket = tmp[1].index('[')
+            index_slash = tmp[1].index('/')
+            protocol = tmp[1][index_first_square_bracket + 1:index_slash].upper()
+            if protocol == 'ACCESS-INTERNAL':
+                protocol = 'DIRECT'
+        else:
+            raise ValueError('protocol name in VRF does not have / like [BGP/170]')
+        return [route, protocol]
 
     @staticmethod
     def get_num_active_route(line, route):
@@ -453,6 +613,7 @@ class Utils:
             route.bgp = num_active
         else:
             pass
+
     @staticmethod
     def create_info_arp(dict_ifl, dict_vpn_instance, labels_1, labels_2):
         dict_sum = {}
@@ -534,7 +695,6 @@ class Utils:
 
         return ifl_jnpr
 
-
     @staticmethod
     def write_to_csv(df, writer, sheet_name):
         df.to_excel(writer, sheet_name, index=False)
@@ -556,6 +716,7 @@ class Utils:
                     return False
             else:
                 return False
+
     @staticmethod
     def get_path_from_os():
         path = os.getcwd()
@@ -604,6 +765,7 @@ class Utils:
         else:
             sys.exit()
 
+
 class Main:
     if os.name == 'nt':
         slash = '\\'
@@ -628,12 +790,13 @@ class Main:
     # result = r"D:\BaoMat_Project\VNPTHCM\MANE-10P\script\Compare_Data_HW_JNPR\result"
 
     # -------------- Used when run on Mac local ---------------------------------- #
+
     dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
     dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
-    hw_file = 'HW.txt'
-    jnpr_file = 'JNPR.txt'
-    mapping_file = 'IFD.csv'
+    hw_file = 'LDG01LNP_all.txt'
+    jnpr_file = 'MX_LDG01LNP_all.txt'
+    mapping_file = ''
     result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
     compare_result = result + slash + 'Compare_Result' + '.xlsx'
 
@@ -678,7 +841,11 @@ class Main:
                 Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[3], writer, labels_hw_vpls, labels_jnpr_vpls,
                                           'Mac-Address VPLS')
                 Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], writer, labels_hw_arp, labels_jnpr_arp, 'ARP')
-
+                # adding new compare route
+                df_vrf_sum, df_route_detail = Main.compare_route(lst_df_hw[6], lst_df_hw[7], lst_df_jnpr[6],
+                                                                 lst_df_jnpr[7], lst_df_hw[8])
+                Utils.write_to_csv(df_vrf_sum, writer, 'Route_Summary_Compare')
+                Utils.write_to_csv(df_route_detail, writer, 'Lost_Route_Info')
             # comparing detail
             if Main.mapping_file != "":
                 df_mapping = Main.read_csv_file_mapping(Main.dir_3 + '/' + Main.mapping_file)
@@ -704,14 +871,15 @@ class Main:
                 # handle file and get information
                 # split into 4 parts
                 lst_part = Utils.split_data_by_command(pttr_split_command, file_string)
-                if len(lst_part) != 4:
+                if len(lst_part) == 4:
                     raise ValueError("your Huawei is not right format, please check this file again")
                 else:
-                    part_1, part_2, part_3, part_4 = lst_part
+                    part_1, part_2, part_3, part_4 = lst_part[0:4]
                     df_part_1 = Utils.get_info_part_1_huawei(part_1)
                     df_part_2 = Utils.get_info_part_2_huawei(part_2)
                     df_part_3_1, df_part_3_2 = Utils.get_info_part_3_huawei(part_3)
                     df_part_4_1, df_part_4_2 = Utils.get_info_part_4_huawei(part_4)
+                    df_route_sum, df_route_detail, lst_vrf_name = Utils.get_info_the_rest_huawei(lst_part[4:])
                     # print(df_part_4_1)
                     # print(df_part_4_2)
                     # write file
@@ -724,8 +892,11 @@ class Main:
                     Utils.write_to_csv(df_part_3_2[['VSI', 'VSI Mac-Count']], writer, 'Mac-Address VPLS Huawei SUMMARY')
                     Utils.write_to_csv(df_part_4_1, writer, 'ARP Huawei')
                     Utils.write_to_csv(df_part_4_2, writer, 'ARP Huawei SUMMARY')
+                    Utils.write_to_csv(df_route_sum, writer, 'Route SUMMARY')
+                    Utils.write_to_csv(df_route_detail, writer, 'Route Detail SUMMARY')
                     writer.save()
-                    return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2]
+                    return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2, df_route_sum,
+                            df_route_detail, lst_vrf_name]
     @staticmethod
     def get_info_from_juniper(filename):
         juniper_pttr = '(?:[\S]+)>\s+show.*\n(?:(?![\S]+>).*\n)+'
@@ -739,18 +910,17 @@ class Main:
                 # handle file and get information
                 # split into 5 parts
                 lst_part = Utils.split_data_by_command(juniper_pttr, file_string)
-                if len(lst_part) != 5:
+                if len(lst_part) != 7:
                     raise ValueError("your Juniper is not right format, please check this file again")
                 else:
-                    part_1, part_2, part_3, part_4, part_5 = lst_part
+                    part_1, part_2, part_3, part_4, part_5, part_6, part_7 = lst_part
                     df_part_1 = Utils.get_info_part_1_juniper(part_1)
                     df_part_2, dict_mapping_helper = Utils.get_info_part_2_juniper(part_2)
                     df_part_3_1, df_part_3_2 = Utils.get_info_part_3_juniper(part_3, dict_mapping_helper)
                     dict_vpn_instance = Utils.get_info_part_4_juniper_new(part_4)
                     df_part_4_1, df_part_4_2 = Utils.get_info_part_5_juniper(part_5, dict_vpn_instance)
-                    # print(df_part_4_1)
-                    # print(df_part_4_2)
-                    # print(df_part_4_2)
+                    df_part_6 = Utils.get_info_part_6_juniper(part_6)
+                    df_part_7 = Utils.get_info_part_7_juniper(part_7)
                     # write file
                     name_out = Main.result + "/" + hostname + ".xlsx"
                     writer = pd.ExcelWriter(name_out, engine='xlsxwriter')
@@ -761,8 +931,11 @@ class Main:
                     Utils.write_to_csv(df_part_3_2[['VPLS', 'VPLS mac-count']], writer, 'Mac-Address VPLS SUMMARY')
                     Utils.write_to_csv(df_part_4_1, writer, 'ARP Juniper')
                     Utils.write_to_csv(df_part_4_2, writer, 'ARP Juniper SUMMARY')
+                    Utils.write_to_csv(df_part_6, writer, 'Route SUMMARY')
+                    Utils.write_to_csv(df_part_7, writer, 'Route Detail SUMMARY')
                     writer.save()
-                    return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2]
+                    return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2, df_part_6,
+                            df_part_7]
 
     @staticmethod
     def compare_l2circuit_vpls(df_hw, df_jnpr, writer, name_service):
@@ -905,6 +1078,85 @@ class Main:
                 lst_record.append((vsi_name_hw, ifl_hw, mac_count_hw, '', '', '', compare_result, ''))
         df_compare = pd.DataFrame.from_records(lst_record, columns=labels)
         Utils.write_to_csv(df_compare, writer, name_service)
+
+    @staticmethod
+    def compare_route(df_hw_sum, df_hw_detail, df_jnpr_sum, df_jnpr_detail, lst_hw_vrf_name):
+        labels_sum = ['HW_VRF', 'HW_BGP', 'HW_ISIS', 'HW_OSPF', 'HW_DIRECT', 'HW_STATIC', 'HW_RIP',
+                      'JNPR_VRF', 'JNPR_BGP', 'JNPR_ISIS', 'JNPR_OSPF', 'HW_DIRECT', 'HW_STATIC', 'HW_RIP',
+                      'RESULT']
+        labels_route_detail = ['VRF', 'Protocol', 'List of LOST Routes']
+        lst_protocol = ['BGP', 'IS-IS', 'OSPF', 'DIRECT', 'STATIC', 'RIP']
+        lst_records_vrf = []
+        lst_records_route = []
+        flag_check = False
+        for hw_vrf_name in lst_hw_vrf_name:
+            check_protocol = {'DIRECT': True, 'STATIC': True, 'RIP': True, 'OSPF': True, 'IS-IS': True, 'BGP': True}
+            result = 'OK'
+            df_hw_vrf = df_hw_sum[df_hw_sum['VRF'] == hw_vrf_name]
+            if hw_vrf_name == 'INET.0':
+                jnpr_vrf_name = 'INET.0'
+            else:
+                jnpr_vrf_name = 'L3-' + hw_vrf_name
+            # print("hw_vrf_name: " + hw_vrf_name)
+            df_jnpr_vrf = df_jnpr_sum[df_jnpr_sum['VRF'] == jnpr_vrf_name]
+            hw_route = Route()
+            jnpr_route = Route()
+            if len(df_jnpr_vrf) > 0:
+                Main.get_check_protocol_helper(df_hw_vrf, df_jnpr_vrf, check_protocol)
+                # check any protocol is mismatch
+                for key, value in check_protocol.items():
+                    if not value:
+                        flag_check = True
+                        result = 'Check Here'
+                        break
+                # create lst_records_route for LOST route
+                if flag_check:
+                    lst_records_route += Main.get_lost_route_detail(df_hw_detail, df_jnpr_detail, check_protocol,
+                                                                    hw_vrf_name, jnpr_vrf_name)
+                # create lst_record_vrf
+                for protocol in lst_protocol:
+                    hw_route.get_info(df_hw_vrf, protocol)
+                    jnpr_route.get_info(df_jnpr_vrf, protocol)
+            else:
+                result = 'Critical'
+                jnpr_vrf_name += ' NOT FOUND'
+                for protocol in lst_protocol:
+                    hw_route.get_info(df_hw_vrf, protocol)
+            lst_records_vrf.append((hw_vrf_name, hw_route.bgp, hw_route.isis, hw_route.ospf, hw_route.direct,
+                                    hw_route.static, hw_route.rip,
+                                    jnpr_vrf_name, jnpr_route.bgp, jnpr_route.isis, jnpr_route.ospf, jnpr_route.direct,
+                                    jnpr_route.static, jnpr_route.rip,
+                                    result))
+        # this case is perfect when HW and JNPR perfect MATCH
+        if len(lst_records_route) == 0:
+            lst_records_route.append(('NULL', 'NULL', 'NULL'))
+        df_vrf_sum = pd.DataFrame.from_records(lst_records_vrf, columns=labels_sum)
+        df_route_detail = pd.DataFrame.from_records(lst_records_route, columns=labels_route_detail)
+        return [df_vrf_sum, df_route_detail]
+
+    @staticmethod
+    def get_lost_route_detail(df_hw_detail, df_jnpr_detail, check_protocol, hw_vrf_name, jnpr_vrf_name):
+        lst_records = []
+        for key, value in check_protocol.items():
+            if not value:
+                df_hw_route_vrf_pro = df_hw_detail[
+                    (df_hw_detail['VRF'] == hw_vrf_name) & (df_hw_detail['Protocol'] == key)]
+                df_jnpr_route_vrf_pro = df_jnpr_detail[
+                    (df_jnpr_detail['VRF'] == jnpr_vrf_name) & (df_jnpr_detail['Protocol'] == key)]
+                set_hw_route = set(df_hw_route_vrf_pro['Route'].tolist())
+                set_jnpr_route = set(df_jnpr_route_vrf_pro['Route'].tolist())
+                list_diff_route = list(set_hw_route.difference(set_jnpr_route))
+                for route in list_diff_route:
+                    lst_records.append((hw_vrf_name, key, route))
+        return lst_records
+
+    @staticmethod
+    def get_check_protocol_helper(df_hw_vrf, df_jnpr_vrf, check_protocol):
+        for key in check_protocol:
+            hw_num_of_key = int(df_hw_vrf[key].to_string(index=False))
+            jnpr_num_of_key = int(df_jnpr_vrf[key].to_string(index=False))
+            if hw_num_of_key != jnpr_num_of_key:
+                check_protocol[key] = False
 
     @staticmethod
     def read_file(filename):
