@@ -261,31 +261,34 @@ class Utils:
             # print ('vrf_name: ' + vrf_name)
             for i in range(0, len(lines_route)):
                 lines = lines_route[i]
-                route = '';
-                protocol = '';
+                route = ''
+                protocol = ''
                 next_hop_interface = ''
                 if i == 0:
                     info = lines.splitlines()[1].strip().split()
-                    route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info)
+                    route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info, True)
                 else:
                     lst_tmp = lines.splitlines()
                     if len(lst_tmp) == 1:
                         info = lst_tmp[0].split()
-                        route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info)
+                        route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info, True)
                     else:
+                        # truong hop 1 route co nhieu hon 1 next hop (next-hop >=2)
                         destination = ''
+                        flag = True
                         for j in range(0, len(lst_tmp)):
                             if j == 0:
                                 info = lst_tmp[j].split()
-                                route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info)
+                                route, protocol, next_hop_interface = Utils.get_route_info_HW(info, route_info, flag)
                                 destination = info[0]
+                                flag = False
                             else:
                                 tmp = lst_tmp[j].split()
                                 if len(tmp) > 0:
                                     # print("value of TMP")
                                     # print(tmp)
                                     tmp.insert(0, destination)
-                                    lst_info_tmp = Utils.get_route_info_HW(tmp, route_info)
+                                    lst_info_tmp = Utils.get_route_info_HW(tmp, route_info, flag)
                                     next_hop_interface += ', ' + lst_info_tmp[2]
                 lst_route_detail.append((vrf_name, route, protocol, next_hop_interface))
             lst_route_sum.append((vrf_name, route_info.direct, route_info.static, route_info.rip, route_info.ospf,
@@ -296,36 +299,42 @@ class Utils:
         return [df_route_sum, df_route_detail, lst_vrf_name]
 
     @staticmethod
-    def get_route_info_HW(info, route_info):
+    def get_route_info_HW(info, route_info, flag):
         route = info[0]
         next_hop = info[5]
         interface = info[6]
         next_hop_interface = '(' + next_hop + ', ' + interface + ')'
-        protocol = Utils.convert_protocol_and_count_HW(info[1], route_info)
+        protocol = Utils.convert_protocol_and_count_HW(info[1], route_info, flag)
         return [route, protocol, next_hop_interface]
 
     @staticmethod
-    def convert_protocol_and_count_HW(p, route_info):
+    def convert_protocol_and_count_HW(p, route_info, flag):
         protocol = ''
         p = p.upper()
         if p == 'ISIS-L1':
             protocol = 'IS-IS'
-            route_info.isis += 1
+            if flag:
+                route_info.isis += 1
         elif p == 'IBGP':
             protocol = 'BGP'
-            route_info.bgp += 1
+            if flag:
+                route_info.bgp += 1
         elif p == 'DIRECT':
             protocol = 'DIRECT'
-            route_info.direct += 1
+            if flag:
+                route_info.direct += 1
         elif p == 'RIP':
             protocol = 'RIP'
-            route_info.rip += 1
+            if flag:
+                route_info.rip += 1
         elif p == 'STATIC':
             protocol = 'STATIC'
-            route_info.static += 1
+            if flag:
+                route_info.static += 1
         elif p == 'OSPF':
             protocol = 'OSPF'
-            route_info.ospf += 1
+            if flag:
+                route_info.ospf += 1
         return protocol
 
     @staticmethod
