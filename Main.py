@@ -464,14 +464,15 @@ class Utils:
         for vpn in l3_vpn:
             vpn_name = vpn.splitlines()[0].split(':')[0].strip()
             lines_below_intterface = re.findall(j_pttr_4_new_sub, vpn, flags=re.MULTILINE)
-            lst_line = lines_below_intterface[0].splitlines()
-            if vpn_name not in dict_vpn_instance:
-                dict_vpn_instance[vpn_name] = {}
-            for i in range(1, len(lst_line)):
-                key = lst_line[i].strip()
-                if (key != '') & (not key.startswith('Interfaces')):
-                    if key not in dict_vpn_instance[vpn_name]:
-                        dict_vpn_instance[vpn_name][key] = []
+            if len(lines_below_intterface) > 0:
+                lst_line = lines_below_intterface[0].splitlines()
+                if vpn_name not in dict_vpn_instance:
+                    dict_vpn_instance[vpn_name] = {}
+                for i in range(1, len(lst_line)):
+                    key = lst_line[i].strip()
+                    if (key != '') & (not key.startswith('Interfaces')):
+                        if key not in dict_vpn_instance[vpn_name]:
+                            dict_vpn_instance[vpn_name][key] = []
         return dict_vpn_instance
 
     @staticmethod
