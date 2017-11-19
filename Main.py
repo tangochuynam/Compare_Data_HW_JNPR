@@ -180,11 +180,16 @@ class Utils:
             key = line_mac[index_vsi:].split(':')[1].strip()
             index_type = line_port.find('Type')
             port_key = line_port[:index_type].split(':')[1].strip()
+            index_vc_id = line_peer.find('VC-ID')
+            peer_ip = line_peer[:index_vc_id].split(':')[1].strip()
 
-            if port_key.startswith('Tun'):
-                index_vc_id = line_peer.find('VC-ID')
-                peer_ip = line_peer[:index_vc_id].split(':')[1].strip()
+            if peer_ip != '-':
                 port_key = peer_ip
+
+            # if port_key.startswith('Tun'):
+            #     index_vc_id = line_peer.find('VC-ID')
+            #     peer_ip = line_peer[:index_vc_id].split(':')[1].strip()
+            #     port_key = peer_ip
 
             if key not in dict_general:
                 dict_general[key] = {}
@@ -1052,6 +1057,7 @@ class Main:
             if name_service == 'Mac-Address VPLS Detail':
                 if (vsi_name_hw.strip().isdigit()) & (vsi_name_hw.strip() not in list_vsi_name_ref):
                     vpls_jnpr = "L2-VLAN-" + vsi_name_hw
+                    ifl_hw = ifl_hw + '.' + vsi_name_hw
                 else:
                     vpls_jnpr = "L2-" + vsi_name_hw
                 lst_mac_hw = df_row_hw[labels_hw[3]].tolist()[0].split()
