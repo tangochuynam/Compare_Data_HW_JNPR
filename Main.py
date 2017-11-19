@@ -858,6 +858,7 @@ class Main:
                                           'Mac-Address VPLS')
                 Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], lst_df_hw[1], writer, labels_hw_arp,
                                               labels_jnpr_arp, 'ARP')
+            if (len(lst_df_hw) > 4) & (len(lst_df_jnpr) > 5):
                 # adding new compare route
                 df_vrf_sum, df_route_detail = Main.compare_route(lst_df_hw[6], lst_df_hw[7], lst_df_jnpr[6],
                                                                  lst_df_jnpr[7], lst_df_hw[8])
@@ -898,7 +899,6 @@ class Main:
                     df_part_2 = Utils.get_info_part_2_huawei(part_2)
                     df_part_3_1, df_part_3_2 = Utils.get_info_part_3_huawei(part_3)
                     df_part_4_1, df_part_4_2 = Utils.get_info_part_4_huawei(part_4)
-                    df_route_sum, df_route_detail, lst_vrf_name = Utils.get_info_the_rest_huawei(lst_part[4:])
                     # print(df_part_4_1)
                     # print(df_part_4_2)
                     # write file
@@ -911,11 +911,18 @@ class Main:
                     Utils.write_to_csv(df_part_3_2[['VSI', 'VSI Mac-Count']], writer, 'Mac-Address VPLS Huawei SUMMARY')
                     Utils.write_to_csv(df_part_4_1, writer, 'ARP Huawei')
                     Utils.write_to_csv(df_part_4_2, writer, 'ARP Huawei SUMMARY')
-                    Utils.write_to_csv(df_route_sum, writer, 'Route SUMMARY')
-                    Utils.write_to_csv(df_route_detail, writer, 'Route Detail SUMMARY')
-                    writer.save()
-                    return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2, df_route_sum,
+                    if len(lst_part) > 4:
+                        # adding more display command in HW
+                        df_route_sum, df_route_detail, lst_vrf_name = Utils.get_info_the_rest_huawei(lst_part[4:])
+                        Utils.write_to_csv(df_route_sum, writer, 'Route SUMMARY')
+                        Utils.write_to_csv(df_route_detail, writer, 'Route Detail SUMMARY')
+                        writer.save()
+                        return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2, df_route_sum,
                             df_route_detail, lst_vrf_name]
+                    else:
+                        writer.save()
+                        return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2]
+
     @staticmethod
     def get_info_from_juniper(filename):
         juniper_pttr = '(?:[\S]+)>\s+show.*\n(?:(?![\S]+>).*\n)+'
@@ -932,14 +939,13 @@ class Main:
                 if len(lst_part) != 7:
                     raise ValueError("your Juniper is not right format, please check this file again")
                 else:
-                    part_1, part_2, part_3, part_4, part_5, part_6, part_7 = lst_part
+                    part_1, part_2, part_3, part_4, part_5 = lst_part[0:5]
                     df_part_1 = Utils.get_info_part_1_juniper(part_1)
                     df_part_2, dict_mapping_helper = Utils.get_info_part_2_juniper(part_2)
                     df_part_3_1, df_part_3_2 = Utils.get_info_part_3_juniper(part_3, dict_mapping_helper)
                     dict_vpn_instance = Utils.get_info_part_4_juniper_new(part_4)
                     df_part_4_1, df_part_4_2 = Utils.get_info_part_5_juniper(part_5, dict_vpn_instance)
-                    df_part_6 = Utils.get_info_part_6_juniper(part_6)
-                    df_part_7 = Utils.get_info_part_7_juniper(part_7)
+
                     # write file
                     name_out = Main.result + "/" + hostname + ".xlsx"
                     writer = pd.ExcelWriter(name_out, engine='xlsxwriter')
@@ -950,12 +956,19 @@ class Main:
                     Utils.write_to_csv(df_part_3_2[['VPLS', 'VPLS mac-count']], writer, 'Mac-Address VPLS SUMMARY')
                     Utils.write_to_csv(df_part_4_1, writer, 'ARP Juniper')
                     Utils.write_to_csv(df_part_4_2, writer, 'ARP Juniper SUMMARY')
-                    Utils.write_to_csv(df_part_6, writer, 'Route SUMMARY')
-                    Utils.write_to_csv(df_part_7, writer, 'Route Detail SUMMARY')
-                    writer.save()
-                    return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2, df_part_6,
-                            df_part_7]
-
+                    if len(lst_part) > 5:
+                        # adding more show command in JNPR
+                        part_6, part_7 = lst_part[5:]
+                        df_part_6 = Utils.get_info_part_6_juniper(part_6)
+                        df_part_7 = Utils.get_info_part_7_juniper(part_7)
+                        Utils.write_to_csv(df_part_6, writer, 'Route SUMMARY')
+                        Utils.write_to_csv(df_part_7, writer, 'Route Detail SUMMARY')
+                        writer.save()
+                        return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2, df_part_6,
+                                df_part_7]
+                    else:
+                        writer.save()
+                        return [df_part_1, df_part_2, df_part_3_1, df_part_3_2, df_part_4_1, df_part_4_2]
     @staticmethod
     def compare_l2circuit_vpls(df_hw, df_jnpr, writer, name_service):
         lst_record = []
