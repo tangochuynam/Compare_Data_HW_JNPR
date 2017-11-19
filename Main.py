@@ -851,7 +851,8 @@ class Main:
                 Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[3], lst_df_hw[1], writer, labels_hw_vpls,
                                               labels_jnpr_vpls,
                                           'Mac-Address VPLS')
-                Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], writer, labels_hw_arp, labels_jnpr_arp, 'ARP')
+                Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], lst_df_hw[1], writer, labels_hw_arp,
+                                              labels_jnpr_arp, 'ARP')
                 # adding new compare route
                 df_vrf_sum, df_route_detail = Main.compare_route(lst_df_hw[6], lst_df_hw[7], lst_df_jnpr[6],
                                                                  lst_df_jnpr[7], lst_df_hw[8])
@@ -863,7 +864,8 @@ class Main:
                 Main.compare_mac_vpls_arp_detail(lst_df_hw[2], lst_df_jnpr[2], df_mapping, lst_df_hw[1], writer,
                                                  labels_hw_vpls_detail,
                                                  labels_jnpr_vpls_detail, 'Mac-Address VPLS Detail')
-                Main.compare_mac_vpls_arp_detail(lst_df_hw[4], lst_df_jnpr[4], df_mapping, writer, labels_hw_arp_detail,
+                Main.compare_mac_vpls_arp_detail(lst_df_hw[4], lst_df_jnpr[4], df_mapping, lst_df_hw[1], writer,
+                                                 labels_hw_arp_detail,
                                                  labels_jnpr_arp_detail, 'ARP Detail')
             # print ('huawei file: ' + Main.hw_file)
             # print ('juniper file: ' + Main.jnpr_file)
