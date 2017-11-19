@@ -859,7 +859,7 @@ class Main:
                 Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], lst_df_hw[1], writer, labels_hw_arp,
                                               labels_jnpr_arp, 'ARP')
             if (len(lst_df_hw) > 6) & (len(lst_df_jnpr) > 6):
-                # adding new compare route
+                # adding new compare route for new command
                 df_vrf_sum, df_route_detail = Main.compare_route(lst_df_hw[6], lst_df_hw[7], lst_df_jnpr[6],
                                                                  lst_df_jnpr[7], lst_df_hw[8])
                 Utils.write_to_csv(df_vrf_sum, writer, 'Route_Summary_Compare')
