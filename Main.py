@@ -858,7 +858,7 @@ class Main:
                                           'Mac-Address VPLS')
                 Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], lst_df_hw[1], writer, labels_hw_arp,
                                               labels_jnpr_arp, 'ARP')
-            if (len(lst_df_hw) > 4) & (len(lst_df_jnpr) > 5):
+            if (len(lst_df_hw) > 6) & (len(lst_df_jnpr) > 6):
                 # adding new compare route
                 df_vrf_sum, df_route_detail = Main.compare_route(lst_df_hw[6], lst_df_hw[7], lst_df_jnpr[6],
                                                                  lst_df_jnpr[7], lst_df_hw[8])
