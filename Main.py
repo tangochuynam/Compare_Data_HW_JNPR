@@ -891,7 +891,7 @@ class Main:
                 # handle file and get information
                 # split into 4 parts
                 lst_part = Utils.split_data_by_command(pttr_split_command, file_string)
-                if len(lst_part) == 4:
+                if len(lst_part) < 4:
                     raise ValueError("your Huawei is not right format, please check this file again")
                 else:
                     part_1, part_2, part_3, part_4 = lst_part[0:4]
@@ -936,7 +936,7 @@ class Main:
                 # handle file and get information
                 # split into 5 parts
                 lst_part = Utils.split_data_by_command(juniper_pttr, file_string)
-                if len(lst_part) != 7:
+                if len(lst_part) < 5:
                     raise ValueError("your Juniper is not right format, please check this file again")
                 else:
                     part_1, part_2, part_3, part_4, part_5 = lst_part[0:5]
