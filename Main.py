@@ -804,9 +804,9 @@ class Main:
     dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
     dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
-    hw_file = 'LDG01LNP_all.txt'
-    jnpr_file = 'MX_LDG01LNP_all.txt'
-    mapping_file = ''
+    hw_file = 'GLI03AYA_H_baseline_script.txt'
+    jnpr_file = 'GLI03AYA_J_baseline_script.txt'
+    mapping_file = 'GLI03AYA-IFD.csv'
     result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
     compare_result = result + slash + 'Compare_Result' + '.xlsx'
 
@@ -848,7 +848,8 @@ class Main:
                 lst_df_jnpr = Main.get_info_from_juniper(Main.jnpr_file)
                 Main.compare_l2circuit_vpls(lst_df_hw[0], lst_df_jnpr[0], writer, 'L2Circuit')
                 Main.compare_l2circuit_vpls(lst_df_hw[1], lst_df_jnpr[1], writer, 'VPLS')
-                Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[3], writer, labels_hw_vpls, labels_jnpr_vpls,
+                Main.compare_mac_vpls_arp_sum(lst_df_hw[3], lst_df_jnpr[3], lst_df_hw[1], writer, labels_hw_vpls,
+                                              labels_jnpr_vpls,
                                           'Mac-Address VPLS')
                 Main.compare_mac_vpls_arp_sum(lst_df_hw[5], lst_df_jnpr[5], writer, labels_hw_arp, labels_jnpr_arp, 'ARP')
                 # adding new compare route
@@ -859,7 +860,8 @@ class Main:
             # comparing detail
             if Main.mapping_file != "":
                 df_mapping = Main.read_csv_file_mapping(Main.dir_3 + '/' + Main.mapping_file)
-                Main.compare_mac_vpls_arp_detail(lst_df_hw[2], lst_df_jnpr[2], df_mapping, writer, labels_hw_vpls_detail,
+                Main.compare_mac_vpls_arp_detail(lst_df_hw[2], lst_df_jnpr[2], df_mapping, lst_df_hw[1], writer,
+                                                 labels_hw_vpls_detail,
                                                  labels_jnpr_vpls_detail, 'Mac-Address VPLS Detail')
                 Main.compare_mac_vpls_arp_detail(lst_df_hw[4], lst_df_jnpr[4], df_mapping, writer, labels_hw_arp_detail,
                                                  labels_jnpr_arp_detail, 'ARP Detail')
@@ -985,7 +987,7 @@ class Main:
         Utils.write_to_csv(df_compare, writer, name_service)
 
     @staticmethod
-    def compare_mac_vpls_arp_sum(df_hw, df_jnpr, writer, labels_hw, labels_jnpr, name_service):
+    def compare_mac_vpls_arp_sum(df_hw, df_jnpr, df_hw_ref, writer, labels_hw, labels_jnpr, name_service):
         lst_record = []
         labels = []
         if name_service == 'Mac-Address VPLS':
@@ -999,11 +1001,13 @@ class Main:
             df_row_hw = df_hw.iloc[[i]]
             col_1_hw = df_row_hw[labels_hw[0]].to_string(index=False)
             col_2_hw = df_row_hw[labels_hw[1]].to_string(index=False)
+            list_vsi_name_ref = df_hw_ref["VPLS Instance"].tolist()
             if name_service == 'Mac-Address VPLS':
-                if col_1_hw.strip().isdigit():
-                    new_col_value = "L2-VLAN-" + col_1_hw
+                name = col_1_hw.strip()
+                if (name.isdigit()) & (name not in list_vsi_name_ref):
+                    new_col_value = "L2-VLAN-" + name
                 else:
-                    new_col_value = "L2-" + col_1_hw
+                    new_col_value = "L2-" + name
             else:
                 # name_service = 'arp'
                 new_col_value = "L3-" + col_1_hw
@@ -1024,7 +1028,8 @@ class Main:
         Utils.write_to_csv(df_compare, writer, name_service)
 
     @staticmethod
-    def compare_mac_vpls_arp_detail(df_hw, df_jnpr, df_mapping, writer, labels_hw, labels_jnpr, name_service):
+    def compare_mac_vpls_arp_detail(df_hw, df_jnpr, df_mapping, df_hw_ref, writer, labels_hw, labels_jnpr,
+                                    name_service):
         lst_record = []
         labels = []
         if name_service == 'Mac-Address VPLS Detail':
@@ -1041,9 +1046,9 @@ class Main:
             vsi_name_hw = df_row_hw[labels_hw[0]].to_string(index=False)
             ifl_hw = df_row_hw[labels_hw[1]].to_string(index=False)
             mac_count_hw = df_row_hw[labels_hw[2]].to_string(index=False)
-
+            list_vsi_name_ref = df_hw_ref["VPLS Instance"].tolist()
             if name_service == 'Mac-Address VPLS Detail':
-                if vsi_name_hw.strip().isdigit():
+                if (vsi_name_hw.strip().isdigit()) & (vsi_name_hw.strip() not in list_vsi_name_ref):
                     vpls_jnpr = "L2-VLAN-" + vsi_name_hw
                 else:
                     vpls_jnpr = "L2-" + vsi_name_hw
