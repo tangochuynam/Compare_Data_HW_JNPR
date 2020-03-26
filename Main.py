@@ -1245,11 +1245,11 @@ class Main:
     def get_helper_2(self):
         flag_mapping = True
         while flag_mapping:
-            mapping_file = raw_input("Enter Mapping csv file: ")
+            mapping_file = input("Enter Mapping csv file: ")
             Main.mapping_file = mapping_file
             if not os.path.isfile(Main.dir_3 + Main.slash + Main.mapping_file):
                 print("you enter wrong file name: ")
-                is_con_compare = raw_input(
+                is_con_compare = input(
                     "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
                 if is_con_compare.lower() == 'y':
                     flag_mapping = False
@@ -1263,11 +1263,11 @@ class Main:
     def get_helper_1(self):
         flag_juniper = True
         while flag_juniper:
-            jnpr_file = raw_input("Enter Juniper file: ")
+            jnpr_file = input("Enter Juniper file: ")
             Main.jnpr_file = jnpr_file
             if not os.path.isfile(Main.dir_2 + Main.slash + Main.jnpr_file):
                 print("you enter wrong Juniper file name")
-                is_con_juniper = raw_input(
+                is_con_juniper = input(
                     "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
                 if is_con_juniper.lower() == 'y':
                     flag_juniper = False
@@ -1283,13 +1283,13 @@ class Main:
     def get_file_name_from_user(self):
         flag_huawei = True
         while flag_huawei:
-            path = raw_input("Enter directory contains file: ")
-            hw_file = raw_input("Enter Huawei file: ")
+            path = input("Enter directory contains file: ")
+            hw_file = input("Enter Huawei file: ")
             Main.dir_1 = Main.dir_2 = Main.dir_3 = path
             Main.hw_file = hw_file
             if not os.path.isfile(Main.dir_1 + Main.slash + Main.hw_file):
                 print("you enter wrong Huawei file name")
-                is_con_hw = raw_input(
+                is_con_hw = input(
                     "Continue (you agree to get wrong information) Enter: y, Rename file name Enter: n ")
                 if is_con_hw.lower() == 'y':
                     flag_huawei = False
