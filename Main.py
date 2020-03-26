@@ -1217,12 +1217,12 @@ class Main:
     #         slash = '/'
     #     flag = True
     #     while flag:
-    #         path = raw_input('Enter directory contains file : ')
+    #         path = input('Enter directory contains file : ')
     #         print('Enter file in order, Huawei first, Juniper second, mapping_file third, Do Not Make Mistake')
     #         print('If you enter wrong name file, feel free to press ENTER to give name file again ')
-    #         hw_file = raw_input('Enter Huawei file txt: ')
-    #         jnpr_file = raw_input('Enter Juniper file txt: ')
-    #         mapping_file = raw_input('Enter Mapping file csv: ')
+    #         hw_file = input('Enter Huawei file txt: ')
+    #         jnpr_file = input('Enter Juniper file txt: ')
+    #         mapping_file = input('Enter Mapping file csv: ')
     #         if (not os.path.isfile(path + slash + hw_file)) | (not os.path.isfile(path + slash + jnpr_file)) \
     #             |(not os.path.isfile(path + slash + mapping_file)):
     #             print('You enter wrong name Huawei or Juniper file or csv file or '
