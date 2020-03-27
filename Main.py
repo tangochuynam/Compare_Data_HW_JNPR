@@ -112,7 +112,7 @@ class Main:
         pttr_split_command = '(?:<[\S]+>)display .*\n(?:(?!(?:<[\S]+>)display).*\n)*'
         name_out = ""
         if filename != '.DS_Store':
-            file_string = Main.read_file(Path.joinpath(Main.dir_1, filename))
+            file_string = Main.read_file(Path.joinpath(Path(Main.dir_1), filename))
             if len(file_string) == 0:
                 raise ValueError(filename + " does not exist")
             else:
