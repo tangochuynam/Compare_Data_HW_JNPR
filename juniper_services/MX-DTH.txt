@@ -1,0 +1,2427 @@
+admin@MX960-LDG01DTH_RE0> set cli screen-length 0 
+Screen length set to 0
+
+{master}
+admin@MX960-LDG01DTH_RE0> show l2circuit connections brief 
+Layer-2 Circuit Connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NP -- interface h/w not present   
+MM -- mtu mismatch               Dn -- down                       
+EM -- encapsulation mismatch     VC-Dn -- Virtual circuit Down    
+CM -- control-word mismatch      Up -- operational                
+VM -- vlan id mismatch           CF -- Call admission control failure
+OL -- no outgoing label          IB -- TDM incompatible bitrate 
+NC -- intf encaps not CCC/TCC    TM -- TDM misconfiguration 
+BK -- Backup Connection          ST -- Standby Connection
+CB -- rcvd cell-bundle size bad  SP -- Static Pseudowire
+LD -- local site signaled down   RS -- remote site standby
+RD -- remote site signaled down  HS -- Hot-standby Connection
+XX -- unknown
+
+Legend for interface status  
+Up -- operational            
+Dn -- down                   
+Neighbor: 123.29.47.1 
+    Interface                 Type  St     Time last up          # Up trans
+    ge-0/2/4.1520(vc 1101401520) rmt OL   
+    ge-0/2/4.2520(vc 1101402520) rmt OL   
+    ge-7/2/5.534(vc 1101410000) rmt Up     Oct 10 23:57:01 2017           1
+    ge-0/2/2.120(vc 1101410020) rmt Up     Oct 10 23:34:57 2017           1
+    ge-0/2/8.458(vc 1101410030) rmt Up     Oct 10 23:38:30 2017           1
+    ge-0/3/1.1344(vc 1101410032) rmt OL   
+    ge-0/3/1.2344(vc 1101410033) rmt OL   
+    ge-0/2/2.122(vc 1101410040) rmt Up     Oct 10 23:34:57 2017           1
+    ge-0/3/1.123(vc 1101410051) rmt Up     Oct 10 23:41:11 2017           1
+    ge-7/2/5.536(vc 1101410060) rmt Up     Oct 10 23:57:01 2017           1
+    ge-7/2/7.125(vc 1101410081) rmt Up     Oct 10 23:47:00 2017           1
+    ge-0/2/4.126(vc 1101410090) rmt Up     Oct 11 00:00:57 2017           1
+    ge-7/3/1.127(vc 1101410101) rmt Up     Oct 10 23:47:03 2017           1
+    ge-7/3/1.128(vc 1101410110) rmt Up     Oct 10 23:47:03 2017           1
+    ge-7/3/0.537(vc 1101410130) rmt Up     Oct 10 23:52:28 2017           1
+    ge-7/3/0.538(vc 1101410140) rmt Up     Oct 10 23:52:28 2017           1
+    ge-7/2/4.130(vc 1101410150) rmt Up     Oct 11 00:00:02 2017           1
+    ge-0/3/1.539(vc 1101410160) rmt Up     Oct 10 23:41:11 2017           1
+    ge-7/3/5.131(vc 1101410171) rmt Up     Oct 10 23:49:21 2017           1
+    ge-7/3/1.292(vc 1101410190) rmt Up     Oct 10 23:47:03 2017           1
+    ge-7/2/1.294(vc 1101410210) rmt OL   
+    ge-0/2/6.294(vc 1101410220) rmt OL   
+    ge-0/2/6.296(vc 1101410230) rmt OL   
+    ge-7/2/2.297(vc 1101410240) rmt OL   
+    ge-0/2/2.273(vc 1101410250) rmt Up     Oct 10 23:34:57 2017           1
+    ge-7/2/6.393(vc 1101410260) rmt Up     Oct 10 23:56:14 2017           1
+    ge-7/2/6.394(vc 1101410270) rmt Up     Oct 10 23:56:14 2017           1
+    ge-0/2/2.285(vc 1101410280) rmt Up     Oct 10 23:34:57 2017           1
+    ge-7/2/9.357(vc 1101410300) rmt Up     Oct 10 23:45:28 2017           1
+    ge-7/3/1.463(vc 1101410310) rmt OL   
+    ge-0/2/1.411(vc 1101410320) rmt Up     Oct 10 23:34:06 2017           1
+    ge-0/3/7.495(vc 1101410330) rmt Up     Oct 10 23:45:18 2017           1
+    ge-0/2/8.474(vc 1101410340) rmt Up     Oct 10 23:38:30 2017           1
+    ge-0/2/3.476(vc 1101410350) rmt Up     Oct 10 23:34:46 2017           1
+    ge-7/3/5.309(vc 1101410361) rmt Up     Oct 10 23:49:21 2017           1
+    ae3.1014(vc 1101410390)   rmt   Up     Oct 10 23:53:34 2017           1
+    ae4.1043(vc 1101410430)   rmt   Up     Oct 10 23:46:45 2017           1
+    ge-0/3/1.278(vc 1101410760) rmt Up     Oct 10 23:41:11 2017           1
+    ae5.1083(vc 1101410830)   rmt   Up     Oct 10 23:42:27 2017           1
+    ae5.1029(vc 1101410990)   rmt   Up     Oct 10 23:42:27 2017           1
+    ge-0/2/9.1248(vc 1101411248) rmt OL   
+    ge-0/3/0.1256(vc 1101411256) rmt OL   
+    ge-0/2/4.1270(vc 1101411270) rmt OL   
+    ge-7/2/1.1280(vc 1101411280) rmt OL   
+    ge-0/2/8.1281(vc 1101411281) rmt OL   
+    ge-0/2/4.1287(vc 1101411287) rmt OL   
+    ge-0/2/4.1290(vc 1101411290) rmt OL   
+    ge-0/3/1.1343(vc 1101411343) rmt OL   
+    ge-0/3/1.1346(vc 1101411346) rmt OL   
+    ge-0/2/8.1494(vc 1101411494) rmt LD   
+    ge-0/2/2.1497(vc 1101411497) rmt OL   
+    ge-0/3/1.1512(vc 1101411512) rmt OL   
+    ge-0/3/1.1521(vc 1101411521) rmt OL   
+    ge-0/2/8.1618(vc 1101411618) rmt LD   
+    ge-0/2/9.2248(vc 1101412248) rmt OL   
+    ge-0/3/0.2256(vc 1101412256) rmt OL   
+    ge-0/2/4.2270(vc 1101412270) rmt OL   
+    ge-7/2/1.2280(vc 1101412280) rmt OL   
+    ge-0/2/8.2281(vc 1101412281) rmt OL   
+    ge-0/2/4.2287(vc 1101412287) rmt OL   
+    ge-0/2/4.2290(vc 1101412290) rmt OL   
+    ge-0/3/1.2343(vc 1101412343) rmt OL   
+    ge-0/3/1.2346(vc 1101412346) rmt OL   
+    ge-0/2/8.2494(vc 1101412494) rmt OL   
+    ge-0/2/2.2497(vc 1101412497) rmt OL   
+    ge-0/3/1.2512(vc 1101412512) rmt OL   
+    ge-0/3/1.2521(vc 1101412521) rmt OL   
+    ge-0/2/8.2618(vc 1101412618) rmt LD   
+    ae6.1006(vc 1101417999)   rmt   Up     Oct 10 23:55:15 2017           1
+    ge-0/2/2.453(vc 1101419000) rmt OL   
+    ge-7/2/8.1289(vc 1101811289) rmt OL   
+    ge-7/2/8.1292(vc 1101811292) rmt OL   
+    ge-7/2/8.2289(vc 1101812289) rmt OL   
+    ge-7/2/8.2292(vc 1101812292) rmt OL   
+    ge-7/2/5.1034(vc 1401410000) rmt Up    Oct 10 23:57:01 2017           1
+    ge-0/2/2.620(vc 1401410020) rmt Up     Oct 10 23:34:57 2017           1
+    ge-0/2/2.622(vc 1401410040) rmt OL   
+    ge-0/3/1.623(vc 1401410050) rmt Up     Oct 10 23:41:11 2017           1
+    ge-7/2/5.1036(vc 1401410060) rmt OL   
+    ge-7/2/7.625(vc 1401410080) rmt OL   
+    ge-0/2/4.626(vc 1401410090) rmt OL   
+    ge-7/3/1.627(vc 1401410100) rmt OL   
+    ge-7/3/1.628(vc 1401410110) rmt OL   
+    ge-7/3/0.1038(vc 1401410140) rmt OL   
+    ge-7/2/4.630(vc 1401410150) rmt OL   
+    ge-0/3/1.1039(vc 1401410160) rmt OL   
+    ge-7/2/9.857(vc 1401410190) rmt OL   
+    ge-7/2/6.894(vc 1401410220) rmt OL   
+    ge-0/2/2.573(vc 1401410250) rmt OL   
+    ge-7/3/1.792(vc 1401410260) rmt OL   
+    ge-0/2/4.1154(vc 1401410990) rmt OL   
+Neighbor: 123.29.47.2 
+    Interface                 Type  St     Time last up          # Up trans
+    ge-0/3/1.1344(vc 1101400032) rmt OL   
+    ge-0/3/1.2344(vc 1101400033) rmt OL   
+    ge-0/2/9.1248(vc 1101401248) rmt OL   
+    ge-0/3/0.1256(vc 1101401256) rmt OL   
+    ge-0/2/4.1270(vc 1101401270) rmt OL   
+    ge-7/2/1.1280(vc 1101401280) rmt OL   
+    ge-0/2/8.1281(vc 1101401281) rmt OL   
+    ge-0/2/4.1287(vc 1101401287) rmt OL   
+    ge-0/2/4.1290(vc 1101401290) rmt OL   
+    ge-0/3/1.1343(vc 1101401343) rmt OL   
+    ge-0/3/1.1346(vc 1101401346) rmt OL   
+    ge-0/3/1.1512(vc 1101401512) rmt OL   
+    ge-0/2/9.2248(vc 1101402248) rmt OL   
+    ge-0/3/0.2256(vc 1101402256) rmt OL   
+    ge-0/2/4.2270(vc 1101402270) rmt OL   
+    ge-7/2/1.2280(vc 1101402280) rmt OL   
+    ge-0/2/8.2281(vc 1101402281) rmt OL   
+    ge-0/2/4.2287(vc 1101402287) rmt OL   
+    ge-0/2/4.2290(vc 1101402290) rmt OL   
+    ge-0/3/1.2343(vc 1101402343) rmt OL   
+    ge-0/3/1.2346(vc 1101402346) rmt OL   
+    ge-0/3/1.2512(vc 1101402512) rmt OL   
+    ge-7/2/5.534(vc 1101410001) rmt OL   
+    ge-0/2/2.120(vc 1101410021) rmt OL   
+    ge-0/2/8.458(vc 1101410031) rmt OL   
+    ge-0/2/2.122(vc 1101410041) rmt OL   
+    ge-7/2/5.536(vc 1101410061) rmt OL   
+    ge-7/3/1.128(vc 1101410111) rmt OL   
+    ge-7/3/0.537(vc 1101410131) rmt ST   
+    ge-7/3/0.538(vc 1101410141) rmt ST   
+    ge-7/2/4.130(vc 1101410151) rmt OL   
+    ge-0/3/1.539(vc 1101410161) rmt OL   
+    ge-7/3/1.292(vc 1101410191) rmt ST   
+    ge-7/2/1.294(vc 1101410211) rmt OL   
+    ge-0/2/6.294(vc 1101410221) rmt OL   
+    ge-0/2/6.296(vc 1101410231) rmt OL   
+    ge-7/2/2.297(vc 1101410241) rmt OL   
+    ge-0/2/2.273(vc 1101410251) rmt OL   
+    ge-7/2/6.393(vc 1101410261) rmt OL   
+    ge-7/2/6.394(vc 1101410271) rmt OL   
+    ge-0/2/2.285(vc 1101410281) rmt OL   
+    ge-7/2/9.357(vc 1101410301) rmt OL   
+    ge-7/3/1.463(vc 1101410311) rmt OL   
+    ge-0/2/1.411(vc 1101410321) rmt OL   
+    ge-0/3/7.495(vc 1101410331) rmt OL   
+    ge-0/2/8.474(vc 1101410341) rmt OL   
+    ge-0/2/3.476(vc 1101410351) rmt OL   
+    ae3.1014(vc 1101410391)   rmt   ST   
+    ae4.1043(vc 1101410431)   rmt   ST   
+    ae5.1083(vc 1101410831)   rmt   OL   
+    ae5.1029(vc 1101410991)   rmt   ST   
+    ae6.1006(vc 1101417998)   rmt   ST   
+    ge-7/2/8.1289(vc 1101801289) rmt OL   
+    ge-7/2/8.1292(vc 1101801292) rmt OL   
+    ge-7/2/8.2289(vc 1101802289) rmt OL   
+    ge-7/2/8.2292(vc 1101802292) rmt OL   
+
+{master}
+admin@MX960-LDG01DTH_RE0> show vpls connections 
+Layer-2 VPN connections:
+
+Legend for connection status (St)   
+EI -- encapsulation invalid      NC -- interface encapsulation not CCC/TCC/VPLS
+EM -- encapsulation mismatch     WE -- interface and instance encaps not same
+VC-Dn -- Virtual circuit down    NP -- interface hardware not present 
+CM -- control-word mismatch      -> -- only outbound connection is up
+CN -- circuit not provisioned    <- -- only inbound connection is up
+OR -- out of range               Up -- operational
+OL -- no outgoing label          Dn -- down                      
+LD -- local site signaled down   CF -- call admission control failure      
+RD -- remote site signaled down  SC -- local and remote site ID collision
+LN -- local site not designated  LM -- local site ID not minimum designated
+RN -- remote site not designated RM -- remote site ID not minimum designated
+XX -- unknown connection status  IL -- no incoming label
+MM -- MTU mismatch               MI -- Mesh-Group ID not available
+BK -- Backup connection          ST -- Standby connection
+PF -- Profile parse failure      PB -- Profile busy
+RS -- remote site standby        SN -- Static Neighbor
+LB -- Local site not best-site   RB -- Remote site not best-site
+VM -- VLAN ID mismatch           HS -- Hot-standby Connection
+
+Legend for interface status 
+Up -- operational           
+Dn -- down
+
+Instance: L2-3G_VMS_3876
+  VPLS-id: 1600013876
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600013876) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262177, Outgoing label: 34153
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048621, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_3876 neighbor 123.29.47.1 vpls-id 1600013876
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1001
+  VPLS-id: 1600011001
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011001) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262159, Outgoing label: 34143
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048620, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1001 neighbor 123.29.47.1 vpls-id 1600011001
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1002
+  VPLS-id: 1600011002
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011002) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262160, Outgoing label: 34136
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048619, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1002 neighbor 123.29.47.1 vpls-id 1600011002
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1007
+  VPLS-id: 1600011007
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011007) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262161, Outgoing label: 34759
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048618, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1007 neighbor 123.29.47.1 vpls-id 1600011007
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1028
+  VPLS-id: 1600011028
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011028) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262162, Outgoing label: 34727
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048617, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1028 neighbor 123.29.47.1 vpls-id 1600011028
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1035
+  VPLS-id: 1600011035
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011035) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262163, Outgoing label: 33943
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048616, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1035 neighbor 123.29.47.1 vpls-id 1600011035
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1039
+  VPLS-id: 1600011039
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011039) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262164, Outgoing label: 33945
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048615, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1039 neighbor 123.29.47.1 vpls-id 1600011039
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1300
+  VPLS-id: 1600010030
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600010030) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262155, Outgoing label: 155796
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048614, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1300 neighbor 123.29.47.1 vpls-id 1600010030
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1302
+  VPLS-id: 1600010050
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600010050) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262156, Outgoing label: 155814
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048613, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1302 neighbor 123.29.47.1 vpls-id 1600010050
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1579
+  VPLS-id: 1600011579
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011579) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262165, Outgoing label: 35521
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048612, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1579 neighbor 123.29.47.1 vpls-id 1600011579
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1620
+  VPLS-id: 1600011620
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011620) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262166, Outgoing label: 35082
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048611, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1620 neighbor 123.29.47.1 vpls-id 1600011620
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_IUP_1633
+  VPLS-id: 1600011633
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600011633) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262167, Outgoing label: 35281
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048610, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_IUP_1633 neighbor 123.29.47.1 vpls-id 1600011633
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_1800
+  VPLS-id: 1600010110
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600010110) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262157, Outgoing label: 155808
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048609, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_1800 neighbor 123.29.47.1 vpls-id 1600010110
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_1802
+  VPLS-id: 1600010130
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600010130) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262158, Outgoing label: 155825
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048608, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_1802 neighbor 123.29.47.1 vpls-id 1600010130
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_2001
+  VPLS-id: 1600012001
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600012001) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262168, Outgoing label: 34142
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048607, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_2001 neighbor 123.29.47.1 vpls-id 1600012001
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_2002
+  VPLS-id: 1600012002
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600012002) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262169, Outgoing label: 34139
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048606, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_2002 neighbor 123.29.47.1 vpls-id 1600012002
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_2007
+  VPLS-id: 1600012007
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600012007) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262170, Outgoing label: 35264
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048605, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_2007 neighbor 123.29.47.1 vpls-id 1600012007
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_2028
+  VPLS-id: 160002028
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 160002028) rmt Up  Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262145, Outgoing label: 34746
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048604, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_2028 neighbor 123.29.47.1 vpls-id 160002028
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_2035
+  VPLS-id: 1600012035
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600012035) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262171, Outgoing label: 34041
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048603, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_2035 neighbor 123.29.47.1 vpls-id 1600012035
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_2039
+  VPLS-id: 1600012039
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600012039) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262172, Outgoing label: 155752
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048602, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_2039 neighbor 123.29.47.1 vpls-id 1600012039
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_MUP_2633
+  VPLS-id: 1600012633
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600012633) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262175, Outgoing label: 35302
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048601, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_MUP_2633 neighbor 123.29.47.1 vpls-id 1600012633
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VMS_SIU_3859
+  VPLS-id: 1600013859
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600013859) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262176, Outgoing label: 153378
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048600, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VMS_SIU_3859 neighbor 123.29.47.1 vpls-id 1600013859
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VNP_MUP_2579
+  VPLS-id: 1600012579
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600012579) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262173, Outgoing label: 35542
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048599, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VNP_MUP_2579 neighbor 123.29.47.1 vpls-id 1600012579
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-3G_VNP_MUP_2620
+  VPLS-id: 1600012620
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600012620) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262174, Outgoing label: 35144
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048598, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-3G_VNP_MUP_2620 neighbor 123.29.47.1 vpls-id 1600012620
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-AGRIBANK-LDG-NT
+  VPLS-id: 1600100190
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600100190) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262180, Outgoing label: 155890
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048597, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-AGRIBANK-LDG-NT neighbor 123.29.47.1 vpls-id 1600100190
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-BD_TW
+  VPLS-id: 1600107770
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600107770) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262182, Outgoing label: 155758
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048596, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-BD_TW neighbor 123.29.47.1 vpls-id 1600107770
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-BIDV_BANK_7750_NT
+  VPLS-id: 1600108000
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600108000) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262183, Outgoing label: 34424
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048595, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-BIDV_BANK_7750_NT neighbor 123.29.47.1 vpls-id 1600108000
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-DKQUYENSUDUNGDAT_NT
+  VPLS-id: 1600100110
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600100110) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262179, Outgoing label: 35589
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048594, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-DKQUYENSUDUNGDAT_NT neighbor 123.29.47.1 vpls-id 1600100110
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-DSLAM_NMS
+  VPLS-id: 1600109990
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600109990) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262188, Outgoing label: 155665
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048593, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-DSLAM_NMS neighbor 123.29.47.1 vpls-id 1600109990
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-DSLAM_NMS1
+  VPLS-id: 1600109991
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600109991) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262189, Outgoing label: 156640
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048592, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-DSLAM_NMS1 neighbor 123.29.47.1 vpls-id 1600109991
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-EP_VNPTLDG_test
+  VPLS-id: 1701808880
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1701808880) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262194, Outgoing label: 156628
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048591, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-EP_VNPTLDG_test neighbor 123.29.47.1 vpls-id 1701808880
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-GIAMSAT_TTVT1
+  VPLS-id: 1600101414
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600101414) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262181, Outgoing label: 33962
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048590, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-GIAMSAT_TTVT1 neighbor 123.29.47.1 vpls-id 1600101414
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-GPON_4000
+  VPLS-id: 1600169990
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600169990) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262193, Outgoing label: 152617
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048589, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-GPON_4000 neighbor 123.29.47.1 vpls-id 1600169990
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-GPON_ALCATEL_NMS
+  VPLS-id: 1600119970
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600119970) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262192, Outgoing label: 152594
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048588, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-GPON_ALCATEL_NMS neighbor 123.29.47.1 vpls-id 1600119970
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-HNTH_UB
+  VPLS-id: 1600109970
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600109970) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262186, Outgoing label: 155722
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048587, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-HNTH_UB neighbor 123.29.47.1 vpls-id 1600109970
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-LOCAL_NEW
+  VPLS-id: 1600109999
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600109999) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262190, Outgoing label: 156658
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048586, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-LOCAL_NEW neighbor 123.29.47.1 vpls-id 1600109999
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-METRO_NT_NHDTPTVN
+  VPLS-id: 1600109910
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600109910) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262184, Outgoing label: 35561
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048585, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-METRO_NT_NHDTPTVN neighbor 123.29.47.1 vpls-id 1600109910
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-MXU_NMS
+  VPLS-id: 1600109930
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600109930) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262185, Outgoing label: 156505
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048584, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-MXU_NMS neighbor 123.29.47.1 vpls-id 1600109930
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-NHCSXH_LDG_NT
+  VPLS-id: 1600110000
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600110000) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262191, Outgoing label: 156579
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048583, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-NHCSXH_LDG_NT neighbor 123.29.47.1 vpls-id 1600110000
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-NMS_OSN_VL13
+  VPLS-id: 1600100020
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600100020) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262178, Outgoing label: 155729
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048582, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-NMS_OSN_VL13 neighbor 123.29.47.1 vpls-id 1600100020
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-SWL2_FTTH
+  VPLS-id: 1101417000
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1101417000) rmt OL   
+    123.29.47.2(vpls-id 1101417000) rmt OL   
+
+Instance: L2-SWL2_FTTH_960
+  VPLS-id: 1101411100
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.2(vpls-id 1101411100) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.2, Negotiated control-word: No
+      Incoming label: 262195, Outgoing label: 299866
+      Negotiated PW status TLV: Yes
+      local PW status code: 0x00000000, Neighbor PW status code: 0x00000000
+      Local interface: lsi.1048622, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-SWL2_FTTH_960 neighbor 123.29.47.2 vpls-id 1101411100
+      Flow Label Transmit: No, Flow Label Receive: No
+    123.29.47.1(vpls-id 1101411100) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262146, Outgoing label: 153455
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048581, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-SWL2_FTTH_960 neighbor 123.29.47.1 vpls-id 1101411100
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-SWL2_FTTH_960_2
+  VPLS-id: 1101411104
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1101411104) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262147, Outgoing label: 35328
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048580, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-SWL2_FTTH_960_2 neighbor 123.29.47.1 vpls-id 1101411104
+      Flow Label Transmit: No, Flow Label Receive: No
+    123.29.47.2(vpls-id 1101411104) rmt OL   
+
+Instance: L2-SWL2_FTTH_QINQ_MAN
+  VPLS-id: 1101417030
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1101417030) rmt OL   
+
+Instance: L2-SWL2_FTTH_QINQ_MAN_960_2
+  VPLS-id: 1101412040
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1101412040) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262148, Outgoing label: 35480
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048579, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-SWL2_FTTH_QINQ_MAN_960_2 neighbor 123.29.47.1 vpls-id 1101412040
+      Flow Label Transmit: No, Flow Label Receive: No
+    123.29.47.2(vpls-id 1101412040) rmt OL   
+
+Instance: L2-SWL2_FTTH_W03
+  VPLS-id: 1101417020
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1101417020) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262150, Outgoing label: 35051
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048578, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-SWL2_FTTH_W03 neighbor 123.29.47.1 vpls-id 1101417020
+      Flow Label Transmit: No, Flow Label Receive: No
+    123.29.47.2(vpls-id 1101417020) rmt OL   
+
+Instance: L2-SWL2_LAG1_DATHANH
+  VPLS-id: 1401410180
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1401410180) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262154, Outgoing label: 153473
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048577, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-SWL2_LAG1_DATHANH neighbor 123.29.47.1 vpls-id 1401410180
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-SWL2_NMS
+  VPLS-id: 1600109980
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1600109980) rmt Up Oct 10 23:34:02 2017           1
+      Remote PE: 123.29.47.1, Negotiated control-word: No
+      Incoming label: 262187, Outgoing label: 155685
+      Negotiated PW status TLV: No
+      Local interface: lsi.1048576, Status: Up, Encapsulation: VLAN
+        Description: Intf - vpls L2-SWL2_NMS neighbor 123.29.47.1 vpls-id 1600109980
+      Flow Label Transmit: No, Flow Label Receive: No
+
+Instance: L2-VODMIMOSATV
+  VPLS-id: 1201400980
+  Mesh-group connections: NO-SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1201400980) rmt OL   
+    123.29.47.2(vpls-id 1201400980) rmt OL   
+
+Instance: L2-VPN_1410_12
+  VPLS-id: 1101417100
+  Mesh-group connections: SPLIT
+    Neighbor                  Type  St     Time last up          # Up trans
+    123.29.47.1(vpls-id 1101417100) rmt OL   
+
+{master}
+admin@MX960-LDG01DTH_RE0> show vpls mac-table 
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_3876
+ Bridging domain : __L2-3G_VMS_3876__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:0e   D        lsi.1048621     
+   00:30:88:20:36:c2   D        lsi.1048621     
+   ac:60:b6:1f:86:c4   D        ge-0/2/2.3876   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_IUP_1001
+ Bridging domain : __L2-3G_VMS_IUP_1001__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:0c   D        lsi.1048620     
+   00:1e:df:97:28:f0   D        ge-0/2/8.1001   
+   00:1e:df:97:31:c5   D        ge-0/2/8.1001   
+   00:1e:df:97:35:92   D        ge-0/3/0.1001   
+   00:1e:df:97:3c:df   D        ge-0/2/8.1001   
+   00:1e:df:9a:40:7e   D        ge-0/3/1.1001   
+   00:1e:df:9e:e2:e5   D        ge-0/2/2.1001   
+   00:1e:df:9f:42:99   D        ge-0/2/4.1001   
+   00:30:88:20:35:89   D        lsi.1048620     
+   00:30:88:20:36:c2   D        lsi.1048620     
+   74:c9:9a:7f:64:96   D        ge-0/2/2.1001   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_IUP_1002
+ Bridging domain : __L2-3G_VMS_IUP_1002__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:0a   D        lsi.1048619     
+   00:1e:df:96:c1:6a   D        ge-0/2/4.1002   
+   00:30:88:20:35:89   D        lsi.1048619     
+   00:30:88:20:36:c2   D        lsi.1048619     
+   74:c9:9a:7f:7d:a6   D        ge-0/2/4.1002   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_IUP_1007
+ Bridging domain : __L2-3G_VMS_IUP_1007__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:13   D        lsi.1048618     
+   00:1e:df:95:32:4b   D        ge-0/3/1.1007   
+   00:30:88:20:35:89   D        lsi.1048618     
+   00:30:88:20:36:c2   D        lsi.1048618     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_IUP_1028
+ Bridging domain : __L2-3G_VMS_IUP_1028__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:31   D        lsi.1048617     
+   00:1e:df:9e:e0:a0   D        ge-0/3/1.1028   
+   00:1e:df:9f:f7:0e   D        ge-0/3/7.1028   
+   00:1e:df:a0:06:ff   D        ge-0/3/1.1028   
+   00:30:88:20:35:89   D        lsi.1048617     
+   00:30:88:20:36:c2   D        lsi.1048617     
+   74:c9:9a:7f:60:06   D        ge-0/3/1.1028   
+   90:38:09:d9:a1:a5   D        ge-0/3/1.1028   
+   c8:35:b8:57:2c:d8   D        ge-0/2/4.1028   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_IUP_1039
+ Bridging domain : __L2-3G_VMS_IUP_1039__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:05:80:00:e2:4a   D        lsi.1048615     
+   00:05:80:01:04:6a   D        ge-0/2/4.1039   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_MUP_2001
+ Bridging domain : __L2-3G_VMS_MUP_2001__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:0d   D        lsi.1048607     
+   00:1e:df:97:28:f0   D        ge-0/2/8.2001   
+   00:1e:df:97:31:c5   D        ge-0/2/8.2001   
+   00:1e:df:97:35:92   D        ge-0/3/0.2001   
+   00:1e:df:97:3c:df   D        ge-0/2/8.2001   
+   00:1e:df:9a:40:7e   D        ge-0/3/1.2001   
+   00:1e:df:9e:e2:e5   D        ge-0/2/2.2001   
+   00:1e:df:9f:42:99   D        ge-0/2/4.2001   
+   00:30:88:20:35:89   D        lsi.1048607     
+   00:30:88:20:36:c2   D        lsi.1048607     
+   74:c9:9a:7f:64:96   D        ge-0/2/2.2001   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_MUP_2002
+ Bridging domain : __L2-3G_VMS_MUP_2002__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:0b   D        lsi.1048606     
+   00:1e:df:96:c1:6a   D        ge-0/2/4.2002   
+   00:30:88:20:35:89   D        lsi.1048606     
+   00:30:88:20:36:c2   D        lsi.1048606     
+   74:c9:9a:7f:7d:a6   D        ge-0/2/4.2002   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_MUP_2007
+ Bridging domain : __L2-3G_VMS_MUP_2007__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:14   D        lsi.1048605     
+   00:1e:df:95:32:4b   D        ge-0/3/1.2007   
+   00:30:88:20:35:89   D        lsi.1048605     
+   00:30:88:20:36:c2   D        lsi.1048605     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_MUP_2028
+ Bridging domain : __L2-3G_VMS_MUP_2028__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:32   D        lsi.1048604     
+   00:1e:df:9e:e0:a0   D        ge-0/3/1.2028   
+   00:1e:df:9f:f7:0e   D        ge-0/3/7.2028   
+   00:1e:df:a0:06:ff   D        ge-0/3/1.2028   
+   00:30:88:20:35:89   D        lsi.1048604     
+   00:30:88:20:36:c2   D        lsi.1048604     
+   74:c9:9a:7f:60:06   D        ge-0/3/1.2028   
+   90:38:09:d9:a1:a5   D        ge-0/3/1.2028   
+   c8:35:b8:57:2c:d8   D        ge-0/2/4.2028   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_MUP_2039
+ Bridging domain : __L2-3G_VMS_MUP_2039__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:91   D        lsi.1048602     
+   00:05:80:01:04:60   D        ge-0/2/4.2039   
+   00:30:88:20:35:89   D        lsi.1048602     
+   00:30:88:20:36:c2   D        lsi.1048602     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-3G_VMS_SIU_3859
+ Bridging domain : __L2-3G_VMS_SIU_3859__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:00:5e:00:01:20   D        lsi.1048600     
+   00:30:88:20:35:89   D        lsi.1048600     
+   00:30:88:20:36:c2   D        lsi.1048600     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-AGRIBANK-LDG-NT
+ Bridging domain : __L2-AGRIBANK-LDG-NT__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:1e:4a:c2:d3:b9   D        lsi.1048597     
+   00:1f:ca:6c:0b:2d   D        ge-0/2/8.1402   
+   cc:46:d6:e5:01:a0   D        lsi.1048597     
+   f8:0b:cb:cc:85:53   D        lsi.1048597     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-BD_TW
+ Bridging domain : __L2-BD_TW__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:06:7b:0b:02:78   D        lsi.1048596     
+   00:0f:90:d7:e0:40   D        lsi.1048596     
+   00:0f:90:d7:e0:42   D        lsi.1048596     
+   00:10:18:2c:a0:88   D        lsi.1048596     
+   00:18:74:2e:93:c0   D        lsi.1048596     
+   00:19:d1:5c:c7:74   D        lsi.1048596     
+   00:1a:4d:75:74:ac   D        lsi.1048596     
+   00:1c:c0:84:c0:93   D        lsi.1048596     
+   00:1c:c0:b8:06:d3   D        lsi.1048596     
+   00:23:04:81:85:4c   D        ge-0/3/1.2700   
+   00:23:33:eb:d7:56   D        lsi.1048596     
+   00:23:33:ec:e4:d0   D        lsi.1048596     
+   00:26:18:01:6a:3f   D        lsi.1048596     
+   00:50:7f:cb:08:f9   D        lsi.1048596     
+   00:50:7f:e2:6a:68   D        lsi.1048596     
+   00:e0:4c:4a:6c:2a   D        lsi.1048596     
+   00:e0:4d:1a:01:01   D        lsi.1048596     
+   00:e0:4d:4a:6c:0b   D        ge-0/3/1.2700   
+   00:ea:01:18:f4:7a   D        lsi.1048596     
+   02:01:00:00:00:00   D        lsi.1048596     
+   10:c3:7b:6a:d4:b2   D        lsi.1048596     
+   14:cc:20:a8:48:63   D        lsi.1048596     
+   30:5a:3a:52:70:42   D        lsi.1048596     
+   32:b6:4f:32:11:46   D        lsi.1048596     
+   3c:df:1e:d8:72:81   D        lsi.1048596     
+   40:16:7e:a7:8b:b7   D        lsi.1048596     
+   40:a6:77:57:a5:8a   D        lsi.1048596     
+   78:44:76:4c:d7:c5   D        lsi.1048596     
+   94:de:80:1f:73:89   D        lsi.1048596     
+   b4:b5:2f:aa:f7:24   D        lsi.1048596     
+   b8:97:5a:ab:c6:57   D        lsi.1048596     
+   bc:5f:f4:30:a2:24   D        lsi.1048596     
+   bc:5f:f4:f0:b4:56   D        lsi.1048596     
+   c4:6e:1f:05:5f:9d   D        lsi.1048596     
+   c4:e9:84:4f:c8:3a   D        ge-7/3/5.2700   
+   c4:e9:84:d2:73:fe   D        lsi.1048596     
+   cc:e1:7f:23:c3:81   D        ge-0/3/1.2700   
+   cc:e1:7f:23:db:c1   D        lsi.1048596     
+   cc:e1:7f:24:72:9a   D        lsi.1048596     
+   cc:e1:7f:24:78:58   D        lsi.1048596     
+   cc:e1:7f:8c:3f:41   D        lsi.1048596     
+   d0:27:88:3f:77:e1   D        lsi.1048596     
+   d0:27:88:77:ab:8f   D        lsi.1048596     
+   d8:50:e6:4a:2b:f2   D        lsi.1048596     
+   e8:de:27:d4:71:f2   D        lsi.1048596     
+   ec:c8:82:b2:06:02   D        lsi.1048596     
+   f0:4d:a2:32:02:a6   D        lsi.1048596     
+   f0:4d:a2:32:02:a9   D        lsi.1048596     
+   f0:4d:a2:32:2c:94   D        lsi.1048596     
+   f8:bc:12:81:47:d9   D        lsi.1048596     
+   f8:bc:12:a2:cd:c7   D        lsi.1048596     
+   fc:aa:14:08:74:d6   D        lsi.1048596     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-DKQUYENSUDUNGDAT_NT
+ Bridging domain : __L2-DKQUYENSUDUNGDAT_NT__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:1d:aa:89:3a:f5   D        ge-0/3/1.1437   
+   18:e7:28:0f:13:a1   D        lsi.1048594     
+   c8:9c:1d:3f:71:81   D        lsi.1048594     
+   d0:72:dc:8e:2d:00   D        lsi.1048594     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-DSLAM_NMS1
+ Bridging domain : __L2-DSLAM_NMS1__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:07:72:25:9b:bd   D        lsi.1048592     
+   00:07:72:2c:77:c1   D        ge-7/3/1.3999   
+   00:07:72:2c:78:11   D        lsi.1048592     
+   00:07:72:2c:82:31   D        lsi.1048592     
+   00:07:72:2f:a7:f7   D        lsi.1048592     
+   00:07:72:2f:b1:b6   D        lsi.1048592     
+   00:07:72:2f:b2:4b   D        lsi.1048592     
+   00:07:72:2f:cb:b7   D        lsi.1048592     
+   00:07:72:2f:e0:47   D        lsi.1048592     
+   00:07:72:2f:ea:05   D        lsi.1048592     
+   00:07:72:2f:ea:0d   D        lsi.1048592     
+   00:07:72:2f:ea:5b   D        lsi.1048592     
+   00:07:72:2f:ea:75   D        lsi.1048592     
+   00:07:72:2f:ea:77   D        lsi.1048592     
+   00:07:72:2f:ea:7b   D        lsi.1048592     
+   00:07:72:2f:ea:81   D        lsi.1048592     
+   00:07:72:30:b1:05   D        lsi.1048592     
+   00:07:72:30:b1:09   D        lsi.1048592     
+   00:07:72:30:b1:35   D        ge-7/3/5.3999   
+   00:07:72:30:b1:49   D        lsi.1048592     
+   00:07:72:30:b1:6b   D        lsi.1048592     
+   00:07:72:30:b1:6f   D        lsi.1048592     
+   00:07:72:30:b1:a4   D        ge-0/2/2.3999   
+   00:07:72:3f:a7:5b   D        lsi.1048592     
+   00:07:72:3f:a7:7f   D        lsi.1048592     
+   00:07:72:3f:a7:a7   D        lsi.1048592     
+   00:07:72:42:15:c0   D        ge-7/2/7.3999   
+   00:07:72:42:4a:60   D        lsi.1048592     
+   00:07:72:42:54:c6   D        lsi.1048592     
+   00:07:72:42:72:b6   D        lsi.1048592     
+   00:07:72:42:72:fa   D        lsi.1048592     
+   00:07:72:42:7d:16   D        lsi.1048592     
+   00:07:72:42:7d:2e   D        lsi.1048592     
+   00:07:72:42:7d:3a   D        lsi.1048592     
+   00:07:72:42:7d:54   D        lsi.1048592     
+   00:07:72:42:7d:64   D        lsi.1048592     
+   00:07:72:42:b9:44   D        lsi.1048592     
+   00:07:72:42:b9:4e   D        lsi.1048592     
+   00:07:72:42:b9:aa   D        lsi.1048592     
+   00:07:72:42:b9:d6   D        lsi.1048592     
+   00:07:72:42:b9:da   D        lsi.1048592     
+   00:07:72:44:14:43   D        lsi.1048592     
+   00:07:72:44:14:f1   D        lsi.1048592     
+   00:07:72:44:15:47   D        lsi.1048592     
+   00:07:72:44:15:69   D        lsi.1048592     
+   00:07:72:44:15:6b   D        lsi.1048592     
+   00:07:72:44:28:89   D        lsi.1048592     
+   00:07:72:44:29:b5   D        lsi.1048592     
+   00:07:72:44:29:c3   D        lsi.1048592     
+   00:07:72:44:2a:03   D        lsi.1048592     
+   00:07:72:44:2a:0f   D        lsi.1048592     
+   00:07:72:44:47:bf   D        lsi.1048592     
+   00:07:72:45:0a:21   D        lsi.1048592     
+   00:07:72:45:0a:4d   D        lsi.1048592     
+   00:07:72:45:0a:55   D        lsi.1048592     
+   00:07:72:45:1d:6d   D        lsi.1048592     
+   00:07:72:45:1d:7d   D        lsi.1048592     
+   00:07:72:45:1d:87   D        lsi.1048592     
+   00:07:72:45:1d:e9   D        lsi.1048592     
+   00:07:72:45:1d:ed   D        lsi.1048592     
+   00:07:72:45:1e:11   D        lsi.1048592     
+   00:07:72:45:1e:47   D        lsi.1048592     
+   00:07:72:45:1e:7f   D        lsi.1048592     
+   00:07:72:45:1e:94   D        lsi.1048592     
+   00:07:72:45:1e:a9   D        lsi.1048592     
+   00:07:72:45:1e:c1   D        lsi.1048592     
+   00:07:72:45:31:93   D        lsi.1048592     
+   00:07:72:45:31:a5   D        lsi.1048592     
+   00:07:72:45:32:01   D        lsi.1048592     
+   00:07:72:45:32:7d   D        lsi.1048592     
+   00:07:72:46:53:9f   D        lsi.1048592     
+   00:07:72:46:53:bf   D        lsi.1048592     
+   00:07:72:46:53:d5   D        lsi.1048592     
+   00:07:72:46:53:eb   D        lsi.1048592     
+   00:07:72:46:53:f1   D        lsi.1048592     
+   00:07:72:46:54:17   D        lsi.1048592     
+   00:07:72:46:54:1b   D        lsi.1048592     
+   00:07:72:47:08:7f   D        lsi.1048592     
+   00:07:72:47:08:a1   D        lsi.1048592     
+   00:07:72:47:08:c3   D        lsi.1048592     
+   00:07:72:47:09:07   D        lsi.1048592     
+   00:07:72:47:1b:d7   D        lsi.1048592     
+   00:07:72:47:1c:3a   D        lsi.1048592     
+   00:07:72:47:1d:45   D        lsi.1048592     
+   00:07:72:47:23:12   D        lsi.1048592     
+   00:07:72:47:30:27   D        lsi.1048592     
+   00:07:72:47:30:45   D        lsi.1048592     
+   00:07:72:47:30:53   D        lsi.1048592     
+   00:07:72:47:30:59   D        lsi.1048592     
+   00:07:72:47:30:5f   D        lsi.1048592     
+   00:07:72:47:30:97   D        lsi.1048592     
+   00:07:72:47:30:9d   D        lsi.1048592     
+   00:07:72:47:30:9f   D        lsi.1048592     
+   00:07:72:47:30:af   D        lsi.1048592     
+   00:07:72:47:30:bf   D        lsi.1048592     
+   00:07:72:47:31:2d   D        lsi.1048592     
+   00:07:72:47:31:81   D        lsi.1048592     
+   00:07:72:47:31:97   D        lsi.1048592     
+   00:07:72:47:31:a3   D        lsi.1048592     
+   00:07:72:47:44:71   D        lsi.1048592     
+   00:07:72:47:44:95   D        lsi.1048592     
+   00:07:72:47:44:9f   D        lsi.1048592     
+   00:07:72:47:44:b9   D        lsi.1048592     
+   00:07:72:47:44:bd   D        lsi.1048592     
+   00:07:72:47:44:d1   D        lsi.1048592     
+   00:07:72:47:45:19   D        lsi.1048592     
+   00:07:72:47:45:45   D        lsi.1048592     
+   00:07:72:47:45:85   D        lsi.1048592     
+   00:07:72:47:45:91   D        lsi.1048592     
+   00:07:72:47:45:b7   D        lsi.1048592     
+   00:07:72:49:86:6f   D        lsi.1048592     
+   00:07:72:49:86:71   D        lsi.1048592     
+   00:07:72:4c:8c:73   D        lsi.1048592     
+   00:07:72:4e:12:46   D        lsi.1048592     
+   00:07:72:4e:13:61   D        lsi.1048592     
+   00:07:72:4e:13:81   D        lsi.1048592     
+   00:07:72:4e:13:83   D        ge-0/2/2.3999   
+   00:07:72:4e:20:bd   D        lsi.1048592     
+   00:07:72:4e:20:d7   D        lsi.1048592     
+   00:07:72:4e:b7:f3   D        ge-0/3/7.3999   
+   00:07:72:73:d8:ab   D        lsi.1048592     
+   00:07:72:73:d8:ad   D        lsi.1048592     
+   00:07:72:73:d9:21   D        lsi.1048592     
+   00:07:72:73:d9:4d   D        lsi.1048592     
+   00:07:72:73:d9:53   D        lsi.1048592     
+   00:07:72:73:d9:61   D        lsi.1048592     
+   00:07:72:73:d9:69   D        lsi.1048592     
+   00:07:72:a3:dc:19   D        lsi.1048592     
+   00:07:72:a8:91:e0   D        lsi.1048592     
+   00:07:72:a8:91:e6   D        lsi.1048592     
+   00:07:72:a8:92:34   D        lsi.1048592     
+   00:07:72:a8:92:3e   D        lsi.1048592     
+   00:07:72:a8:92:40   D        lsi.1048592     
+   00:07:72:a8:92:6e   D        lsi.1048592     
+   00:07:72:a8:92:70   D        lsi.1048592     
+   00:07:72:a8:92:86   D        lsi.1048592     
+   00:07:72:a8:92:90   D        lsi.1048592     
+   00:07:72:a8:92:a2   D        lsi.1048592     
+   00:07:72:a8:9c:64   D        ge-7/2/6.3999   
+   00:07:72:a8:9c:74   D        lsi.1048592     
+   00:07:72:a8:9c:a2   D        lsi.1048592     
+   00:07:72:a8:9c:b8   D        lsi.1048592     
+   00:07:72:ab:09:8f   D        ge-7/3/1.3999   
+   00:07:72:ab:09:ef   D        lsi.1048592     
+   00:07:72:ab:0a:07   D        lsi.1048592     
+   00:07:72:ab:0a:0f   D        lsi.1048592     
+   00:07:72:ab:13:a7   D        lsi.1048592     
+   00:07:72:ab:13:a9   D        lsi.1048592     
+   00:07:72:ab:13:b3   D        lsi.1048592     
+   00:07:72:ab:13:f1   D        lsi.1048592     
+   00:07:72:ab:14:1d   D        ge-0/2/2.3999   
+   00:07:72:ab:14:25   D        lsi.1048592     
+   00:07:72:ab:14:27   D        lsi.1048592     
+   00:07:72:ab:14:3f   D        lsi.1048592     
+   00:07:72:ab:14:43   D        lsi.1048592     
+   00:07:72:ab:1d:b1   D        ge-7/2/9.3999   
+   00:07:72:ab:1d:c1   D        ge-7/2/6.3999   
+   00:07:72:ab:1d:f3   D        lsi.1048592     
+   00:07:72:ab:1d:f5   D        lsi.1048592     
+   00:07:72:ab:1e:01   D        lsi.1048592     
+   00:07:72:ab:1e:17   D        lsi.1048592     
+   00:07:72:ab:74:67   D        lsi.1048592     
+   00:07:72:ab:a9:1b   D        lsi.1048592     
+   00:07:72:ab:a9:1d   D        lsi.1048592     
+   00:07:72:ab:b2:b3   D        lsi.1048592     
+   00:07:72:ab:b2:f5   D        lsi.1048592     
+   00:07:72:ab:b3:03   D        lsi.1048592     
+   00:07:72:ab:b3:13   D        lsi.1048592     
+   00:07:72:ab:b3:27   D        ge-7/2/9.3999   
+   00:07:72:ab:ba:e1   D        lsi.1048592     
+   00:07:72:ab:ba:e7   D        lsi.1048592     
+   00:07:72:ab:ba:e9   D        lsi.1048592     
+   00:07:72:ab:bb:45   D        lsi.1048592     
+   00:07:72:ab:bb:63   D        lsi.1048592     
+   00:07:72:bd:14:dd   D        lsi.1048592     
+   00:07:72:f5:5a:c9   D        lsi.1048592     
+   00:0f:bb:15:b3:70   D        lsi.1048592     
+   00:0f:bb:15:c7:1b   D        lsi.1048592     
+   00:0f:bb:15:cf:b8   D        ge-0/3/1.3999   
+   00:0f:bb:15:d0:35   D        ge-7/3/0.3999   
+   00:0f:bb:15:d6:c5   D        lsi.1048592     
+   00:0f:bb:15:d8:be   D        ge-7/2/5.3999   
+   00:0f:bb:15:dc:38   D        lsi.1048592     
+   00:19:8f:2f:11:5f   D        lsi.1048592     
+   00:19:8f:2f:11:d9   D        lsi.1048592     
+   00:19:8f:2f:11:db   D        ge-0/2/4.3999   
+   00:19:8f:2f:11:e7   D        lsi.1048592     
+   00:19:8f:2f:11:e9   D        lsi.1048592     
+   00:19:8f:2f:11:fb   D        lsi.1048592     
+   00:19:8f:2f:11:ff   D        lsi.1048592     
+   00:19:8f:2f:12:19   D        lsi.1048592     
+   00:19:8f:2f:12:2d   D        lsi.1048592     
+   00:19:8f:2f:12:39   D        lsi.1048592     
+   00:19:8f:2f:1b:dd   D        lsi.1048592     
+   00:19:8f:2f:1b:df   D        lsi.1048592     
+   00:19:8f:2f:1b:ff   D        ge-0/2/2.3999   
+   00:19:8f:2f:1c:01   D        lsi.1048592     
+   00:19:8f:2f:20:9b   D        lsi.1048592     
+   00:19:8f:2f:21:07   D        lsi.1048592     
+   00:19:8f:2f:21:09   D        lsi.1048592     
+   00:19:8f:2f:21:33   D        lsi.1048592     
+   00:19:8f:2f:21:35   D        lsi.1048592     
+   00:19:8f:2f:21:39   D        lsi.1048592     
+   00:19:8f:2f:21:41   D        lsi.1048592     
+   00:19:8f:2f:21:f3   D        lsi.1048592     
+   00:19:8f:2f:28:6f   D        lsi.1048592     
+   00:19:8f:2f:28:99   D        lsi.1048592     
+   00:19:8f:2f:28:a9   D        lsi.1048592     
+   00:19:8f:2f:29:37   D        lsi.1048592     
+   00:19:8f:2f:29:3d   D        lsi.1048592     
+   00:19:8f:2f:29:41   D        lsi.1048592     
+   00:19:8f:2f:29:57   D        lsi.1048592     
+   00:19:8f:2f:29:d9   D        lsi.1048592     
+   00:19:8f:2f:29:ed   D        ge-7/3/5.3999   
+   00:19:8f:2f:2a:01   D        lsi.1048592     
+   00:19:8f:2f:2a:55   D        ge-7/2/4.3999   
+   00:19:8f:2f:2a:67   D        lsi.1048592     
+   18:80:f5:0f:ff:7e   D        lsi.1048592     
+   18:80:f5:0f:ff:98   D        lsi.1048592     
+   18:80:f5:32:50:a5   D        lsi.1048592     
+   3c:df:1e:d8:72:81   D        lsi.1048592     
+   3c:df:1e:d8:72:ef   D        lsi.1048592     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-EP_VNPTLDG_test
+ Bridging domain : __L2-EP_VNPTLDG_test__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:06:7b:09:05:42   D        lsi.1048591     
+   00:06:7b:13:ab:f9   D        lsi.1048591     
+   00:0b:74:db:49:31   D        lsi.1048591     
+   00:0d:bd:2d:5e:80   D        lsi.1048591     
+   00:0d:bd:2d:5e:82   D        lsi.1048591     
+   00:12:13:3f:76:66   D        lsi.1048591     
+   00:12:13:3f:7d:f7   D        lsi.1048591     
+   00:12:13:3f:e5:ff   D        lsi.1048591     
+   00:12:13:3f:fb:68   D        lsi.1048591     
+   00:12:13:40:1a:0f   D        lsi.1048591     
+   00:12:13:40:27:7c   D        lsi.1048591     
+   00:12:13:40:3f:71   D        lsi.1048591     
+   00:12:13:40:41:f3   D        lsi.1048591     
+   00:12:13:40:4c:fd   D        lsi.1048591     
+   00:12:14:10:ff:8d   D        lsi.1048591     
+   00:12:14:11:19:a2   D        lsi.1048591     
+   00:12:14:11:94:f7   D        lsi.1048591     
+   00:12:14:16:c5:21   D        lsi.1048591     
+   00:19:66:c6:06:21   D        lsi.1048591     
+   00:1c:c0:cb:1b:cf   D        lsi.1048591     
+   00:1c:c0:cc:e6:2b   D        lsi.1048591     
+   00:1c:c0:cd:bb:56   D        lsi.1048591     
+   00:1c:c0:cd:cf:0a   D        lsi.1048591     
+   00:1c:c0:f2:a0:44   D        lsi.1048591     
+   00:1d:7d:10:88:80   D        lsi.1048591     
+   00:1d:7d:2e:3b:70   D        lsi.1048591     
+   00:1d:7d:2e:78:6c   D        lsi.1048591     
+   00:1d:7d:2e:7d:b3   D        lsi.1048591     
+   00:1d:7d:55:11:50   D        lsi.1048591     
+   00:1d:7d:73:92:d4   D        lsi.1048591     
+   00:1d:7d:b1:da:a7   D        lsi.1048591     
+   00:1d:7d:b2:bf:fb   D        lsi.1048591     
+   00:1d:7d:b2:bf:fd   D        lsi.1048591     
+   00:1d:7d:b3:87:99   D        lsi.1048591     
+   00:1d:7d:b3:8f:be   D        lsi.1048591     
+   00:1f:c6:28:31:8f   D        lsi.1048591     
+   00:1f:c6:cb:8c:74   D        lsi.1048591     
+   00:1f:e2:51:9c:4c   D        lsi.1048591     
+   00:21:5e:47:d5:34   D        lsi.1048591     
+   00:21:85:9c:b5:9d   D        ge-0/3/0.2399   
+   00:21:97:d3:cd:db   D        lsi.1048591     
+   00:22:64:76:4c:f0   D        lsi.1048591     
+   00:22:68:83:f8:da   D        lsi.1048591     
+   00:23:54:48:df:aa   D        lsi.1048591     
+   00:23:54:65:a5:f1   D        lsi.1048591     
+   00:23:54:e2:93:c9   D        lsi.1048591     
+   00:24:81:67:9b:61   D        lsi.1048591     
+   00:24:8c:b6:1f:fa   D        lsi.1048591     
+   00:24:8c:d8:b7:49   D        lsi.1048591     
+   00:26:18:34:32:e4   D        lsi.1048591     
+   00:30:05:1d:98:1e   D        lsi.1048591     
+   00:80:48:59:2b:76   D        lsi.1048591     
+   00:e0:4c:6b:89:70   D        lsi.1048591     
+   00:e0:7c:7e:13:5e   D        lsi.1048591     
+   02:11:e5:67:ee:d0   D        ge-0/3/0.2399   
+   08:18:1a:c3:bf:08   D        lsi.1048591     
+   08:19:a6:98:ae:d5   D        ge-0/2/8.2399   
+   10:78:d2:30:fd:a2   D        lsi.1048591     
+   10:fe:ed:fb:d2:03   D        ge-0/3/0.2399   
+   18:a9:05:bf:5a:14   D        ge-0/2/3.2399   
+   1c:1b:0d:4d:10:a6   D        lsi.1048591     
+   2c:27:d7:20:80:eb   D        lsi.1048591     
+   30:0e:d5:18:f9:2f   D        lsi.1048591     
+   30:85:a9:3a:fe:96   D        lsi.1048591     
+   34:64:a9:1e:99:f5   D        lsi.1048591     
+   34:64:a9:1e:9a:4d   D        lsi.1048591     
+   34:64:a9:36:63:6c   D        lsi.1048591     
+   40:8d:5c:60:ff:97   D        lsi.1048591     
+   40:8d:5c:66:f3:5d   D        lsi.1048591     
+   40:8d:5c:d1:6c:61   D        lsi.1048591     
+   48:0f:cf:4f:ca:b4   D        lsi.1048591     
+   48:d7:05:32:0e:c1   D        lsi.1048591     
+   4c:cc:6a:0a:39:97   D        ge-0/2/3.2399   
+   50:65:f3:4e:b9:2a   D        lsi.1048591     
+   50:65:f3:4e:b9:a8   D        lsi.1048591     
+   50:e5:49:ae:3b:9e   D        lsi.1048591     
+   54:04:a6:63:e6:0b   D        lsi.1048591     
+   54:e6:fc:af:55:dc   D        lsi.1048591     
+   58:c5:cb:dc:a4:bf   D        ge-0/2/2.2399   
+   64:66:b3:68:c6:93   D        lsi.1048591     
+   6c:62:6d:cd:36:46   D        lsi.1048591     
+   6c:f0:49:4d:a0:1b   D        lsi.1048591     
+   6c:f0:49:8d:0d:ff   D        lsi.1048591     
+   74:d4:35:0c:50:dd   D        lsi.1048591     
+   78:44:76:3e:85:87   D        ge-0/2/9.2399   
+   78:44:76:45:8f:bc   D        ge-0/3/0.2399   
+   78:44:76:45:96:97   D        lsi.1048591     
+   78:44:76:45:96:98   D        lsi.1048591     
+   78:44:76:45:97:1f   D        lsi.1048591     
+   78:44:76:55:6b:8c   D        lsi.1048591     
+   78:44:76:af:2b:83   D        lsi.1048591     
+   84:7e:40:d6:a3:50   D        lsi.1048591     
+   90:fb:a6:37:32:0a   D        lsi.1048591     
+   90:fb:a6:90:79:98   D        lsi.1048591     
+   90:fb:a6:ea:f8:54   D        lsi.1048591     
+   94:de:80:18:a9:fb   D        lsi.1048591     
+   94:de:80:6f:1e:38   D        lsi.1048591     
+   94:fb:b2:bd:3f:10   D        lsi.1048591     
+   9c:2a:70:bf:6f:37   D        lsi.1048591     
+   a0:65:18:12:86:a5   D        ae3.2399        
+   a0:65:18:1a:fb:bb   D        lsi.1048591     
+   a0:65:18:1c:2f:2c   D        ae3.2399        
+   a0:65:18:44:82:15   D        ae3.2399        
+   a0:65:18:5c:21:a9   D        ae6.2399        
+   a0:65:18:76:13:04   D        lsi.1048591     
+   a0:65:18:9e:75:c6   D        lsi.1048591     
+   a0:f3:c1:3e:2f:62   D        lsi.1048591     
+   a0:f3:c1:85:84:21   D        lsi.1048591     
+   a0:f3:c1:b2:24:71   D        lsi.1048591     
+   a4:e4:b8:95:59:d5   D        lsi.1048591     
+   b0:70:2d:7d:cd:93   D        lsi.1048591     
+   b8:ca:3a:81:a7:e8   D        lsi.1048591     
+   b8:ca:3a:81:d1:b2   D        lsi.1048591     
+   b8:ca:3a:86:95:a0   D        lsi.1048591     
+   b8:ca:3a:b8:b2:2c   D        lsi.1048591     
+   c4:6e:1f:2e:78:ca   D        lsi.1048591     
+   c4:6e:1f:2e:7a:25   D        lsi.1048591     
+   c4:6e:1f:31:03:c5   D        ge-7/3/5.2399   
+   c4:6e:1f:5f:76:01   D        lsi.1048591     
+   c4:6e:1f:96:63:0d   D        ge-0/2/9.2399   
+   c4:6e:1f:c3:15:47   D        ge-7/3/5.2399   
+   c4:e9:84:5e:eb:98   D        lsi.1048591     
+   c4:e9:84:67:e7:53   D        lsi.1048591     
+   c4:e9:84:b9:a9:57   D        lsi.1048591     
+   c8:1f:66:02:3c:ca   D        lsi.1048591     
+   c8:3a:35:19:bb:e8   D        lsi.1048591     
+   c8:3a:35:34:63:50   D        lsi.1048591     
+   c8:9c:dc:a4:a1:36   D        lsi.1048591     
+   d0:27:88:3f:44:12   D        lsi.1048591     
+   d0:27:88:6b:43:f8   D        lsi.1048591     
+   d8:50:e6:4a:2c:ac   D        lsi.1048591     
+   d8:50:e6:bb:27:c3   D        lsi.1048591     
+   d8:d1:cb:df:3e:c6   D        lsi.1048591     
+   dc:4a:3e:3b:aa:6e   D        lsi.1048591     
+   dc:4a:3e:8e:4f:60   D        lsi.1048591     
+   e0:3f:49:53:31:54   D        lsi.1048591     
+   e0:cb:4e:de:41:a4   D        lsi.1048591     
+   e0:cb:4e:de:4c:87   D        lsi.1048591     
+   e0:db:55:b0:9c:25   D        lsi.1048591     
+   e8:39:35:3a:60:ea   D        lsi.1048591     
+   e8:94:f6:e6:b3:c4   D        lsi.1048591     
+   f4:f2:6d:fe:bc:ab   D        lsi.1048591     
+   f4:f2:6d:fe:bc:ac   D        lsi.1048591     
+   f8:1a:67:4c:32:be   D        lsi.1048591     
+   f8:bc:12:65:e4:46   D        lsi.1048591     
+   f8:bc:12:9e:fb:3b   D        lsi.1048591     
+   fc:3f:db:0a:a0:b0   D        lsi.1048591     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-GPON_4000
+ Bridging domain : __L2-GPON_4000__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   3c:df:1e:d8:72:81   D        lsi.1048589     
+   94:18:82:01:8c:2e   D        lsi.1048589     
+   a0:65:18:3a:2d:75   D        lsi.1048589     
+   a0:65:18:71:d1:7b   D        lsi.1048589     
+   a0:65:18:84:de:ca   D        lsi.1048589     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-GPON_ALCATEL_NMS
+ Bridging domain : __L2-GPON_ALCATEL_NMS__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   18:4a:6f:50:08:19   D        ae6.3991        
+   18:4a:6f:ae:ea:ca   D        ae3.3991        
+   18:4a:6f:b7:b8:7b   D        ae4.3991        
+   3c:df:1e:d8:72:81   D        lsi.1048588     
+   3c:df:1e:d8:72:e7   D        lsi.1048588     
+   e4:a1:e6:5d:b8:4c   D        ae5.3991        
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-HNTH_UB
+ Bridging domain : __L2-HNTH_UB__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   0c:c4:7a:96:a4:f6   D        lsi.1048587     
+   0c:c4:7a:96:a9:e6   D        lsi.1048587     
+   1c:e8:5d:3a:8a:90   D        lsi.1048587     
+   3c:df:1e:d8:72:81   D        lsi.1048587     
+   64:d1:54:13:ca:df   D        lsi.1048587     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-LOCAL_NEW
+ Bridging domain : __L2-LOCAL_NEW__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:01:af:0c:77:01   D        lsi.1048586     
+   c4:6e:1f:2e:79:18   D        lsi.1048586     
+   e8:de:27:64:0b:43   D        ge-7/2/8.2340   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-METRO_NT_NHDTPTVN
+ Bridging domain : __L2-METRO_NT_NHDTPTVN__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:01:29:0e:bb:3e   D        lsi.1048585     
+   00:01:29:2c:a3:da   D        lsi.1048585     
+   00:01:29:a6:88:76   D        lsi.1048585     
+   00:05:9a:3d:05:35   D        lsi.1048585     
+   00:06:7b:13:50:d8   D        lsi.1048585     
+   00:06:7b:13:5b:32   D        lsi.1048585     
+   00:12:12:45:19:cb   D        lsi.1048585     
+   00:12:12:92:95:05   D        lsi.1048585     
+   00:12:12:92:95:70   D        lsi.1048585     
+   00:12:12:93:58:a9   D        lsi.1048585     
+   00:12:12:94:cb:b7   D        lsi.1048585     
+   00:12:13:2d:17:0e   D        lsi.1048585     
+   00:12:13:2d:3e:bd   D        lsi.1048585     
+   00:12:13:31:e6:13   D        lsi.1048585     
+   00:12:16:a9:50:3c   D        lsi.1048585     
+   00:12:16:a9:68:04   D        lsi.1048585     
+   00:12:16:a9:68:93   D        lsi.1048585     
+   00:12:16:a9:75:6f   D        lsi.1048585     
+   00:16:47:29:33:15   D        lsi.1048585     
+   00:16:9d:03:40:89   D        lsi.1048585     
+   00:16:c7:11:ec:bc   D        lsi.1048585     
+   00:18:ae:5e:71:3e   D        lsi.1048585     
+   00:18:ae:5f:ec:d8   D        lsi.1048585     
+   00:1a:2f:1a:71:90   D        lsi.1048585     
+   00:1a:d4:15:54:e2   D        lsi.1048585     
+   00:21:1b:b0:55:0f   D        lsi.1048585     
+   00:24:81:a2:9e:01   D        lsi.1048585     
+   00:42:68:7d:7d:21   D        ge-0/3/1.1426   
+   00:80:91:4f:cd:56   D        lsi.1048585     
+   00:80:91:50:bc:de   D        lsi.1048585     
+   00:80:f0:43:a1:03   D        lsi.1048585     
+   00:80:f0:cd:25:8a   D        lsi.1048585     
+   00:80:f0:cd:25:8e   D        lsi.1048585     
+   00:80:f0:cd:25:c3   D        lsi.1048585     
+   00:80:f0:cd:25:c8   D        lsi.1048585     
+   00:80:f0:cd:25:f3   D        lsi.1048585     
+   00:80:f0:cd:25:f4   D        lsi.1048585     
+   00:80:f0:cd:26:40   D        lsi.1048585     
+   00:80:f0:cd:26:72   D        lsi.1048585     
+   00:80:f0:cd:26:73   D        lsi.1048585     
+   00:c8:8b:da:73:03   D        ge-0/3/1.1426   
+   08:00:0e:44:e5:b3   D        lsi.1048585     
+   08:00:23:31:22:b9   D        lsi.1048585     
+   34:17:eb:a4:50:c5   D        lsi.1048585     
+   3c:d9:2b:4b:1e:da   D        lsi.1048585     
+   3c:d9:2b:4b:ce:a6   D        lsi.1048585     
+   3c:d9:2b:50:81:0b   D        lsi.1048585     
+   40:61:86:7d:6b:1d   D        lsi.1048585     
+   90:b1:1c:96:37:76   D        lsi.1048585     
+   98:90:96:c4:68:6d   D        lsi.1048585     
+   a0:8c:fd:e6:36:65   D        lsi.1048585     
+   a0:8c:fd:ec:29:26   D        lsi.1048585     
+   a0:b3:cc:fe:05:5b   D        lsi.1048585     
+   ac:16:2d:06:e7:ff   D        lsi.1048585     
+   ac:16:2d:06:e8:1e   D        lsi.1048585     
+   b4:b5:2f:cd:6a:8b   D        lsi.1048585     
+   e0:24:7f:1b:6c:8a   D        lsi.1048585     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-MXU_NMS
+ Bridging domain : __L2-MXU_NMS__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   08:18:1a:38:54:60   D        lsi.1048584     
+   08:18:1a:38:54:70   D        lsi.1048584     
+   08:18:1a:38:54:9e   D        ge-0/2/1.3994   
+   3c:df:1e:d8:72:81   D        lsi.1048584     
+   3c:df:1e:d8:72:ea   D        lsi.1048584     
+   4c:ac:0a:bd:5d:b8   D        ge-7/2/2.3994   
+   4c:ac:0a:c1:01:94   D        ge-0/2/3.3994   
+   4c:ac:0a:c1:01:9a   D        ge-0/2/8.3994   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-NHCSXH_LDG_NT
+ Bridging domain : __L2-NHCSXH_LDG_NT__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   ac:f2:c5:2a:fe:49   D        lsi.1048583     
+   ac:f2:c5:fe:b8:e2   D        ge-0/3/1.1429   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-NMS_OSN_VL13
+ Bridging domain : __L2-NMS_OSN_VL13__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:0c:29:7c:95:7d   D        lsi.1048582     
+   00:18:82:22:cd:7f   D        lsi.1048582     
+   00:18:82:b0:ee:28   D        lsi.1048582     
+   00:1c:c4:6d:66:ba   D        lsi.1048582     
+   08:00:3e:9e:74:e6   D        lsi.1048582     
+   3c:df:1e:d8:72:81   D        lsi.1048582     
+   94:18:82:01:8c:2d   D        lsi.1048582     
+   d0:15:4a:da:61:f9   D        lsi.1048582     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-SWL2_FTTH_960
+ Bridging domain : __L2-SWL2_FTTH_960__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:1d:aa:84:e9:9d   D        ge-0/2/9.1104   
+   00:50:7f:c7:66:b5   D        ge-0/2/3.1104   
+   00:50:7f:c8:73:59   D        ge-0/2/3.1104   
+   10:56:ca:0b:11:61   D        ge-0/2/9.1104   
+   10:56:ca:0e:23:70   D        ge-0/2/9.1104   
+   30:b5:c2:a9:80:77   D        ge-0/2/3.1104   
+   48:5d:60:a2:50:8c   D        ge-0/2/3.1104   
+   60:e3:27:2a:79:8d   D        ge-0/3/0.1104   
+   64:87:88:f1:37:c6   D        lsi.1048622     
+   66:87:88:f1:30:f3   D        lsi.1048581     
+   78:44:76:34:35:4a   D        ge-0/2/9.1104   
+   78:44:76:3e:74:07   D        ge-0/2/3.1104   
+   78:44:76:45:93:7c   D        ge-0/2/3.1104   
+   78:44:76:4b:87:78   D        ge-0/2/3.1104   
+   78:44:76:4c:e2:b8   D        ge-0/3/0.1104   
+   78:44:76:55:4f:44   D        ge-0/2/9.1104   
+   c4:6e:1f:30:d5:b1   D        ge-0/2/3.1104   
+   c4:6e:1f:30:f8:cf   D        ge-0/3/0.1104   
+   c4:6e:1f:31:0d:bd   D        ge-0/3/0.1104   
+   c4:6e:1f:96:70:ff   D        ge-0/3/0.1104   
+   c4:6e:1f:d1:dd:7b   D        ge-0/2/9.1104   
+   c4:6e:1f:f6:9e:3d   D        ge-0/2/9.1104   
+   c4:e9:84:67:e4:a3   D        ge-0/2/9.1104   
+   c4:e9:84:67:ea:97   D        ge-0/2/9.1104   
+   c4:e9:84:67:f6:41   D        ge-0/2/9.1104   
+   e8:94:f6:e6:5f:df   D        ge-0/2/3.1104   
+   e8:94:f6:e6:5f:eb   D        ge-0/2/3.1104   
+   e8:94:f6:e6:ab:7d   D        ge-0/2/9.1104   
+   f4:f2:6d:9a:0c:0f   D        ge-0/2/3.1104   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-SWL2_FTTH_960_2
+ Bridging domain : __L2-SWL2_FTTH_960_2__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:07:72:4e:af:f2   D        ge-0/3/7.1104   
+   00:1d:aa:00:e1:7d   D        ge-0/2/3.1204   
+   00:1d:aa:36:3f:e0   D        ge-7/2/1.1104   
+   00:1d:aa:81:bd:61   D        ge-0/2/8.1104   
+   00:1d:aa:84:c7:b6   D        ge-7/2/2.1104   
+   00:1d:aa:84:e2:7d   D        ge-0/2/6.1104   
+   00:1d:aa:84:e3:ed   D        ge-7/2/1.1104   
+   00:1d:aa:86:5c:4d   D        ge-0/2/6.1104   
+   00:1d:aa:89:35:5a   D        ge-0/2/6.1104   
+   00:1d:aa:89:35:5d   D        ge-0/2/4.1104   
+   00:1d:aa:89:37:c2   D        ge-0/3/1.1304   
+   00:1d:aa:89:3a:71   D        ge-7/2/1.1104   
+   00:1d:aa:89:3a:f1   D        ge-0/3/1.1204   
+   00:1d:aa:89:3e:2a   D        ge-0/2/8.1104   
+   00:1d:aa:89:fe:b5   D        ge-0/3/1.1204   
+   00:1d:aa:89:fe:fd   D        ge-0/2/4.1104   
+   00:1d:aa:8a:0f:55   D        ge-0/2/6.1104   
+   00:1d:aa:8a:11:b9   D        ge-7/2/1.1104   
+   00:1d:aa:8b:8e:89   D        ge-0/2/6.1104   
+   00:1d:aa:8c:0a:85   D        ge-0/2/6.1104   
+   00:1d:aa:8c:0d:30   D        ge-0/3/1.1204   
+   00:1d:aa:8c:0d:31   D        ge-0/3/1.1204   
+   00:1d:aa:8c:10:cd   D        ge-0/2/6.1104   
+   00:1d:aa:8c:13:ed   D        ge-0/2/6.1104   
+   00:1d:aa:8c:31:51   D        ge-0/2/6.1104   
+   00:1d:aa:8c:34:a9   D        ge-0/2/6.1104   
+   00:1d:aa:8c:3c:bd   D        ge-0/2/6.1104   
+   00:1d:aa:8c:3c:ee   D        ge-0/2/6.1104   
+   00:1d:aa:8c:3d:9d   D        ge-0/2/4.1104   
+   00:1d:aa:8e:05:0d   D        ge-0/2/6.1104   
+   00:1d:aa:8e:06:85   D        ge-0/2/8.1104   
+   00:1d:aa:8e:07:19   D        ge-7/2/2.1104   
+   00:1d:aa:8e:10:9d   D        ge-0/3/7.1104   
+   00:1d:aa:bb:2c:d1   D        ge-0/2/4.1104   
+   00:1d:aa:c8:12:a9   D        ge-0/3/1.1104   
+   00:1d:aa:e7:cf:b9   D        ge-7/2/2.1104   
+   00:1d:aa:eb:e6:69   D        ge-7/2/2.1104   
+   00:1d:aa:eb:e6:6a   D        ge-7/2/2.1104   
+   00:1d:aa:ec:b1:c2   D        ge-0/3/1.1104   
+   00:50:7f:62:44:b1   D        ge-0/2/4.1104   
+   00:50:7f:72:7f:49   D        ge-0/2/8.1104   
+   00:50:7f:c7:6d:65   D        ge-0/3/1.1204   
+   00:50:7f:c7:6f:6d   D        ge-7/2/2.1104   
+   00:50:7f:c8:74:15   D        ge-7/2/1.1104   
+   00:50:7f:c8:a1:05   D        ge-7/2/2.1104   
+   00:50:7f:c8:eb:cd   D        ge-0/3/1.1204   
+   00:50:7f:c8:ec:5d   D        ge-7/2/2.1104   
+   00:50:7f:cb:b7:f9   D        ge-0/3/1.1104   
+   00:50:7f:e0:9b:b6   D        ge-0/2/8.1104   
+   00:50:7f:e1:6e:49   D        ge-7/2/1.1104   
+   00:50:7f:e2:4d:01   D        ge-7/2/1.1104   
+   0c:d7:46:a9:d1:29   D        ge-0/2/4.1104   
+   10:30:47:79:7b:bd   D        ge-7/2/2.1104   
+   10:56:ca:0e:23:6e   D        ge-0/2/8.1104   
+   10:56:ca:0e:23:71   D        ge-0/2/8.1104   
+   30:b5:c2:75:56:85   D        ge-0/2/6.1104   
+   30:b5:c2:a9:80:e9   D        ge-0/2/4.1104   
+   30:b5:c2:a9:82:b1   D        ge-0/3/7.1104   
+   30:b5:c2:a9:88:cf   D        ge-7/2/2.1104   
+   30:b5:c2:a9:a0:0f   D        ge-0/3/7.1104   
+   30:b5:c2:a9:a0:23   D        ge-0/3/7.1104   
+   30:b5:c2:a9:a1:fb   D        ge-0/3/7.1204   
+   30:b5:c2:a9:a2:0b   D        ge-0/3/7.1204   
+   30:b5:c2:a9:c7:2d   D        ge-0/3/7.1104   
+   30:b5:c2:a9:c8:e5   D        ge-0/2/4.1304   
+   30:b5:c2:a9:ca:af   D        ge-0/3/7.1104   
+   30:b5:c2:a9:d8:49   D        ge-0/2/8.1104   
+   30:b6:4f:32:17:ce   D        lsi.1048580     
+   40:b8:9a:c7:37:f3   D        ge-0/3/1.1104   
+   60:e3:27:6e:e0:a5   D        ge-0/3/7.1104   
+   60:e3:27:6e:e2:8d   D        ge-0/3/7.1104   
+   60:e3:27:6e:e3:fd   D        ge-0/3/1.1304   
+   60:e3:27:6e:e6:c7   D        ge-0/3/7.1204   
+   60:e3:27:6e:e8:83   D        ge-0/3/7.1104   
+   60:e3:27:6e:eb:b7   D        ge-0/2/4.1304   
+   60:e3:27:6e:ec:b9   D        ge-0/3/7.1204   
+   78:44:76:24:5a:20   D        ge-7/2/2.1104   
+   78:44:76:34:32:56   D        ge-0/3/7.1104   
+   78:44:76:34:3b:72   D        ge-0/3/1.1204   
+   78:44:76:34:49:66   D        ge-7/2/2.1104   
+   78:44:76:34:4c:c6   D        ge-0/2/8.1104   
+   78:44:76:3e:72:ab   D        ge-0/2/4.1104   
+   78:44:76:3e:77:0b   D        ge-7/2/2.1104   
+   78:44:76:3e:78:37   D        ge-0/2/6.1104   
+   78:44:76:3e:79:07   D        ge-7/2/2.1104   
+   78:44:76:3e:7b:9f   D        ge-0/3/7.1104   
+   78:44:76:3e:7e:db   D        ge-0/3/7.1104   
+   78:44:76:3e:7f:77   D        ge-0/2/8.2104   
+   78:44:76:3e:83:9b   D        ge-7/2/2.1104   
+   78:44:76:3e:85:7f   D        ge-0/3/1.1104   
+   78:44:76:3e:86:13   D        ge-0/2/4.1104   
+   78:44:76:3e:87:f7   D        ge-7/2/2.1104   
+   78:44:76:3e:8b:3b   D        ge-0/3/1.1104   
+   78:44:76:3e:ed:07   D        ge-0/3/7.1104   
+   78:44:76:3e:f3:db   D        ge-0/3/7.1104   
+   78:44:76:3f:9e:27   D        ge-0/3/7.1104   
+   78:44:76:3f:ae:a7   D        ge-0/3/7.1104   
+   78:44:76:3f:bc:43   D        ge-7/2/2.1104   
+   78:44:76:3f:bd:0b   D        ge-7/2/2.1104   
+   78:44:76:3f:c2:bf   D        ge-0/3/1.1104   
+   78:44:76:45:8e:e0   D        ge-7/2/2.1104   
+   78:44:76:45:94:b4   D        ge-0/2/4.1104   
+   78:44:76:45:99:3c   D        ge-7/2/2.1104   
+   78:44:76:45:99:54   D        ge-0/3/7.1204   
+   78:44:76:45:9a:48   D        ge-0/2/8.2104   
+   78:44:76:49:b9:e4   D        ge-0/2/6.1104   
+   78:44:76:49:e9:28   D        ge-0/3/7.1104   
+   78:44:76:49:f0:9c   D        ge-0/2/6.1104   
+   78:44:76:4a:0d:d0   D        ge-0/2/9.5000   
+   78:44:76:4a:0d:d4   D        ge-0/2/4.1104   
+   78:44:76:4a:19:e4   D        ge-0/2/8.2104   
+   78:44:76:4a:21:fc   D        ge-7/2/1.1104   
+   78:44:76:4a:35:bc   D        ge-0/2/8.2104   
+   78:44:76:4a:73:e0   D        ge-7/2/1.1104   
+   78:44:76:4b:08:7c   D        ge-0/3/7.1104   
+   78:44:76:4b:b0:11   D        ge-0/2/8.2104   
+   78:44:76:4c:92:0c   D        ge-0/2/6.1104   
+   78:44:76:4c:d1:58   D        ge-0/2/6.1104   
+   78:44:76:4c:d7:40   D        ge-0/2/4.1104   
+   78:44:76:4c:da:54   D        ge-7/2/1.1104   
+   78:44:76:4c:e1:f4   D        ge-0/3/7.1104   
+   78:44:76:4c:e4:f8   D        ge-0/2/4.1104   
+   78:44:76:4c:e7:6e   D        ge-0/3/7.1204   
+   78:44:76:4c:e9:e6   D        ge-0/3/7.1204   
+   78:44:76:4c:ef:24   D        ge-0/2/6.1104   
+   78:44:76:4e:fb:16   D        ge-0/2/3.1204   
+   78:44:76:55:21:f8   D        ge-0/3/7.1104   
+   78:44:76:55:2e:ec   D        ge-0/3/7.1104   
+   78:44:76:55:37:fc   D        ge-0/3/7.1104   
+   78:44:76:55:45:40   D        ge-0/2/8.1104   
+   78:44:76:55:48:c4   D        ge-0/3/7.1104   
+   78:44:76:55:4a:5c   D        ge-0/2/4.1104   
+   78:44:76:55:4b:3c   D        ge-7/2/2.1104   
+   78:44:76:55:5d:7c   D        ge-0/3/7.1104   
+   78:44:76:55:60:9c   D        ge-0/3/7.1104   
+   78:44:76:55:62:a8   D        ge-0/2/4.1104   
+   78:44:76:81:96:c2   D        ge-0/3/7.1104   
+   78:44:76:91:79:b1   D        ge-0/3/7.1104   
+   78:44:76:91:7c:7d   D        ge-0/3/7.1104   
+   78:44:76:91:7f:f9   D        ge-0/3/7.1104   
+   78:44:76:91:83:a9   D        ge-0/3/7.1104   
+   78:44:76:91:8c:59   D        ge-0/3/7.1104   
+   78:44:76:91:8c:5d   D        ge-0/3/7.1104   
+   78:44:76:91:8d:01   D        ge-0/3/7.1104   
+   78:44:76:91:8f:d9   D        ge-0/3/7.1104   
+   78:44:76:91:96:55   D        ge-0/3/7.1104   
+   78:44:76:91:99:19   D        ge-0/3/7.1104   
+   78:44:76:91:9f:e9   D        ge-0/3/1.1104   
+   78:44:76:92:46:0d   D        ge-0/3/7.1204   
+   78:44:76:92:46:21   D        ge-0/3/1.1204   
+   78:44:76:95:c6:99   D        ge-0/2/6.1104   
+   78:44:76:95:cf:91   D        ge-0/2/4.1104   
+   78:44:76:99:29:95   D        ge-0/2/6.1104   
+   78:44:76:99:33:05   D        ge-0/3/1.1204   
+   78:44:76:99:39:15   D        ge-0/2/9.5000   
+   78:44:76:ad:1c:27   D        ge-7/2/1.1104   
+   78:44:76:af:30:01   D        ge-0/2/6.1104   
+   78:44:76:de:00:c1   D        ge-0/3/7.1204   
+   98:f1:70:9b:80:e3   D        ge-0/2/4.1104   
+   a4:5e:60:38:fe:83   D        ge-0/2/6.1104   
+   ac:3c:0b:b5:39:29   D        ge-0/2/6.1104   
+   c0:d3:c0:85:bc:4f   D        ge-0/3/1.1204   
+   c4:6e:1f:30:da:d5   D        ge-0/2/6.1104   
+   c4:6e:1f:30:dc:8b   D        ge-0/2/8.2104   
+   c4:6e:1f:30:e6:1b   D        ge-7/2/2.1104   
+   c4:6e:1f:30:eb:81   D        ge-0/2/9.5000   
+   c4:6e:1f:30:ec:2f   D        ge-7/2/2.1104   
+   c4:6e:1f:30:ed:8b   D        ge-7/2/1.1104   
+   c4:6e:1f:30:f8:ff   D        ge-0/2/9.5000   
+   c4:6e:1f:31:00:13   D        ge-0/2/9.5000   
+   c4:6e:1f:31:00:bb   D        ge-0/3/1.1104   
+   c4:6e:1f:31:01:a1   D        ge-0/2/4.1104   
+   c4:6e:1f:31:04:59   D        ge-0/3/7.1104   
+   c4:6e:1f:31:07:d9   D        ge-0/2/4.1304   
+   c4:6e:1f:31:0a:1b   D        ge-0/2/9.5000   
+   c4:6e:1f:31:0d:3d   D        ge-0/2/4.1304   
+   c4:6e:1f:31:0d:67   D        ge-0/2/9.5000   
+   c4:6e:1f:31:0f:0f   D        ge-0/2/9.5000   
+   c4:6e:1f:31:0f:4b   D        ge-0/3/1.1204   
+   c4:6e:1f:31:0f:5d   D        ge-0/3/7.1204   
+   c4:6e:1f:31:0f:7f   D        ge-0/3/7.1104   
+   c4:6e:1f:96:5f:97   D        ge-0/2/9.5000   
+   c4:6e:1f:b2:ac:0f   D        ge-7/2/2.1104   
+   c4:6e:1f:b2:b7:85   D        ge-0/2/4.1104   
+   c4:6e:1f:e9:3c:a7   D        ge-0/2/4.1304   
+   c4:6e:1f:e9:3c:ab   D        ge-0/2/4.1304   
+   c4:6e:1f:e9:3c:e9   D        ge-0/2/6.1104   
+   c4:6e:1f:e9:3c:ff   D        ge-0/2/3.1204   
+   c4:6e:1f:e9:5c:b5   D        ge-0/2/4.1304   
+   c4:6e:1f:f6:b5:59   D        ge-0/2/6.1104   
+   c4:6e:1f:f7:6e:7f   D        ge-0/2/8.2104   
+   c4:6e:1f:f7:74:91   D        ge-0/2/4.1104   
+   c4:6e:1f:f7:7b:17   D        ge-0/2/4.1104   
+   c4:6e:1f:f7:7b:25   D        ge-0/3/7.1104   
+   c4:6e:1f:f7:7b:57   D        ge-0/2/4.1104   
+   c4:6e:1f:f7:7c:c1   D        ge-0/3/1.1204   
+   c4:e9:84:62:19:c9   D        ge-0/2/4.1304   
+   c4:e9:84:62:1a:11   D        ge-7/2/2.1104   
+   c4:e9:84:62:28:97   D        ge-0/3/7.1104   
+   c4:e9:84:62:49:89   D        ge-0/2/4.1104   
+   c4:e9:84:62:4a:7f   D        ge-0/3/7.1104   
+   c4:e9:84:62:53:fd   D        ge-0/3/7.1104   
+   c4:e9:84:67:e9:a3   D        ge-0/3/7.1104   
+   c4:e9:84:67:ea:03   D        ge-0/3/1.1204   
+   c4:e9:84:67:f4:3b   D        ge-0/3/7.1204   
+   c4:e9:84:67:f4:93   D        ge-0/3/7.1204   
+   c4:e9:84:67:f4:a3   D        ge-7/3/5.1104   
+   c4:e9:84:67:f5:0f   D        ge-0/2/6.1104   
+   c4:e9:84:67:f5:3b   D        ge-0/2/1.1104   
+   c4:e9:84:67:f5:a5   D        ge-0/3/7.1204   
+   c4:e9:84:67:f5:f7   D        ge-0/3/7.1204   
+   c4:e9:84:67:f6:09   D        ge-0/2/1.1104   
+   c4:e9:84:67:f6:23   D        ge-0/3/7.1204   
+   c4:e9:84:67:f6:81   D        ge-0/2/1.1104   
+   c4:e9:84:67:f7:df   D        ge-0/3/1.1204   
+   c4:e9:84:67:f8:5f   D        ge-0/3/1.1204   
+   c4:e9:84:67:f8:8f   D        ge-0/3/1.1204   
+   c4:e9:84:67:f8:ff   D        ge-0/3/1.1204   
+   c4:e9:84:82:d1:69   D        ge-0/2/8.2104   
+   c4:e9:84:82:d1:73   D        ge-0/3/7.1104   
+   c4:e9:84:82:d1:7b   D        ge-0/3/7.1104   
+   c4:e9:84:82:d3:41   D        ge-0/2/4.1304   
+   c4:e9:84:a1:17:9f   D        ge-0/2/4.1304   
+   c4:e9:84:a1:1d:39   D        ge-0/2/4.1304   
+   c4:e9:84:a1:24:7d   D        ge-0/3/7.1104   
+   c4:e9:84:a1:25:57   D        ge-0/2/4.1304   
+   c4:e9:84:a1:2d:9d   D        ge-0/2/8.1104   
+   c4:e9:84:b9:51:5f   D        ge-0/3/1.1204   
+   c4:e9:84:b9:51:dd   D        ge-0/2/8.2104   
+   c4:e9:84:b9:51:f5   D        ge-0/3/1.1204   
+   c4:e9:84:b9:53:85   D        ge-0/2/4.1304   
+   c4:e9:84:b9:54:77   D        ge-0/3/7.1204   
+   c4:e9:84:b9:54:ed   D        ge-0/3/1.1204   
+   c4:e9:84:b9:81:25   D        ge-0/2/8.2104   
+   c4:e9:84:b9:8e:99   D        ge-0/3/1.1204   
+   c4:e9:84:b9:91:d3   D        ge-0/3/1.1204   
+   c4:e9:84:b9:95:5f   D        ge-0/3/1.1204   
+   c4:e9:84:b9:95:73   D        ge-0/3/1.1204   
+   c4:e9:84:b9:a3:cb   D        ge-0/3/1.1204   
+   c4:e9:84:b9:a5:21   D        ge-0/3/7.1104   
+   c4:e9:84:b9:ab:6f   D        ge-0/3/1.1204   
+   c4:e9:84:d2:73:1d   D        ge-0/2/8.2104   
+   c4:e9:84:d2:73:87   D        ge-0/2/8.2104   
+   c4:e9:84:d2:73:ad   D        ge-0/2/8.2104   
+   cc:2d:83:dd:d8:34   D        ge-0/3/7.1104   
+   e4:8d:8c:2b:50:fc   D        ge-7/2/2.1104   
+   e8:94:f6:e6:43:91   D        ge-0/3/7.1104   
+   e8:94:f6:e6:5f:d1   D        ge-0/2/6.1104   
+   e8:94:f6:e6:86:3b   D        ge-0/3/7.1104   
+   f4:f2:6d:99:fc:b5   D        ge-0/2/9.5000   
+   f4:f2:6d:9a:07:a9   D        ge-0/3/7.1104   
+   f4:f2:6d:9a:13:23   D        ge-0/2/4.1104   
+   f4:f2:6d:9a:19:1d   D        ge-0/3/7.1104   
+   f4:f2:6d:9a:1d:ab   D        ge-0/3/1.1304   
+   f4:f2:6d:9a:21:d3   D        ge-0/3/1.1304   
+   f4:f2:6d:9a:37:c3   D        ge-7/2/2.1104   
+   f4:f2:6d:9a:38:fb   D        ge-0/3/1.1204   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-SWL2_FTTH_QINQ_MAN_960_2
+ Bridging domain : __L2-SWL2_FTTH_QINQ_MAN_960_2__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   10:56:ca:0e:23:6f   D        ge-7/2/2.1204   
+   30:b6:4f:32:17:c4   D        lsi.1048579     
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-SWL2_FTTH_W03
+ Bridging domain : __L2-SWL2_FTTH_W03__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:1d:aa:5e:20:71   D        ge-7/2/8.1214   
+   00:1d:aa:84:e1:89   D        ge-7/2/8.1214   
+   00:1d:aa:89:34:f1   D        ge-7/2/8.1304   
+   00:1d:aa:8a:14:f9   D        ge-7/2/8.1304   
+   00:1d:aa:8c:08:f1   D        ge-7/2/8.1304   
+   00:1d:aa:8c:0f:d9   D        ge-7/2/8.1304   
+   00:1d:aa:8c:36:c1   D        ge-7/2/8.1304   
+   00:1d:aa:8c:81:16   D        ge-7/2/8.1304   
+   00:50:7f:3c:2f:f9   D        ge-7/2/8.1304   
+   00:50:7f:c7:6f:01   D        ge-7/2/8.1304   
+   00:50:7f:e1:38:f2   D        ge-7/2/8.1304   
+   00:50:7f:e1:8d:d5   D        ge-7/2/8.1304   
+   00:50:7f:e2:4d:39   D        ge-7/2/8.1214   
+   30:b5:c2:a9:8d:f5   D        ge-7/2/8.1304   
+   30:b6:4f:32:17:ce   D        lsi.1048578     
+   60:e3:27:6e:e1:a9   D        ge-7/2/8.1214   
+   78:44:76:34:3a:7e   D        ge-7/2/8.1214   
+   78:44:76:45:95:88   D        ge-7/2/8.1214   
+   78:44:76:48:f7:58   D        ge-7/2/8.1304   
+   78:44:76:4c:53:30   D        ge-7/2/8.1214   
+   78:44:76:4c:da:00   D        ge-7/2/8.1214   
+   78:44:76:4c:dd:5c   D        ge-7/2/8.1214   
+   78:44:76:af:43:9f   D        ge-7/2/8.1304   
+   84:16:f9:46:70:3f   D        ge-7/2/8.1304   
+   c4:6e:1f:31:0f:6d   D        ge-7/2/8.1304   
+   c4:6e:1f:96:70:a1   D        ge-7/2/8.1304   
+   c4:6e:1f:b2:b7:c7   D        ge-7/2/8.1304   
+   c4:e9:84:62:28:af   D        ge-7/2/8.1214   
+   c4:e9:84:b9:50:6d   D        ge-7/2/8.1214   
+   f4:f2:6d:9a:38:e9   D        ge-7/2/8.1304   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-SWL2_LAG1_DATHANH
+ Bridging domain : __L2-SWL2_LAG1_DATHANH__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:0b:82:9a:58:ac   D        ge-0/2/6.3614   
+   1c:6a:7a:af:bc:d2   D        ge-0/3/1.3614   
+   28:93:fe:ab:cb:58   D        ge-0/2/6.3614   
+   32:b6:4f:32:11:46   D        lsi.1048577     
+   d4:8c:b5:c5:87:e0   D        ge-0/3/1.3614   
+   f4:b5:49:f1:5a:ea   D        ge-0/2/9.3614   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-SWL2_NMS
+ Bridging domain : __L2-SWL2_NMS__, VLAN : NA
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   00:0b:04:12:cf:35   D        ge-0/3/7.3996   
+   00:0b:04:12:dc:4a   D        ge-0/3/1.3996   
+   00:0b:04:12:dc:85   D        lsi.1048576     
+   00:0b:04:12:dc:8d   D        ge-0/3/1.3996   
+   00:0b:04:12:dc:90   D        ge-0/2/8.3996   
+   00:12:cf:19:a6:e0   D        ge-0/3/0.3996   
+   00:12:cf:69:7a:60   D        ge-0/3/7.3996   
+   00:12:cf:69:9b:80   D        ge-0/2/3.3996   
+   00:12:cf:6f:20:00   D        ge-0/2/9.3996   
+   00:d0:cb:2a:9f:f3   D        lsi.1048576     
+   00:d0:cb:2a:9f:fb   D        lsi.1048576     
+   00:d0:cb:f4:0b:26   D        ge-0/2/6.3996   
+   00:d0:cb:f4:a7:28   D        ge-0/2/6.3996   
+   00:e0:b1:dc:84:53   D        lsi.1048576     
+   00:e0:b1:dc:9a:82   D        lsi.1048576     
+   04:f9:38:94:89:a1   D        lsi.1048576     
+   04:f9:38:94:89:ae   D        lsi.1048576     
+   04:f9:38:94:89:b0   D        lsi.1048576     
+   04:f9:38:94:89:b6   D        lsi.1048576     
+   04:f9:38:94:89:e1   D        lsi.1048576     
+   04:f9:38:94:89:e4   D        lsi.1048576     
+   04:f9:38:94:89:ef   D        lsi.1048576     
+   04:f9:38:94:89:f5   D        lsi.1048576     
+   04:f9:38:e5:e3:13   D        lsi.1048576     
+   04:f9:38:e5:e3:17   D        lsi.1048576     
+   04:f9:38:e5:e3:1e   D        lsi.1048576     
+   04:f9:38:e5:e3:24   D        lsi.1048576     
+   04:f9:38:e5:e3:29   D        lsi.1048576     
+   04:f9:38:e5:e3:2a   D        lsi.1048576     
+   04:f9:38:e5:e3:2d   D        lsi.1048576     
+   04:f9:38:e5:e3:31   D        lsi.1048576     
+   04:f9:38:e5:e3:38   D        lsi.1048576     
+   04:f9:38:e5:e3:39   D        lsi.1048576     
+   04:f9:38:e5:e3:3c   D        lsi.1048576     
+   04:f9:38:e5:e3:3d   D        lsi.1048576     
+   04:f9:38:e5:e3:43   D        lsi.1048576     
+   04:f9:38:e5:e3:47   D        lsi.1048576     
+   04:f9:38:e5:e3:4d   D        lsi.1048576     
+   04:f9:38:e5:e3:4e   D        lsi.1048576     
+   04:f9:38:e5:e3:51   D        lsi.1048576     
+   04:f9:38:e5:e3:61   D        lsi.1048576     
+   04:f9:38:e5:e3:6c   D        lsi.1048576     
+   08:19:a6:98:ae:ca   D        lsi.1048576     
+   08:19:a6:98:ae:d2   D        ge-7/3/5.3996   
+   08:19:a6:98:ae:d5   D        ge-0/2/8.3996   
+   08:19:a6:98:ae:e1   D        ge-7/2/1.3996   
+   08:19:a6:98:af:1a   D        lsi.1048576     
+   18:d0:71:07:97:0c   D        ge-0/2/9.3996   
+   18:d0:71:0a:b4:f8   D        ge-0/2/4.3996   
+   18:d0:71:0e:dc:6c   D        ge-0/3/1.3996   
+   18:d0:71:0f:30:7d   D        ge-0/3/7.3996   
+   18:d0:71:0f:30:b4   D        ge-7/2/8.3996   
+   3c:df:1e:d8:72:81   D        lsi.1048576     
+   3c:df:1e:d8:72:ec   D        lsi.1048576     
+   48:46:fb:dc:93:1e   D        lsi.1048576     
+   48:46:fb:dc:93:28   D        ge-0/3/1.3996   
+   48:46:fb:dc:93:31   D        lsi.1048576     
+   48:46:fb:dc:93:48   D        lsi.1048576     
+   48:46:fb:dc:93:53   D        lsi.1048576     
+   48:46:fb:dc:93:59   D        lsi.1048576     
+   48:46:fb:dc:93:5a   D        lsi.1048576     
+   48:46:fb:dc:93:6d   D        ge-7/2/8.3996   
+   48:46:fb:dc:93:71   D        lsi.1048576     
+   48:46:fb:dc:93:7d   D        lsi.1048576     
+   48:46:fb:dc:93:84   D        lsi.1048576     
+   48:46:fb:dc:93:8a   D        lsi.1048576     
+   48:46:fb:dc:93:8c   D        lsi.1048576     
+   48:46:fb:dc:93:94   D        lsi.1048576     
+   48:46:fb:dc:93:98   D        ge-0/2/4.3996   
+   48:46:fb:dc:93:9b   D        lsi.1048576     
+   48:62:76:01:21:4e   D        lsi.1048576     
+   48:62:76:01:21:56   D        lsi.1048576     
+   48:62:76:01:21:58   D        lsi.1048576     
+   48:62:76:01:21:59   D        lsi.1048576     
+   48:62:76:01:21:5f   D        lsi.1048576     
+   48:62:76:01:21:67   D        lsi.1048576     
+   48:62:76:01:21:68   D        ae8.3996        
+   48:62:76:01:21:69   D        lsi.1048576     
+   48:62:76:01:21:6b   D        ge-0/2/4.3996   
+   48:62:76:01:21:6e   D        lsi.1048576     
+   48:62:76:01:21:74   D        lsi.1048576     
+   48:62:76:01:21:7e   D        lsi.1048576     
+   48:62:76:01:21:84   D        lsi.1048576     
+   48:62:76:01:21:87   D        lsi.1048576     
+   48:62:76:01:21:88   D        lsi.1048576     
+   48:62:76:01:21:8d   D        lsi.1048576     
+   48:62:76:01:21:90   D        lsi.1048576     
+   e0:24:7f:1b:6c:80   D        ge-0/3/7.3996   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-VLAN-2602
+ Bridging domain : __L2-VLAN-2602__, VLAN : none
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   60:a8:fe:67:9e:23   D        ge-0/3/7.2602   
+   60:a8:fe:67:a8:03   D        ge-0/2/4.2602   
+   60:a8:fe:67:ae:93   D        ge-0/2/4.2602   
+   60:a8:fe:67:ae:c3   D        ge-7/2/8.2602   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-VLAN-2654
+ Bridging domain : __L2-VLAN-2654__, VLAN : none
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   d8:ef:cd:25:df:39   D        ge-0/2/4.2654   
+   d8:ef:cd:7a:eb:79   D        ae8.2654        
+   d8:ef:cd:7e:0c:99   D        ge-7/3/5.2654   
+   d8:ef:cd:7e:0c:d9   D        ae8.2654        
+   d8:ef:cd:80:b7:b9   D        ge-0/2/8.2654   
+   d8:ef:cd:80:b8:e9   D        ae8.2654        
+   d8:ef:cd:87:17:59   D        ge-0/2/8.2654   
+   d8:ef:cd:87:1f:69   D        ge-7/3/5.2654   
+   d8:ef:cd:87:27:99   D        ge-0/2/8.2654   
+   d8:ef:cd:8c:17:e9   D        ge-7/3/5.2654   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-VLAN-2704
+ Bridging domain : __L2-VLAN-2704__, VLAN : none
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   d8:ef:cd:25:df:39   D        ge-0/2/4.2704   
+   d8:ef:cd:7a:eb:79   D        ae8.2704        
+   d8:ef:cd:7e:0c:99   D        ge-7/3/5.2704   
+   d8:ef:cd:7e:0c:d9   D        ae8.2704        
+   d8:ef:cd:80:b7:b9   D        ge-0/2/8.2704   
+   d8:ef:cd:80:b8:e9   D        ae8.2704        
+   d8:ef:cd:87:17:59   D        ge-0/2/8.2704   
+   d8:ef:cd:87:1f:69   D        ge-7/3/5.2704   
+   d8:ef:cd:87:27:99   D        ge-0/2/8.2704   
+   d8:ef:cd:8c:17:e9   D        ge-7/3/5.2704   
+
+MAC flags       (S -static MAC, D -dynamic MAC, L -locally learned, C -Control MAC
+    O -OVSDB MAC, SE -Statistics enabled, NM -Non configured MAC, R -Remote PE MAC)
+
+Routing instance : L2-VLAN-2754
+ Bridging domain : __L2-VLAN-2754__, VLAN : none
+   MAC                 MAC      Logical          NH     RTR
+   addresssss          flags    interface        Index  ID
+   d8:ef:cd:25:df:39   D        ge-0/2/4.2754   
+   d8:ef:cd:7a:eb:79   D        ae8.2754        
+   d8:ef:cd:7e:0c:99   D        ge-7/3/5.2754   
+   d8:ef:cd:7e:0c:d9   D        ae8.2754        
+   d8:ef:cd:80:b7:b9   D        ge-0/2/8.2754   
+   d8:ef:cd:80:b8:e9   D        ae8.2754        
+   d8:ef:cd:87:17:59   D        ge-0/2/8.2754   
+   d8:ef:cd:87:1f:69   D        ge-7/3/5.2754   
+   d8:ef:cd:87:27:99   D        ge-0/2/8.2754   
+   d8:ef:cd:8c:17:e9   D        ge-7/3/5.2754   
+
+{master}
+admin@MX960-LDG01DTH_RE0> show route instance detail | find L3- 
+L3-Abis-L3-VNP:
+  Router ID: 0.0.0.0
+  Type: vrf               State: Active        
+  Interfaces:
+    lsi.0
+  Route-distinguisher: 65061:2074805014
+  Vrf-import: [ PS-IMP-Abis-L3-VNP ]
+  Vrf-export: [ PS-EXP-Abis-L3-VNP ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-Abis-L3-VNP.inet.0  : 8 routes (3 active, 0 holddown, 0 hidden)
+
+L3-ENODEB-OAM:
+  Router ID: 10.215.107.65
+  Type: vrf               State: Active        
+  Interfaces:
+    irb.2754
+    lsi.1
+  Route-distinguisher: 65061:2074808014
+  Vrf-import: [ PS-IMP-ENODEB-OAM ]
+  Vrf-export: [ PS-EXP-ENODEB-OAM ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-ENODEB-OAM.inet.0   : 52 routes (26 active, 0 holddown, 0 hidden)
+
+L3-ENODEB-SERVICE:
+  Router ID: 10.209.79.33
+  Type: vrf               State: Active        
+  Interfaces:
+    irb.2804
+    irb.2704
+    lsi.2
+  Route-distinguisher: 65061:2074807014
+  Vrf-import: [ PS-IMP-ENODEB-SERVICE ]
+  Vrf-export: [ PS-EXP-ENODEB-SERVICE ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-ENODEB-SERVICE.inet.0: 86 routes (44 active, 0 holddown, 0 hidden)
+
+L3-IUB-3G-L3-VNP:
+  Router ID: 10.209.43.33
+  Type: vrf               State: Active        
+  Interfaces:
+    irb.2654
+    irb.2602
+    lsi.3
+  Route-distinguisher: 65061:2074801014
+  Vrf-import: [ PS-IMP-IUB-3G-L3-VNP ]
+  Vrf-export: [ PS-EXP-IUB-3G-L3-VNP ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-IUB-3G-L3-VNP.inet.0: 31 routes (25 active, 0 holddown, 0 hidden)
+
+L3-OAM-3G-L3-VNP:
+  Router ID: 0.0.0.0
+  Type: vrf               State: Active        
+  Interfaces:
+    lsi.4
+  Route-distinguisher: 65061:2074802014
+  Vrf-import: [ PS-IMP-OAM-3G-L3-VNP ]
+  Vrf-export: [ PS-EXP-OAM-3G-L3-VNP ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-OAM-3G-L3-VNP.inet.0: 8 routes (3 active, 0 holddown, 0 hidden)
+
+L3-TSLCD-HUB-BX-BOCONGAN-2998:
+  Router ID: 10.224.133.1
+  Type: vrf               State: Active        
+  Interfaces:
+    irb.3157
+    lsi.5
+  Route-distinguisher: 65061:2242023007
+  Vrf-import: [ PS-IMP-TSLCD-HUB-BX-BOCONGAN-2998 ]
+  Vrf-export: [ PS-EXP-TSLCD-HUB-BX-BOCONGAN-2998 ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-TSLCD-HUB-BX-BOCONGAN-2998.inet.0: 2 routes (2 active, 0 holddown, 0 hidden)
+
+L3-TSLCD-KHOICHINHQUYEN-2990:
+  Router ID: 10.224.19.1
+  Type: vrf               State: Active        
+  Interfaces:
+    irb.4003
+    irb.4001
+    lsi.6
+  Route-distinguisher: 65061:2242023001
+  Vrf-import: [ PS-IMP-TSLCD-KHOICHINHQUYEN-2990 ]
+  Vrf-export: [ PS-EXP-TSLCD-KHOICHINHQUYEN-2990 ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-TSLCD-KHOICHINHQUYEN-2990.inet.0: 8 routes (6 active, 0 holddown, 0 hidden)
+
+L3-VPRN-306100004:
+  Description: VPRN-306100004,DBSCLBANK-NT-LDG (MHB)-NEW BIDV                  
+  Router ID: 172.32.178.33
+  Type: vrf               State: Active        
+  Interfaces:
+    ge-0/2/4.1855
+    lsi.7
+  Route-distinguisher: 65061:201400004
+  Vrf-import: [ PS-IMP-VPRN-306100004 ]
+  Vrf-export: [ PS-EXP-VPRN-306100004 ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-VPRN-306100004.inet.0: 14 routes (8 active, 0 holddown, 0 hidden)
+
+L3-VPRN-306100015:
+  Description: BTC/KBNN QUAN-HUYEN-LDG,Kho bac nha nuoc Lac Duong, LDG-GE-4M   
+  Router ID: 172.19.205.17
+  Type: vrf               State: Active        
+  Interfaces:
+    ge-0/3/1.1896
+    lsi.8
+  Route-distinguisher: 65061:201400015
+  Vrf-import: [ PS-IMP-VPRN-306100015 ]
+  Vrf-export: [ PS-EXP-VPRN-306100015 ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-VPRN-306100015.inet.0: 4 routes (3 active, 0 holddown, 0 hidden)
+
+L3-VPRN-306100018:
+  Description: BTC/CT-CCTHUE-LDG Lac Duong- GE4M M630002                       
+  Router ID: 172.19.76.169
+  Type: vrf               State: Active        
+  Interfaces:
+    ge-0/3/1.1913
+    lsi.9
+  Route-distinguisher: 65061:201400018
+  Vrf-import: [ PS-IMP-VPRN-306100018 ]
+  Vrf-export: [ PS-EXP-VPRN-306100018 ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-VPRN-306100018.inet.0: 4 routes (3 active, 0 holddown, 0 hidden)
+
+L3-VPRN-306100020:
+  Description: VPRN-306100020,AGRIBANK-LAMDONG-NT- DA LAT                      
+  Router ID: 172.30.133.29
+  Type: vrf               State: Active        
+  Interfaces:
+    ge-7/3/5.1440
+    lsi.10
+  Route-distinguisher: 65061:201400020
+  Vrf-import: [ PS-IMP-VPRN-306100020 ]
+  Vrf-export: [ PS-EXP-VPRN-306100020 ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-VPRN-306100020.inet.0: 10 routes (6 active, 0 holddown, 0 hidden)
+
+L3-VPRN-311005514:
+  Description: ##NMS CPE##                                                     
+  Router ID: 172.18.176.161
+  Type: vrf               State: Active        
+  Interfaces:
+    ae6.4002
+    ae5.4002
+    ae4.4002
+    ae3.4002
+    lsi.11
+  Route-distinguisher: 65061:1100550014
+  Vrf-import: [ PS-IMP-VPRN-311005514 ]
+  Vrf-export: [ PS-EXP-VPRN-311005514 ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-VPRN-311005514.inet.0: 16 routes (14 active, 0 holddown, 0 hidden)
+
+L3-VoD-LDG:
+  Router ID: 10.48.128.1
+  Type: vrf               State: Active        
+  Interfaces:
+    ge-7/3/5.2404
+    ge-7/3/1.2404
+    ge-7/3/0.2404
+    ge-7/2/9.2404
+    ge-7/2/8.2404
+    ge-7/2/7.2404
+    ge-7/2/6.2404
+    ge-7/2/5.2404
+    ge-7/2/4.2404
+    ge-7/2/2.2404
+    ge-7/2/1.2404
+    ge-0/3/7.2404
+    ge-0/3/1.2404
+    ge-0/3/0.2404
+    ge-0/2/6.2404
+    ge-0/2/4.2404
+    ge-0/2/3.2404
+    ge-0/2/2.2404
+    ge-0/2/1.2404
+    ge-0/2/9.2404
+    ge-0/2/8.2404
+    lo0.2404
+    ae6.2404
+    ae5.2404
+    ae4.2404
+    ae3.2404
+    lsi.12
+  Route-distinguisher: 65061:2099801014
+  Vrf-import: [ PS-IMP-VoD-LDG ]
+  Vrf-export: [ PS-EXP-VoD-LDG ]
+  Fast-reroute-priority: low
+  Tables:
+    L3-VoD-LDG.inet.0      : 43 routes (32 active, 0 holddown, 0 hidden)
+
+__juniper_private1__:
+  Router ID: 0.0.0.0
+  Type: forwarding        State: Active        
+  Interfaces:
+    pfh-7/0/0.16383
+    pfe-7/2/0.16383
+    pfe-7/0/0.16383
+    pfh-0/0/0.16383
+    pfe-0/2/0.16383
+    pfe-0/0/0.16383
+    lo0.16385
+    em1.0
+    em0.0
+  Tables:
+    __juniper_private1__.inet.0: 9 routes (5 active, 0 holddown, 0 hidden)
+    __juniper_private1__.inet6.0: 5 routes (4 active, 0 holddown, 0 hidden)
+
+__juniper_private2__:
+  Router ID: 0.0.0.0
+  Type: forwarding        State: Active        
+  Interfaces:
+    pfh-7/0/0.16384
+    pfh-0/0/0.16384
+    lo0.16384
+  Tables:
+    __juniper_private2__.inet.0: 1 routes (0 active, 0 holddown, 1 hidden)
+
+__juniper_private4__:
+  Router ID: 0.0.0.0
+  Type: forwarding        State: Active        
+
+__master.anon__:
+  Router ID: 0.0.0.0
+  Type: forwarding        State: Active        
+
+{master}
+admin@MX960-LDG01DTH_RE0> show arp 
+MAC Address       Address         Name                      Interface               Flags
+02:01:00:00:00:05 10.0.0.5        10.0.0.5                  em1.0                   none
+30:f3:1d:80:ac:c3 10.48.136.67    10.48.136.67              ae6.2404                permanent
+a0:65:18:07:d6:41 10.48.136.146   10.48.136.146             ae5.2404                permanent
+10:4f:a8:6d:a2:20 10.48.137.70    10.48.137.70              ae4.2404                permanent
+1c:77:f6:c3:63:ac 10.48.139.8     10.48.139.8               ae4.2404                permanent
+a0:65:18:26:f9:fa 10.48.139.87    10.48.139.87              ae4.2404                permanent
+a0:65:18:07:d5:33 10.48.141.232   10.48.141.232             ae3.2404                permanent
+a0:65:18:07:da:3b 10.48.142.126   10.48.142.126             ae4.2404                permanent
+a0:65:18:26:cd:99 10.48.144.36    10.48.144.36              ae4.2404                permanent
+a0:65:18:26:f9:92 10.48.145.200   10.48.145.200             ae4.2404                permanent
+a0:65:18:26:b2:d5 10.48.151.55    10.48.151.55              ae3.2404                permanent
+90:d8:f3:6b:eb:ef 10.48.152.130   10.48.152.130             ae5.2404                permanent
+a0:65:18:07:db:db 10.48.154.102   10.48.154.102             ae3.2404                permanent
+d0:15:4a:da:50:e9 10.48.154.190   10.48.154.190             ae4.2404                permanent
+00:26:ed:55:e8:ba 10.48.158.50    10.48.158.50              ae5.2404                permanent
+30:f3:1d:88:93:90 10.48.159.9     10.48.159.9               ae3.2404                permanent
+3c:da:2a:ba:ef:7a 10.48.159.66    10.48.159.66              ge-0/2/2.2404           permanent
+00:07:67:40:fd:e2 10.48.159.175   10.48.159.175             ge-7/3/1.2404           permanent
+a0:65:18:07:d6:20 10.48.159.202   10.48.159.202             ae4.2404                permanent
+00:26:ed:37:fe:d3 10.48.159.251   10.48.159.251             ge-0/2/2.2404           permanent
+ca:e7:f0:57:18:21 10.61.0.162     10.61.0.162               ae2.0                   none
+00:18:82:b0:ee:13 10.123.0.1      10.123.0.1                fxp0.0                  none
+60:a8:fe:67:9e:23 10.209.43.36    10.209.43.36              irb.2602 [ge-0/3/7.2602] none
+60:a8:fe:67:a8:03 10.209.43.52    10.209.43.52              irb.2602 [ge-0/2/4.2602] none
+60:a8:fe:67:ae:93 10.209.43.53    10.209.43.53              irb.2602 [ge-0/2/4.2602] none
+60:a8:fe:67:ae:c3 10.209.43.55    10.209.43.55              irb.2602 [ge-7/2/8.2602] none
+d8:ef:cd:80:b8:e9 10.209.85.50    10.209.85.50              irb.2654 [ae8.2654]     none
+d8:ef:cd:87:27:99 10.209.85.51    10.209.85.51              irb.2654 [ge-0/2/8.2654] none
+d8:ef:cd:87:17:59 10.209.85.52    10.209.85.52              irb.2654 [ge-0/2/8.2654] none
+d8:ef:cd:7a:eb:79 10.209.85.53    10.209.85.53              irb.2654 [ae8.2654]     none
+d8:ef:cd:87:1f:69 10.209.85.54    10.209.85.54              irb.2654 [ge-7/3/5.2654] none
+d8:ef:cd:80:b7:b9 10.209.85.55    10.209.85.55              irb.2654 [ge-0/2/8.2654] none
+d8:ef:cd:7e:0c:99 10.209.85.56    10.209.85.56              irb.2654 [ge-7/3/5.2654] none
+d8:ef:cd:7e:0c:d9 10.209.85.57    10.209.85.57              irb.2654 [ae8.2654]     none
+d8:ef:cd:25:df:39 10.209.85.58    10.209.85.58              irb.2654 [ge-0/2/4.2654] none
+d8:ef:cd:8c:17:e9 10.209.85.59    10.209.85.59              irb.2654 [ge-7/3/5.2654] none
+d8:ef:cd:80:b8:e9 10.215.75.66    10.215.75.66              irb.2704 [ae8.2704]     none
+d8:ef:cd:87:27:99 10.215.75.67    10.215.75.67              irb.2704 [ge-0/2/8.2704] none
+d8:ef:cd:87:17:59 10.215.75.68    10.215.75.68              irb.2704 [ge-0/2/8.2704] none
+d8:ef:cd:7a:eb:79 10.215.75.69    10.215.75.69              irb.2704 [ae8.2704]     none
+d8:ef:cd:87:1f:69 10.215.75.70    10.215.75.70              irb.2704 [ge-7/3/5.2704] none
+d8:ef:cd:80:b7:b9 10.215.75.71    10.215.75.71              irb.2704 [ge-0/2/8.2704] none
+d8:ef:cd:7e:0c:99 10.215.75.72    10.215.75.72              irb.2704 [ge-7/3/5.2704] none
+d8:ef:cd:7e:0c:d9 10.215.75.73    10.215.75.73              irb.2704 [ae8.2704]     none
+d8:ef:cd:25:df:39 10.215.75.74    10.215.75.74              irb.2704 [ge-0/2/4.2704] none
+d8:ef:cd:8c:17:e9 10.215.75.75    10.215.75.75              irb.2704 [ge-7/3/5.2704] none
+d8:ef:cd:80:b8:e9 10.215.107.66   10.215.107.66             irb.2754 [ae8.2754]     none
+d8:ef:cd:87:27:99 10.215.107.67   10.215.107.67             irb.2754 [ge-0/2/8.2754] none
+d8:ef:cd:87:17:59 10.215.107.68   10.215.107.68             irb.2754 [ge-0/2/8.2754] none
+d8:ef:cd:7a:eb:79 10.215.107.69   10.215.107.69             irb.2754 [ae8.2754]     none
+d8:ef:cd:87:1f:69 10.215.107.70   10.215.107.70             irb.2754 [ge-7/3/5.2754] none
+d8:ef:cd:80:b7:b9 10.215.107.71   10.215.107.71             irb.2754 [ge-0/2/8.2754] none
+d8:ef:cd:7e:0c:99 10.215.107.72   10.215.107.72             irb.2754 [ge-7/3/5.2754] none
+d8:ef:cd:7e:0c:d9 10.215.107.73   10.215.107.73             irb.2754 [ae8.2754]     none
+d8:ef:cd:25:df:39 10.215.107.74   10.215.107.74             irb.2754 [ge-0/2/4.2754] none
+d8:ef:cd:8c:17:e9 10.215.107.75   10.215.107.75             irb.2754 [ge-7/3/5.2754] none
+02:01:00:00:00:05 128.0.0.5       128.0.0.5                 em1.0                   none
+02:01:00:00:00:05 128.0.0.6       128.0.0.6                 em1.0                   none
+02:00:00:00:00:10 128.0.0.16      128.0.0.16                em0.0                   none
+02:00:00:00:00:17 128.0.0.23      128.0.0.23                em0.0                   none
+18:4a:6f:50:08:19 172.18.176.162  172.18.176.162            ae6.4002                none
+18:4a:6f:ae:ea:ca 172.18.176.170  172.18.176.170            ae3.4002                none
+18:4a:6f:b7:b8:7b 172.18.176.174  172.18.176.174            ae4.4002                none
+e4:a1:e6:5d:b8:4c 172.18.176.234  172.18.176.234            ae5.4002                none
+50:3d:e5:d3:27:e0 172.19.76.170   172.19.76.170             ge-0/3/1.1913           none
+b4:a4:e3:9f:d8:8c 172.32.178.34   172.32.178.34             ge-0/2/4.1855           none
+Total entries: 66
+
+{master}

@@ -36,13 +36,15 @@ class Main:
     # -------------- Used when run on Mac local ---------------------------------- #
 
     dir_1 = os.getcwd() + "/BTN_services"
-    dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
-    dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
+    dir_2 = os.getcwd() + '/juniper_services'
+    dir_3 = os.getcwd() + '/mapping'
     hw_file = 'GLI03AYA_H_baseline_script.txt'
     jnpr_file = 'GLI03AYA_J_baseline_script.txt'
-    mapping_file = 'GLI03AYA-IFD.csv'
-    result = os.getcwd() + "/btn_result"
-    compare_result = Path.joinpath(Path(result), 'Compare_Result.xlsx')
+    mapping_file = 'MX-DTH.txt'
+    btn_result = os.getcwd() + "/btn_result"
+    jnpr_result = os.getcwd() + "/juniper_result"
+    result = os.getcwd() + "/compare_result"
+    compare_result = Path.joinpath(Path(result), 'compare_result.xlsx')
 
     def main(self):
         check_valid = 0
@@ -95,7 +97,7 @@ class Main:
                 Utils.write_to_csv(df_route_detail, writer, 'Lost_Route_Info')
             # comparing detail
             if Main.mapping_file != "":
-                df_mapping = Main.read_csv_file_mapping(Main.dir_3 + '/' + Main.mapping_file)
+                df_mapping = Main.read_csv_file_mapping(Path.joinpath(Path(Main.dir_3), Main.mapping_file))
                 Main.compare_mac_vpls_arp_detail(lst_df_hw[2], lst_df_jnpr[2], df_mapping, lst_df_hw[1], writer,
                                                  labels_hw_vpls_detail,
                                                  labels_jnpr_vpls_detail, 'Mac-Address VPLS Detail')
@@ -131,7 +133,7 @@ class Main:
                     # print(df_part_4_1)
                     # print(df_part_4_2)
                     # write file
-                    name_out = Main.result + "/" + hostname + ".xlsx"
+                    name_out = Main.btn_result + "/" + hostname + ".xlsx"
                     writer = pd.ExcelWriter(name_out, engine='xlsxwriter')
                     Utils.write_to_csv(df_part_1, writer, 'L2Circuit')
                     Utils.write_to_csv(df_part_2, writer, 'VPLS')
@@ -157,7 +159,7 @@ class Main:
         juniper_pttr = '(?:[\S]+)>\s+show.*\n(?:(?![\S]+>).*\n)+'
         name_out = ""
         if filename != '.DS_Store':
-            file_string = Main.read_file(Main.dir_2 + Main.slash + filename)
+            file_string = Main.read_file(Path.joinpath(Path(Main.dir_2), filename))
             if len(file_string) == 0:
                 raise ValueError(filename + " does not exist")
             else:
@@ -176,7 +178,7 @@ class Main:
                     df_part_4_1, df_part_4_2 = Utils.get_info_part_5_juniper(part_5, dict_vpn_instance)
 
                     # write file
-                    name_out = Main.result + "/" + hostname + ".xlsx"
+                    name_out = Main.jnpr_result + "/" + hostname + ".xlsx"
                     writer = pd.ExcelWriter(name_out, engine='xlsxwriter')
                     Utils.write_to_csv(df_part_1, writer, 'L2Circuit')
                     Utils.write_to_csv(df_part_2, writer, 'VPLS')
