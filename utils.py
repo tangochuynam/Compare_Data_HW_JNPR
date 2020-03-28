@@ -6,6 +6,7 @@ import pandas as pd
 import datetime
 import os
 
+
 class Utils:
     @staticmethod
     def find_index_to_split(pattern):
@@ -64,15 +65,15 @@ class Utils:
             for line in lines:
                 if line.strip() != '':
                     tmp = line.strip().split(':')
-                    tmp[0] = tmp[0].strip()
-                    tmp[1] = tmp[1].strip()
-                    if tmp[0] == 'Client Interface':
+                    tmp[0] = tmp[0].strip().lower()
+                    tmp[1] = tmp[1].strip().lower()
+                    if tmp[0] == 'client interface':
                         l2_vc.ac_interface = tmp[1]
-                    if tmp[0] == 'VC State':
+                    if tmp[0] == 'vc state':
                         l2_vc.vc_state = tmp[1]
-                    if tmp[0] == 'VC ID':
+                    if tmp[0] == 'vc id':
                         l2_vc.vc_id = tmp[1]
-                    if tmp[0] == 'Destination':
+                    if tmp[0] == 'destination':
                         l2_vc.neighbor = tmp[1]
             lst_l2vc.append((l2_vc.vc_state, l2_vc.ac_interface, l2_vc.neighbor, int(l2_vc.vc_id)))
         # create DataFrame from lst_l2vc
@@ -106,34 +107,44 @@ class Utils:
     def get_info_part_3_huawei(part_3):
         dict_general = {}
         pttr_3 = 'MAC Address:.*\n(?:(?!MAC Address:).*\n)+'
+        pttr_mac = 'MAC [aA]ddress: .*VLAN.*'
+        pttr_port = 'Port.*Type.*'
+        pttr_peerip = 'Peer IP.*VC-ID.*'
         labels = ['VSI', 'HW AC-remote IP', 'mac-count', 'List-Mac']
         labels_sum = ['VSI', 'VSI Mac-Count', 'List-Mac']
         lst_mac_add = re.findall(pttr_3, part_3, flags=re.MULTILINE)
         for mac_dd in lst_mac_add:
-            lines = mac_dd.split('\n')
+            # lines = mac_dd.split('\n')
             # just consider line[0] - mac address, line[1] - port, line[3]- peer ip
-            line_mac = ''
-            line_port = ''
-            line_peer = ''
+            check_mac = re.search(pttr_mac, mac_dd)
+            check_peerip = re.search(pttr_peerip, mac_dd)
+            if check_mac and check_peerip:
+                line_mac = check_mac.group()
+                line_peer = check_peerip.group()
+            else:
+                print(f'mac_dd : {mac_dd}')
+                raise ValueError('can not found the line Mac Address .... VLAN.... or '
+                                 'Peer IP.... VC-ID '
+                                 'in the display mac-address')
 
-            for line in lines:
-                if line.startswith('MAC Address'):
-                    line_mac = line
-                if line.startswith('Port'):
-                    line_port = line
-                if line.startswith('Peer IP'):
-                    line_peer = line
-            index_vsi = line_mac.find('VLAN/VSI/SI')
-            mac_tmp = line_mac[:index_vsi].split(':')[1].strip()
-            mac = Utils.convert_mac_to_jnpr_form(mac_tmp)
-            key = line_mac[index_vsi:].split(':')[1].strip()
-            index_type = line_port.find('Type')
-            port_key = line_port[:index_type].split(':')[1].strip()
-            index_vc_id = line_peer.find('VC-ID')
-            peer_ip = line_peer[:index_vc_id].split(':')[1].strip()
-
+            line_peerip_part = re.split('VC-ID', line_peer)
+            # check peerip_part first if peer-ip == '-' check port type and get port
+            peer_ip = line_peerip_part[0].split(':')[1].strip()
             if peer_ip != '-':
                 port_key = peer_ip
+            else:
+                check_port = re.search(pttr_port, mac_dd)
+                if check_port:
+                    line_port = check_port.group()
+                    line_port_part = re.split('[tT]ype', line_port)
+                    port_key = line_port_part[0].split(':')[1].strip()
+                else:
+                    raise ValueError('can not found the line Port:......Type: in display mac-address')
+
+            line_mac_part = re.split('\s{4,6}', line_mac)
+            mac_tmp = line_mac_part[0].split(':')[1].strip()
+            mac = Utils.convert_mac_to_jnpr_form(mac_tmp)
+            key = line_mac_part[1].split(':')[1].strip()
 
             # if port_key.startswith('Tun'):
             #     index_vc_id = line_peer.find('VC-ID')

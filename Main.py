@@ -35,13 +35,13 @@ class Main:
 
     # -------------- Used when run on Mac local ---------------------------------- #
 
-    dir_1 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/huawei_test/"
+    dir_1 = os.getcwd() + "/BTN_services"
     dir_2 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/juniper_test"
     dir_3 = "/Users/tnhnam/Desktop/du an anh P/Compare_data/mapping_file_test"
     hw_file = 'GLI03AYA_H_baseline_script.txt'
     jnpr_file = 'GLI03AYA_J_baseline_script.txt'
     mapping_file = 'GLI03AYA-IFD.csv'
-    result = "/Users/tnhnam/Desktop/du an anh P/Compare_data/result"
+    result = os.getcwd() + "/btn_result"
     compare_result = Path.joinpath(Path(result), 'Compare_Result.xlsx')
 
     def main(self):
